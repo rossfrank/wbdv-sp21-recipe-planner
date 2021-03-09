@@ -9,9 +9,6 @@ function App() {
             <Route path="/" exact={true}>
                 <Home/>
             </Route>
-            <Route path="/courses">
-                <CourseManager/>
-            </Route>
         </div>
       </BrowserRouter>
   );
