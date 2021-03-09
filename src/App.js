@@ -1,20 +1,16 @@
-import CourseManager from "./components/course-manager";
-import {BrowserRouter, Route} from "react-router-dom";
+import React from 'react'
 import Home from "./components/home"
 
 function App() {
-  return (
-      <BrowserRouter>
-        <div className="container-fluid">
-            <Route path="/" exact={true}>
-                <Home/>
-            </Route>
-            <Route path="/courses">
-                <CourseManager/>
-            </Route>
+    return (
+
+        <div>
+            {/*<Home/>*/}
         </div>
-      </BrowserRouter>
-  );
+    );
 }
 
-export default App;
+
+export default App
+
+
