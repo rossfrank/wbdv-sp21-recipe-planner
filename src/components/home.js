@@ -8,5 +8,8 @@ export default () =>
             <Link to="/recipe/recipe-profile">
                 Recipe Profile
             </Link>
+            <Link to="/signup">
+                Sign Up
+            </Link>
         </div>
     </>

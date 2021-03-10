@@ -2,6 +2,7 @@ import CourseManager from "./components/course-manager";
 import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/home"
 import RecipeProfile from "./components/recipe-profile/recipe-profile";
+import SignUp from "./components/sign-up/sign-up"
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
             </Route>
             <Route path="/recipe/recipe-profile" exact>
               <RecipeProfile/>
+            </Route>
+            <Route path="/signup" exact>
+              <SignUp/>
             </Route>
         </div>
       </BrowserRouter>
