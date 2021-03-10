@@ -7,6 +7,31 @@
 }
 
 .image-display {
-  width: 80%;
+  width: 70%;
   margin: auto;
+}
+
+.center-element {
+    margin:auto;
+}
+
+.percentage70-item {
+    width: 70%;
+}
+
+.table-frame {
+    width: 40%;
+}
+
+.align-to-left {
+    text-align: left;
+}
+
+.align-to-right{
+    text-align: right;
+}
+
+.user-photo {
+    width: 2rem;
+    height: 2rem;
 }
