@@ -2,6 +2,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/home"
 import RecipeProfile from "./components/recipe-profile/recipe-profile";
 import SignUp from "./components/sign-up/sign-up"
+import LogIn from "./components/log-in/log-in"
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
             </Route>
             <Route path="/signup" exact>
               <SignUp/>
+            </Route>
+            <Route path="/login" exact>
+              <LogIn/>
             </Route>
         </div>
       </BrowserRouter>
