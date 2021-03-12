@@ -1,6 +1,7 @@
 import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/home"
 import RecipeManager from "./components/recipe-manager";
+import "./App.css";
 
 function App() {
   return (
