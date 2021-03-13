@@ -1,9 +1,9 @@
 import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/home"
+import "./App.css";
 import SignUp from "./components/sign-up/sign-up"
 import LogIn from "./components/log-in/log-in"
 import RecipeManager from "./components/recipe-manager";
-
 function App() {
   return (
       <BrowserRouter>
