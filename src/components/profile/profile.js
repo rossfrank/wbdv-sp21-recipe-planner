@@ -6,7 +6,6 @@ export default class Profile extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log(props)
     }
 
     render() {
@@ -19,6 +18,7 @@ export default class Profile extends React.Component {
                     </div>
                     <div className="col-8">
                         <h2>Content</h2>
+                        
                     </div>
                 </div>
             </div>
