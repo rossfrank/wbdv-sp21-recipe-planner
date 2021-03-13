@@ -1,0 +1,37 @@
+.whole-page {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.collect-op {
+  text-align: right;
+}
+
+.image-display {
+  width: 70%;
+  margin: auto;
+}
+
+.center-element {
+    margin:auto;
+}
+
+.percentage70-item {
+    width: 70%;
+}
+
+.table-frame {
+    width: 40%;
+}
+
+.align-to-left {
+    text-align: left;
+}
+
+.align-to-right{
+    text-align: right;
+}
+
+.user-photo {
+    width: 64px;
+    height: 64px;
+}
