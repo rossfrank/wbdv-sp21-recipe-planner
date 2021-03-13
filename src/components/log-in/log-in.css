@@ -1,0 +1,39 @@
+.percentage40-item {
+    width: 40%;
+}
+
+.a-box {
+    display: block;
+    border-radius: 4px;
+    border: 1px #ddd solid;
+    margin: auto;
+}
+
+.a-box-inner {
+    border-radius: 4px;
+    position: relative;
+    padding: 14px 18px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.label {
+    font-weight: 700;
+}
+
+.info-box {
+    margin:5px;
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.pwd-info {
+    font-size:12px;
+}
+
+.URL-link {
+    font-size: 12px;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route} from "react-router-dom";
 import Profile from "./profile/profile";
-import Recipe from "./recipe/recipe";
+import RecipeProfile from "./recipe/recipe-profile";
 
 class RecipeManager extends React.Component {
 
@@ -29,8 +29,8 @@ class RecipeManager extends React.Component {
                 <Route path="/recipe/profile" exact={true}>
                     <Profile/>
                 </Route>
-                <Route path="/recipe/recipe" exact={true}>
-                    <Recipe/>
+                <Route path="/recipe/recipe-profile" exact>
+                    <RecipeProfile/>
                 </Route>
             </div>
         )
