@@ -1,0 +1,16 @@
+.content-page {
+    padding-top: 70px;
+}
+
+.bg-theme {
+    background-color: #efbe69;
+    color: black;
+}
+
+.col {
+    z-index: -1;
+}
+
+.card {
+    z-index: -1;
+}

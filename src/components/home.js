@@ -17,5 +17,11 @@ export default () =>
             <Link to="/login">
                 Log In
             </Link>
+            <Link className="list-group-item" to="/homepage">
+                Homepage
+            </Link>
+            <Link className="list-group-item" to="/search">
+                Search
+            </Link>
         </div>
     </>
