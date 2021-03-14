@@ -1,4 +1,4 @@
-#[Heroku Link](https://wbdv-sp21-recipe-planner.herokuapp.com/)
+# [Heroku Link](https://wbdv-sp21-recipe-planner.herokuapp.com/)
 
 # Getting Started with Create React App
 
