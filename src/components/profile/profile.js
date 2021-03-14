@@ -1,6 +1,7 @@
 import React from 'react'
 import UserDescription from "./user-description";
 import "./profile.css";
+import ProfileTabs from "./profile-tabs";
 
 export default class Profile extends React.Component {
 
@@ -17,8 +18,7 @@ export default class Profile extends React.Component {
                         <UserDescription />
                     </div>
                     <div className="col-8">
-                        <h2>Content</h2>
-                        
+                        <ProfileTabs/>
                     </div>
                 </div>
             </div>
