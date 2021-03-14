@@ -24,7 +24,6 @@ const ProfileTabs = ({}) => {
                                 </Link>
                             </li>
                         </div>
-
                     )
                 }
             </ul>
