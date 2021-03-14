@@ -7,7 +7,6 @@ class RecipeManager extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log(props)
     }
 
     render() {
@@ -26,7 +25,10 @@ class RecipeManager extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Route path="/recipe/profile" exact={true}>
+                <Route path={[
+                    "/recipe/profile",
+                    "/recipe/profile/:tab"
+                ]} exact>
                     <Profile/>
                 </Route>
                 <Route path="/recipe/recipe-profile" exact>
