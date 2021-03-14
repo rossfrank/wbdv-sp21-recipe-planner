@@ -11,10 +11,10 @@ export default () =>
             <Link className="list-group-item" to="/recipe/profile">
                 Profile
             </Link>
-            <Link to="/signup">
+            <Link className="list-group-item" to="/signup">
                 Sign Up
             </Link>
-            <Link to="/login">
+            <Link className="list-group-item" to="/login">
                 Log In
             </Link>
         </div>
