@@ -1,5 +1,4 @@
 import React from 'react'
-import NavbarUser from "../homepage/navbar-user";
 import './search-result.css'
 import RecipeCard from "../homepage/recipe-card";
 
@@ -17,11 +16,9 @@ function SearchResult(){
     ];
 
     return(
-        <>
-            <NavbarUser/>
+        <div>
             <div className="content-page">
-
-                <span className="search-results-header-pads"></span>
+                <span className="search-results-header-pads" />
                 <div className="search-results-header-wrapper">
                     <div className="search-results-header border-dark">
                         <div className="search-results-header-group">
@@ -39,13 +36,8 @@ function SearchResult(){
 
                     </div>
                 </div>
-
-
-
-
-
             </div>
-        </>
+        </div>
     )
 }
 export default SearchResult
