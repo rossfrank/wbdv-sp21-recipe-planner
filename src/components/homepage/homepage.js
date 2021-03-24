@@ -1,8 +1,5 @@
 import React from 'react'
 import './homepage.css'
-import NavbarVisitor from "./navbar-vistor";
-import NavbarUser from "./navbar-user";
-import Recipe from "../recipe/recipe";
 import RecipeCard from "./recipe-card";
 
 
@@ -18,9 +15,7 @@ function Homepage(){
         {title: 'recipe8'},
     ]
     return(
-        <>
-            <NavbarVisitor />
-            {/*<NavbarUser/>*/}
+        <div>
             <div className="content-page">
 
                 <div className="row row-cols-1 row-cols-md-5 m-4">
@@ -29,7 +24,7 @@ function Homepage(){
                 </div>
 
             </div>
-        </>
+        </div>
     )
 }
 

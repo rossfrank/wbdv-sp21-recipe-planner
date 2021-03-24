@@ -19,7 +19,7 @@ const ProfileTabs = ({}) => {
                         <div className="nav-item">
                             <li className="nav-item">
                                 <Link className={`nav-link ${isActive(item)?'active white':''}`}
-                                      to={`/recipe/profile/${item}`}>
+                                      to={`/profile/${item}`}>
                                     {item}
                                 </Link>
                             </li>
