@@ -18,7 +18,7 @@ const Reviews = () => {
             alt="..."
           />
           <div className="media-body">
-            <a className="mt-0">User1</a>
+            <a className="mt-0" href="/profile">User1</a>
             <p>This dish is healthy and super delicious.</p>
           </div>
         </div>
@@ -30,7 +30,7 @@ const Reviews = () => {
             alt="..."
           />
           <div className="media-body">
-            <a className="mt-0">User2</a>
+            <a className="mt-0" href="/profile">User2</a>
             <p>
               I love this dish so much. I love this dish so much. I love this
               dish so much. I love this dish so much. I love this dish so much.
