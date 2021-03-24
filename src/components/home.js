@@ -5,10 +5,10 @@ export default () =>
     <div>
         <h1>Home</h1>
         <div className="list-group">
-            <Link className="list-group-item" to="/recipe/recipe-profile">
+            <Link className="list-group-item" to="/recipe">
                 Recipe
             </Link>
-            <Link className="list-group-item" to="/recipe/profile">
+            <Link className="list-group-item" to="/profile">
                 Profile
             </Link>
             <Link className="list-group-item" to="/signup">
