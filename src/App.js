@@ -17,84 +17,30 @@ function App() {
         <div>
             <Navbar/>
             <div className="">
-                <Switch>
-                    <Route path={["/", "/homepage"]} exact>
-                        <Homepage/>
-                    </Route>
-                    <Route path="/signup" exact>
-                        <SignUp/>
-                    </Route>
-                    <Route path="/login" exact>
-                        <LogIn/>
-                    </Route>
-                    <Route path="/recipe">
-                        <Profile />
-                    </Route>
-                    <Route path={[
-                        "/profile",
-                        "/profile/:tab"
-                    ]} exact>
-                        <Profile/>
-                    </Route>
-                    <Route path={[
-                        "/recipes/search",
-                        "/recipes/search/:keyword",
-                    ]} exact>
-                        <SearchResult />
-                    </Route>
-                    <Route path="/" exact>
-                        <Home/>
-                    </Route>
-                    <Route path="/signup" exact>
-                      <SignUp/>
-                    </Route>
-                    <Route path="/login" exact>
-                      <LogIn/>
-                    </Route>
-                    <Route path="/recipe/:recipeId">
-                        <RecipeProfile />
-                    </Route>
-                    <Route path="/newrecipe" exact>
-                        <NewRecipe/>
-                    </Route>
-                    <Route path={[
-                        "/profile",
-                        "/profile/:tab"
-                    ]} exact>
-                        <Profile/>
-                    </Route>
-                    <Route path="/homepage">
-                        <Homepage />
-                    </Route>
-                    <Route path="/search">
-                        <SearchResult />
-                    </Route>
-
-                    <Route path="/" exact>
-                        <Home/>
-                    </Route>
-                    <Route path="/register" exact>
-                      <SignUp/>
-                    </Route>
-                    <Route path="/login" exact>
-                      <LogIn/>
-                    </Route>
-                    <Route path="/recipes/:recipeId" exact>
-                        <RecipeProfile />
-                    </Route>
-                    <Route path={[
-                        "/profile",
-                        "/profile/:tab"
-                    ]} exact>
-                        <Profile/>
-                    </Route>
-                    <Route path="/homepage">
-                        <Homepage />
-                    </Route>
-                    <Route path="/search">
-                        <SearchResult />
-                    </Route>
-                </Switch>
+                <Route path="/" exact>
+                    <Home/>
+                </Route>
+                <Route path="/signup" exact>
+                  <SignUp/>
+                </Route>
+                <Route path="/login" exact>
+                  <LogIn/>
+                </Route>
+                <Route path="/recipe">
+                    <RecipeProfile />
+                </Route>
+                <Route path={[
+                    "/profile",
+                    "/profile/:tab"
+                ]} exact>
+                    <Profile/>
+                </Route>
+                <Route path="/homepage">
+                    <Homepage />
+                </Route>
+                <Route path="/search">
+                    <SearchResult />
+                </Route>
             </div>
         </div>
       </BrowserRouter>
