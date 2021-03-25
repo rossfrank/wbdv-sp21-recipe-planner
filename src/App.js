@@ -26,7 +26,7 @@ function App() {
                   <LogIn/>
                 </Route>
                 <Route path="/recipe">
-                    <RecipeProfile />
+                    <Profile />
                 </Route>
                 <Route path={[
                     "/profile",
