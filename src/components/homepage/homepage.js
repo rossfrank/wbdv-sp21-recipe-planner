@@ -4,32 +4,30 @@ import RecipeCard from "./recipe-card";
 import RecipeService from "../../services/recipe-service";
 
 function Homepage() {
-    const recipes = [
-        {title: 'recipe1'},
-        {title: 'recipe2'},
-        {title: 'recipe3'},
-        {title: 'recipe4'},
-        {title: 'recipe5'},
-        {title: 'recipe6'},
-        {title: 'recipe7'},
-        {title: 'recipe8'},
-    ]
 
     const service = new RecipeService();
-    const [recipe, setRecipe] = useState({});
+    // const [homeRecipes, setHomeRecipes] = useState([]);
 
-    useEffect(()=>{
-        service.findRecipeByRandom()
-            .then((res)=>{setRecipe(res)})
-    },[])
+    // useEffect(()=>{
+    //     service.findRecipeTopRating(2)
+    //         .then((res)=>{
+    //             setHomeRecipes(res.results)
+    //         })
+    // },[])
+
+    const [homeRecipes, setHomeRecipes] = useState([{id:1},{id:2}]);
+
 
     return(
         <div>
             <div className="content-page">
-                {console.log(recipe.recipes)}
+                <div className="row row-cols-1 row-cols-md-4 m-4">
 
-                <div className="row row-cols-1 row-cols-md-5 m-4">
-                    {recipes.map(recipe => <RecipeCard recipe={recipe} />)}
+                    {/*{homeRecipes.map(*/}
+                    {/*    r => <RecipeCard recipe={r} key={r.id}/>*/}
+                    {/*)}*/}
+
+                    <RecipeCard recipe={{id:1}}/>
 
                 </div>
 

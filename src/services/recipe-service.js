@@ -4,7 +4,7 @@ function RecipeService() {
     this.findRecipeByKeyword = findRecipeByKeyword;
     this.findRecipeByRandom = findRecipeByRandom;
     this.findRecipeTopRating = findRecipeTopRating;
-    this.url = `${process.env.REACT_APP_RECIPE_API}/recipes/`
+    this.url = `${process.env.REACT_APP_RECIPE_API}/recipes`
     this.apiKey = process.env.REACT_APP_RECIPE_API_KEY
     const self = this
 
