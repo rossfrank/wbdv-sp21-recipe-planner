@@ -19,13 +19,13 @@ function App() {
                 <Route path="/" exact>
                     <Home/>
                 </Route>
-                <Route path="/signup" exact>
+                <Route path="/register" exact>
                   <SignUp/>
                 </Route>
                 <Route path="/login" exact>
                   <LogIn/>
                 </Route>
-                <Route path="/recipe/:recipeId">
+                <Route path="/details/:recipeId" exact>
                     <RecipeProfile />
                 </Route>
                 <Route path={[
