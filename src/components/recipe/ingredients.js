@@ -1,7 +1,7 @@
 import React from "react";
-import "./recipe-profile.css"
+import "./recipe-profile.css";
 
-const Ingredients = () => {
+const Ingredients = ({ ingred = [] }) => {
   return (
     <>
       <div className="row center-element percentage70-item">
@@ -9,25 +9,19 @@ const Ingredients = () => {
           <h4>Ingredients</h4>
         </div>
         <div className="col-4 align-to-right">
-          <i className="fas fa-shopping-basket"/>
+          <i className="fas fa-shopping-basket" />
         </div>
       </div>
-        <table className="center-element table-frame">
-          <tbody>
-            <tr>
-              <td className="align-to-left">Eggs</td>
-              <td className="align-to-right">200g</td>
+      <table className="center-element table-frame">
+        <tbody>
+          {ingred.map((ingredient) => (
+            <tr key={ingredient.id}>
+              <td className="align-to-left">{ingredient.nameClean}</td>
+              <td className="align-to-right">{`${ingredient.amount} ${ingredient.unit}`}</td>
             </tr>
-            <tr>
-              <td className="align-to-left">Salad</td>
-              <td className="align-to-right">20g</td>
-            </tr>
-            <tr>
-              <td className="align-to-left">Sesame</td>
-              <td className="align-to-right">10g</td>
-            </tr>
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };

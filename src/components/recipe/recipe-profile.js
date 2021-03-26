@@ -1,32 +1,29 @@
 import React, { useEffect } from "react";
 import "./recipe-profile.css";
-import RecipeImage from "./recipe-image";
 import Ingredients from "./ingredients";
 import Directions from "./directions";
 import Reviews from "./reviews";
 import { connect } from "react-redux";
+import {useParams} from "react-router-dom";
 
 import recipeService from "../services/recipe-service";
 
 const RecipeProfile = ({recipe = [], findRecipeById}) => {
+  const { recipeId } = useParams()
   useEffect(() => {
-    findRecipeById("716429");
-  }, []);
+     findRecipeById(recipeId);
+   }, []);
   return (
     <div className="container whole-page">
       <div className="row">
-        <h3>Delicious Egg Salad</h3>
+        <h3>{`${recipe.title}`}</h3>
       </div>
       <div className="row">
         <div className="col-2">
-          <i className="fas fa-star" />
-          <i className="fas fa-star" />
-          <i className="fas fa-star" />
-          <i className="fas fa-star" />
-          <i className="far fa-star" />
+          <h6>{`Score: ${recipe.spoonacularScore}/100`}</h6>
         </div>
         <div className="col-3">
-          <a>Author Name</a>
+          <a>{recipe.sourceName}</a>
         </div>
         <div className="col-7 collect-op">
           <i className="far fa-heart fa-lg" />
@@ -34,10 +31,10 @@ const RecipeProfile = ({recipe = [], findRecipeById}) => {
           <i className="far fa-star fa-lg" />
         </div>
       </div>
-      <RecipeImage />
-      <Ingredients />
+      <img src={recipe.image} className="image-display"/>
+      <Ingredients ingred = {recipe.extendedIngredients}/>
       &nbsp;
-      <Directions />
+      <Directions recipe = {recipe}/>
       &nbsp;
       <Reviews />
     </div>
