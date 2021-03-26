@@ -16,8 +16,8 @@ function App() {
         <div>
             <NavbarVisitor/>
             <div className="">
-                <Route path="/" exact>
-                    <Home/>
+                <Route path={["/", "/homepage"]} exact>
+                    <Homepage/>
                 </Route>
                 <Route path="/signup" exact>
                   <SignUp/>
@@ -33,9 +33,6 @@ function App() {
                     "/profile/:tab"
                 ]} exact>
                     <Profile/>
-                </Route>
-                <Route path="/homepage">
-                    <Homepage />
                 </Route>
                 <Route path="/search">
                     <SearchResult />

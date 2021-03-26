@@ -1,0 +1,40 @@
+.card-title {
+    color: black;
+    font-family: "CopperPot Bold";
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin: 0 0 6px;
+    overflow: hidden;
+}
+
+.card-subtitle {
+    font-family: "Source Sans Pro","Times New Roman",serif;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: rgba(0,0,0,0.95);
+    font-weight: 700;
+    margin-left: 4px;
+    margin-top: 20px;
+}
+
+.card-summary {
+    margin: 2px 4px 8px 4px;
+    font-family: "Source Sans Pro","Times New Roman",serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    line-height: 20px;
+    max-height: 40px;
+}
+
+.card-timer {
+    font-size: 13px;
+    font-weight: 600;
+    color: #a47524;
+    float: right;
+}
