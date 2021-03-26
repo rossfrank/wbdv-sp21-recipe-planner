@@ -11,7 +11,6 @@ const recipeReducer = (state = initialState, action) => {
                 ...state,
                 recipe: action.recipe,
             }
-            console.log(newState)
             return newState
         default:
             return state

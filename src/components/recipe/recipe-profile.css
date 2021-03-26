@@ -8,6 +8,7 @@
 }
 
 .image-display {
+  display: flex;
   width: 70%;
   margin: auto;
 }
@@ -21,7 +22,7 @@
 }
 
 .table-frame {
-    width: 40%;
+    width: 55%;
 }
 
 .align-to-left {
