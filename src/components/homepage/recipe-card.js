@@ -4,7 +4,7 @@ import RecipeService from "../../services/recipe-service";
 import {Link, Route} from "react-router-dom";
 
 
-function RecipeCard({recipe}) {
+function RecipeCard({recipe={}}) {
 
     const service = new RecipeService();
     // const [recipeDetail, setRecipeDetail] = useState({})
@@ -549,18 +549,16 @@ function RecipeCard({recipe}) {
     })
 
     return(
+
         <div className="col mb-4">
+
             <div className="card h-100">
                 <img src={recipeDetail.image} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <Link className="card-title"
-                          to="/signup">
+                          to={`/recipes/details/${recipeDetail.id}`}>
                         {recipeDetail.title}
                     </Link>
-                    <button type="button" className="btn btn-primary" onClick={()=>alert("button")}>Primary</button>
-                    <a href="http://www.google.co.uk" >
-                        <div className="button" id="button=popup" >Download Codes</div>
-                    </a>
 
                     <h6 className="card-subtitle">Ingredients</h6>
                     <div className="card-summary">

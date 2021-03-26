@@ -1,3 +1,7 @@
+.col {
+    z-index: 0;
+}
+
 .card-title {
     color: black;
     font-family: "CopperPot Bold";

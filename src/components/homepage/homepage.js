@@ -23,11 +23,10 @@ function Homepage() {
             <div className="content-page">
                 <div className="row row-cols-1 row-cols-md-4 m-4">
 
-                    {/*{homeRecipes.map(*/}
-                    {/*    r => <RecipeCard recipe={r} key={r.id}/>*/}
-                    {/*)}*/}
+                    {homeRecipes.map(
+                        r => <RecipeCard recipe={r} key={r.id}/>
+                    )}
 
-                    <RecipeCard recipe={{id:1}}/>
 
                 </div>
 
