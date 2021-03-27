@@ -38,6 +38,13 @@ const Reviews = () => {
           </div>
         </div>
       </ul>
+      <div className="percentage70-item center-element">
+      <textarea placeholder="Please leave your review here." 
+      className="form-control"></textarea>
+      <br/>
+      <button className="btn btn-warning float-right">Submit</button>
+      </div>
+      
     </>
   );
 };

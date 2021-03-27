@@ -25,7 +25,7 @@ function App() {
                 <Route path="/login" exact>
                   <LogIn/>
                 </Route>
-                <Route path="/details/:recipeId" exact>
+                <Route path="/recipes/:recipeId" exact>
                     <RecipeProfile />
                 </Route>
                 <Route path={[
