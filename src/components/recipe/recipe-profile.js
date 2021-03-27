@@ -6,10 +6,10 @@ import Reviews from "./reviews";
 import { connect } from "react-redux";
 import {useParams} from "react-router-dom";
 
-import recipeService from "../services/recipe-service";
+import RecipeService from "../../services/recipe-service";
 
 const RecipeProfile = ({recipe = [], findRecipeById}) => {
-  const { recipeId } = useParams()
+  const { recipeId } = useParams();
   useEffect(() => {
      findRecipeById(recipeId);
    }, []);
@@ -47,9 +47,11 @@ const stpm = (state) => {
   };
 };
 const dtpm = (dispatch) => {
+    const service = new RecipeService();
+
   return {
     findRecipeById: (recipeId) =>
-      recipeService.findRecipeById(recipeId).then((theRecipe) =>
+      service.findRecipeById(recipeId).then((theRecipe) =>
         dispatch({
           type: "FIND_RECIPE_BY_ID",
           recipe: theRecipe,

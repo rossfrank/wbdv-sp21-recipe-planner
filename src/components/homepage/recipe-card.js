@@ -22,7 +22,7 @@ function RecipeCard({recipe={}}) {
                 <img src={recipeDetail.image} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <Link className="card-title"
-                          to={`/recipes/details/${recipeDetail.id}`}>
+                          to={`/recipes/${recipeDetail.id}`}>
                         {recipeDetail.title}
                     </Link>
 
