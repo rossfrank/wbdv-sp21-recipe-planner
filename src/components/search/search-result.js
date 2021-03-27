@@ -2,16 +2,20 @@ import React, {useState, useEffect} from 'react'
 import './search-result.css'
 import RecipeCard from "../homepage/recipe-card";
 import {useParams} from "react-router-dom";
+import RecipeService from "../../services/recipe-service";
 
 
 function SearchResult(){
-
+    const service = new RecipeService()
     const {keyword} = useParams();
     const [resultRecipes, setResultRecipes] = useState([]);
 
     useEffect(()=>{
-        setResultRecipes( [{id:1}, {id:2}])
-    },[])
+        service.findRecipeByKeyword(keyword)
+            .then((res)=>{
+                setResultRecipes(res.results)
+            })
+    },[keyword])
 
     return(
         <div>
@@ -30,8 +34,13 @@ function SearchResult(){
 
                 <div className="container mb-4">
                     <div className="row row-cols-1 row-cols-md-4">
-                        {resultRecipes.map(recipe =>
-                            <RecipeCard />)
+                        {
+                            resultRecipes === undefined &&
+                            <></>
+                        }
+                        {
+                            resultRecipes !== undefined &&
+                            resultRecipes.map(r =><RecipeCard key={r.id} recipe={r}/>)
                         }
 
                     </div>

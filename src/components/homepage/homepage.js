@@ -6,16 +6,14 @@ import RecipeService from "../../services/recipe-service";
 function Homepage() {
 
     const service = new RecipeService();
-    // const [homeRecipes, setHomeRecipes] = useState([]);
+    const [homeRecipes, setHomeRecipes] = useState([]);
 
-    // useEffect(()=>{
-    //     service.findRecipeTopRating(2)
-    //         .then((res)=>{
-    //             setHomeRecipes(res.results)
-    //         })
-    // },[])
-
-    const [homeRecipes, setHomeRecipes] = useState([{id:1},{id:2}]);
+    useEffect(()=>{
+        service.findRecipeTopRating(2)
+            .then((res)=>{
+                setHomeRecipes(res.results)
+            })
+    },[])
 
 
     return(
@@ -23,9 +21,10 @@ function Homepage() {
             <div className="content-page">
                 <div className="row row-cols-1 row-cols-md-4 m-4">
 
-                    {homeRecipes.map(
-                        r => <RecipeCard recipe={r} key={r.id}/>
-                    )}
+                    {
+                        homeRecipes !== undefined &&
+                        homeRecipes.map(r => <RecipeCard recipe={r} key={r.id}/>)
+                    }
 
 
                 </div>
