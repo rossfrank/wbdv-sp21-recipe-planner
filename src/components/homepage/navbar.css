@@ -16,7 +16,7 @@
     left: auto;
 }
 
-.dropdown-menu > a.active {
+.dropdown-menu > .active {
     background-color: #efbe69;
 }
 

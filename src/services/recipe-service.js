@@ -18,7 +18,9 @@ function RecipeService() {
 
     // get recipe by search keyword
     function findRecipeByKeyword(keyword) {
-        return fetch(`${self.url}/complexSearch?query=${keyword}&apiKey=${self.apiKey}`)
+        //TODO: Change limit of search
+        // return fetch(`${self.url}/complexSearch?query=${keyword}&apiKey=${self.apiKey}`)
+        return fetch(`${self.url}/complexSearch?query=${keyword}&number=3&apiKey=${self.apiKey}`)
             .then(function (res) {
                 return res.json()
             })
