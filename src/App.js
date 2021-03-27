@@ -65,6 +65,31 @@ function App() {
                     <Route path="/search">
                         <SearchResult />
                     </Route>
+
+                    <Route path="/" exact>
+                        <Home/>
+                    </Route>
+                    <Route path="/register" exact>
+                      <SignUp/>
+                    </Route>
+                    <Route path="/login" exact>
+                      <LogIn/>
+                    </Route>
+                    <Route path="/recipes/:recipeId" exact>
+                        <RecipeProfile />
+                    </Route>
+                    <Route path={[
+                        "/profile",
+                        "/profile/:tab"
+                    ]} exact>
+                        <Profile/>
+                    </Route>
+                    <Route path="/homepage">
+                        <Homepage />
+                    </Route>
+                    <Route path="/search">
+                        <SearchResult />
+                    </Route>
                 </Switch>
             </div>
         </div>
