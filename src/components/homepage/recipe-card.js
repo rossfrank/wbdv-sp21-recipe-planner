@@ -1,16 +1,44 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import './recipe-card.css'
+import RecipeService from "../../services/recipe-service";
+import {Link, Route} from "react-router-dom";
 
 
-function RecipeCard({recipe}) {
+function RecipeCard({recipe={}}) {
+
+    const service = new RecipeService();
+    const [recipeDetail, setRecipeDetail] = useState({})
+
+    useEffect(()=>{
+        service.findRecipeById(recipe.id)
+            .then((res)=>setRecipeDetail(res))
+    },[])
+
 
     return(
+
         <div className="col mb-4">
             <div className="card h-100">
-                <img src="..." className="card-img-top" alt="..."/>
+                <img src={recipeDetail.image} className="card-img-top" alt="..."/>
                 <div className="card-body">
-                    <h5 className="card-title">{recipe.title}</h5>
-                    <p className="card-text">This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a little bit longer.</p>
+                    <Link className="card-title"
+                          to={`/recipes/${recipeDetail.id}`}>
+                        {recipeDetail.title}
+                    </Link>
+
+                    <h6 className="card-subtitle">Ingredients</h6>
+                    <div className="card-summary">
+                        {recipeDetail.extendedIngredients !== undefined &&
+                        recipeDetail.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
+                        }
+                    </div>
+
+
+                    <span className="card-timer">
+                        <i className="far fa-clock "></i>
+                        {recipeDetail.readyInMinutes} min
+                    </span>
+
                 </div>
             </div>
         </div>
