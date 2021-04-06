@@ -13,7 +13,7 @@ const Directions = ({recipe}) => {
       <ol className="percentage70-item center-element">
         {recipe.instructions && 
         <>
-          {recipe.instructions}
+        <div dangerouslySetInnerHTML ={{__html:recipe.instructions}} />
         </>
         }
         {!recipe.instructions && 
