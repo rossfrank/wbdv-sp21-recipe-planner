@@ -2,7 +2,6 @@ import React from "react";
 import "./recipe-profile.css";
 
 const Directions = ({recipe}) => {
-  console.log(recipe)
   return (
     <>
       <div className="row center-element percentage70-item">

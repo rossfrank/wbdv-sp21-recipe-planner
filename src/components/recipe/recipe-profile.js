@@ -27,8 +27,6 @@ const RecipeProfile = ({recipe = [], findRecipeById}) => {
         </div>
         <div className="col-7 collect-op">
           <i className="far fa-heart fa-lg" />
-          &nbsp;
-          <i className="far fa-star fa-lg" />
         </div>
       </div>
       <img src={recipe.image} className="image-display"/>
