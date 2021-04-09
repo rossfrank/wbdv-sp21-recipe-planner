@@ -9,6 +9,7 @@ import Profile from "./components/profile/profile";
 import RecipeProfile from "./components/recipe/recipe-profile";
 import React from "react";
 import Navbar from "./components/homepage/navbar";
+import NewRecipe from "./components/recipe/new-recipe";
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
                     </Route>
                     <Route path="/recipe/:recipeId">
                         <RecipeProfile />
+                    </Route>
+                    <Route path="/newrecipe" exact>
+                        <NewRecipe/>
                     </Route>
                     <Route path={[
                         "/profile",

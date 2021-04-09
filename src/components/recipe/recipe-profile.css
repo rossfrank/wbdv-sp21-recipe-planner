@@ -37,3 +37,7 @@
     width: 64px;
     height: 64px;
 }
+
+.instruction-box {
+  height: 15rem;
+}

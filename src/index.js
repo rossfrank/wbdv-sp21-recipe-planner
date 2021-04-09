@@ -9,10 +9,12 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
 
-import recipeReducer from "./components/reducers/recipe-reducer";
+import recipeReducer from "./reducers/recipe-reducer";
+import reviewReducer from "./reducers/review-reducer";
 
 const reducer = combineReducers({
   recipeReducer: recipeReducer,
+  reviewReducer: reviewReducer,
 });
 
 const store = createStore(reducer);
