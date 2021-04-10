@@ -1,13 +1,20 @@
 const initialState = {
-    userCredential: {}
+    userCredential: {
+        userId: "",
+        Authorization: ""
+    }
 }
 
 const userReducer = (state=initialState, action) => {
     switch (action.type) {
         case "USER_LOGIN":
+            const res = action.payload
             return {
                 ...state,
-                userCredential: action.payload
+                userCredential: {
+                    ...state["userCredential"],
+                    ...res,
+                }
             }
         case "USER_LOGOUT":
             return {

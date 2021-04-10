@@ -5,10 +5,9 @@ import UserService from "../../services/user-service";
 
 const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [clickLogIn, setClickLogIn] = useState(false)
 
   return (
     <div className="login-page">
@@ -23,16 +22,22 @@ const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
             </div>
             <div className="form-group">
               <label>Password</label>
-              <input className="form-control" type="password"
+              <input className={`form-control 
+              ${ ((clickLogIn) && (userCredential["Authorization"].length < 8)) ? "is-invalid": "" }`}
+                     type="password"
                      onChange={(e)=>setPassword(e.target.value)}/>
+                <div id="validationServer03Feedback" className="invalid-feedback">
+                    Please provide valid username and password.
+                </div>
             </div>
             <div className="form-group">
               <a className="btn btn-primary btn-block"
                  onClick={()=>{
                    userLogin({
-                     "username": email,
+                     "email": email,
                      "password": password
                    });
+                   setClickLogIn(true);
                  }}>
                 Log In
               </a>
@@ -58,7 +63,6 @@ const dispatchToPropMapper = (dispatch)=> {
   const userService = new UserService();
   return {
     userLogin: (login) => {
-      console.log(login)
 
       userService.userLogin(login)
           .then((res) => {
