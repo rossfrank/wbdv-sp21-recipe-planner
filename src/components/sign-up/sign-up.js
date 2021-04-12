@@ -70,13 +70,13 @@ const SignUp = ({userCredential, userRegister}) => {
                    if (validPassword !== password){
                      alert("Please verify your passwords.")
                    }else {
-                     const user = {
+                     const userInput = {
                        "email": email,
                        "username": username,
                        "password": password,
                        "role": role
                      };
-                     userRegister(user);
+                     userRegister(userInput);
                    }
                  }}>
                 Sign Up
@@ -103,22 +103,28 @@ const dispatchToPropMapper = (dispatch)=> {
   const userService = new UserService();
   return {
     userRegister: (user) => {
-      userService.userRegister(user)
-          .then(()=>{
-            const login ={
-              "email": user["email"],
-              "password": user["password"]
-            };
-            userService.userLogin(login)
-                .then((res) => {
-                  dispatch({
-                    type: "USER_LOGIN",
-                    payload: res
-                  });
-                });
-
-          });
-
+      userService.userRegister({
+        "email": user["email"],
+        "username": user["username"],
+        "password": user["password"],
+        "role": user["role"]
+      }).
+      then((res)=>{
+        if (res["status"]===200){
+          userService.userLogin({
+            "email": user["email"],
+            "password": user["password"]
+          }).then((res)=>{
+            dispatch({
+              type: "USER_LOGIN",
+              payload: res
+            })
+            return 1;
+          })
+        }else {
+          return -1;
+        }
+      })
     }
   }
 }
