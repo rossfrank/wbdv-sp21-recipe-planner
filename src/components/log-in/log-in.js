@@ -1,7 +1,9 @@
 import React, {useState} from "react";
+import {Route, Redirect, NavLink, Link} from "react-router-dom";
 import "./log-in.css";
 import {connect} from 'react-redux'
 import UserService from "../../services/user-service";
+import Homepage from "../homepage/homepage";
 
 const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
 
@@ -31,16 +33,18 @@ const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
                 </div>
             </div>
             <div className="form-group">
-              <a className="btn btn-primary btn-block"
+              <Link className="btn btn-primary btn-block"
+                 to={`${ userCredential["isAuthenticated"]? "/": "/login"}`}
                  onClick={()=>{
                    userLogin({
                      "email": email,
                      "password": password
                    });
                    setClickLogIn(true);
+                   console.log(userCredential["Authorization"]);
                  }}>
                 Log In
-              </a>
+              </Link>
             </div>
             <div className="form-group URL-link">
               Do not have an account?

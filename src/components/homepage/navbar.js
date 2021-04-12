@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react'
 import './navbar.css'
 import NavbarSearchForm from "./navbar-search-form";
 import {Link} from "react-router-dom";
+import UserService from "../../services/user-service";
+import {connect} from "react-redux";
 
-function Navbar(){
+function Navbar({userCredential, userLogout}){
 
-    const [loggedIn, setLoggedIn] = useState(false)
 
     return(
         <nav className="navbar navbar-light bg-theme">
@@ -41,7 +42,7 @@ function Navbar(){
             </div>
 
             {
-                !loggedIn &&
+                !userCredential["isAuthenticated"] &&
                     <>
                         <div className="d-inline-flex flex-row-reverse">
                             <a className="float-left bg-theme mr-4 my-2 d-none d-lg-inline-block d-xl-inline-block"
@@ -61,7 +62,7 @@ function Navbar(){
 
 
             {
-                loggedIn &&
+                userCredential["isAuthenticated"] &&
                 <div className="d-inline-flex flex-row-reverse">
                     <button className="border-0 bg-theme mr-3">
                         <i className="fas fa-shopping-cart"></i>
@@ -76,7 +77,7 @@ function Navbar(){
                         <a className="dropdown-item" href="#">Your Account</a>
                         <a className="dropdown-item" href="#">Your Recipe</a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="#">Log Out</a>
+                        <a className="dropdown-item" href="#" onClick={userLogout}>Log Out</a>
                     </div>
                 </div>
             }
@@ -86,5 +87,21 @@ function Navbar(){
         </nav>
     )
 }
+const stateToPropMapper = (state) => {
+    return {
+        userCredential: state.userReducer.userCredential
+    }
+}
 
-export default Navbar;
+const dispatchToPropMapper = (dispatch)=> {
+
+    return {
+        userLogout: ()=>{
+            dispatch({
+                type: "USER_LOGOUT"
+            })
+        }
+    }
+}
+
+export default connect(stateToPropMapper, dispatchToPropMapper)(Navbar);
