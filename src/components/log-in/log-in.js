@@ -3,7 +3,6 @@ import {Route, Redirect, NavLink, Link} from "react-router-dom";
 import "./log-in.css";
 import {connect} from 'react-redux'
 import UserService from "../../services/user-service";
-import Homepage from "../homepage/homepage";
 
 const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
 
@@ -25,7 +24,7 @@ const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
             <div className="form-group">
               <label>Password</label>
               <input className={`form-control 
-              ${ ((clickLogIn) && (userCredential["Authorization"].length < 8)) ? "is-invalid": "" }`}
+              ${ ((clickLogIn) && (userCredential["isAuthenticated"])) ? "is-invalid": "" }`}
                      type="password"
                      onChange={(e)=>setPassword(e.target.value)}/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
@@ -41,7 +40,6 @@ const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
                      "password": password
                    });
                    setClickLogIn(true);
-                   console.log(userCredential["Authorization"]);
                  }}>
                 Log In
               </Link>
@@ -70,7 +68,7 @@ const dispatchToPropMapper = (dispatch)=> {
 
       userService.userLogin(login)
           .then((res) => {
-            dispatch({
+              dispatch({
               type: "USER_LOGIN",
               payload: res
             });
