@@ -16,7 +16,7 @@ const ProfileTabs = ({}) => {
             <ul className="nav nav-pills">
                 {
                     items.map(item =>
-                        <div className="nav-item">
+                        <div key={item} className="nav-item">
                             <li className="nav-item">
                                 <Link className={`nav-link ${isActive(item)?'active white':''}`}
                                       to={`/profile/${item}`}>
