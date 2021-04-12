@@ -34,7 +34,7 @@ const userReducer = (state=initialState, action) => {
                 ...state,
                 userCredential: {
                     userId: "",
-                    Authorization: "",
+                    authorization: "",
                     isAuthenticated: false,
                 }
             }
