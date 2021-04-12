@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './homepage.css'
 import RecipeCard from "./recipe-card";
 import RecipeService from "../../services/recipe-service";
+import {loadFromLocalStorage} from "../../reducers/local-storage-util";
 
 function Homepage() {
 
@@ -9,6 +10,10 @@ function Homepage() {
     const [homeRecipes, setHomeRecipes] = useState([]);
 
     useEffect(()=>{
+
+        const persistedState = loadFromLocalStorage();
+        console.log(persistedState)
+
         service.findRecipeTopRating(2)
             .then((res)=>{
                 setHomeRecipes(res.results)
