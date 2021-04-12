@@ -32,7 +32,7 @@ function App({userCredential,}) {
                     {/*    <LogIn/>*/}
                     {/*</Route>*/}
                     <Route exact path="/login">
-                        {userCredential["Authorization"]>8 ? <Redirect to="/homepage" /> : <LogIn />}
+                        {userCredential["isAuthenticated"] ? <Redirect to="/homepage" /> : <LogIn />}
                     </Route>
 
                     <Route path="/recipe">
