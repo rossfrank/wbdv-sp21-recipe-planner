@@ -74,8 +74,7 @@ function Navbar({userCredential, userLogout}){
                         <span className="d-none d-lg-inline-block d-xl-inline-block">Profile</span>
                     </button>
                     <div className="dropdown-menu">
-                        <a className="dropdown-item" href="#">Your Account</a>
-                        <a className="dropdown-item" href="#">Your Recipe</a>
+                        <Link className="dropdown-item" to={`/profile/${userCredential["userId"]}`}>Your Account</Link>
                         <div className="dropdown-divider"></div>
                         <a className="dropdown-item" href="#" onClick={userLogout}>Log Out</a>
                     </div>
