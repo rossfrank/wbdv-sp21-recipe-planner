@@ -20,7 +20,7 @@ function App() {
                 <Route path={["/", "/homepage"]} exact>
                     <Homepage/>
                 </Route>
-                <Route path="/signup" exact>
+                <Route path="/register" exact>
                   <SignUp/>
                 </Route>
                 <Route path="/login" exact>
