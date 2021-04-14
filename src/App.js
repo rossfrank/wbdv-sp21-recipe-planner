@@ -34,9 +34,12 @@ function App({userCredential,}) {
                         {userCredential["isAuthenticated"] ? <Redirect to="/homepage" /> : <LogIn />}
                     </Route>
 
+                    {/*protect Search function*/}
+                    <Route exact path={["/recipes/search", "/recipes/search/:keyword"]}>
+                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/homepage" />}
+                    </Route>
 
-                    <PrivateRoute component={SearchResult}
-                                  path={["/recipes/search", "/recipes/search/:keyword"]} exact />
+
                     <Route path="/recipes/:recipeId">
                         <RecipeProfile />
                     </Route>
