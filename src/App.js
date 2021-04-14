@@ -11,6 +11,8 @@ import React from "react";
 import Navbar from "./components/homepage/navbar";
 import UserService from "./services/user-service";
 import {connect} from "react-redux";
+import UserService from "./services/user-service";
+import {connect} from "react-redux";
 import PrivateRoute from "./router-util";
 import NewRecipe from "./components/recipe/new-recipe";
 
