@@ -1,18 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./recipe-profile.css";
 import Ingredients from "./ingredients";
 import Directions from "./directions";
 import Reviews from "./reviews";
+import Favorite from "./favorite";
 import { connect } from "react-redux";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import RecipeService from "../../services/recipe-service";
 
-const RecipeProfile = ({recipe = [], findRecipeById}) => {
+const RecipeProfile = ({ recipe = [], findRecipeById }) => {
   const { recipeId } = useParams();
+
   useEffect(() => {
-     findRecipeById(recipeId);
-   }, []);
+    findRecipeById(recipeId);
+  }, []);
   return (
     <div className="container whole-page">
       <div className="row">
@@ -20,19 +22,20 @@ const RecipeProfile = ({recipe = [], findRecipeById}) => {
       </div>
       <div className="row">
         <div className="col-2">
-          <h6>{`Score: ${recipe.spoonacularScore}/100`}</h6>
+          {recipe.spoonacularScore && (
+            <h6>{`Score: ${recipe.spoonacularScore}/100`}</h6>
+          )}
         </div>
         <div className="col-3">
           <a>{recipe.sourceName}</a>
         </div>
-        <div className="col-7 collect-op">
-          <i className="far fa-heart fa-lg" />
-        </div>
+        <Favorite/>
+        
       </div>
-      <img src={recipe.image} className="image-display"/>
-      <Ingredients ingred = {recipe.extendedIngredients}/>
+      <img src={recipe.image} className="image-display" />
+      <Ingredients ingred={recipe.extendedIngredients} />
       &nbsp;
-      <Directions recipe = {recipe}/>
+      <Directions recipe={recipe} />
       &nbsp;
       <Reviews />
     </div>
@@ -45,7 +48,7 @@ const stpm = (state) => {
   };
 };
 const dtpm = (dispatch) => {
-    const service = new RecipeService();
+  const service = new RecipeService();
 
   return {
     findRecipeById: (recipeId) =>
