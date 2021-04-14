@@ -73,7 +73,7 @@ const RecipeProfile = ({ recipe = [],
     }else{
       alert("Please Log In First!")
     }
-    
+
   }
   return (
     <div className="container whole-page">

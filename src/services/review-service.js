@@ -8,12 +8,12 @@ export const createReview = (rId, review) =>
     headers: {
       "content-type": "application/json",
     },
-  }).then((response) => {
-    return response.json()
-  });
+  }).then((response) =>
+    response.json()
+  );
 
 export const findReviewForRecipe = (rId) =>
-  fetch(`${RECIPES_URL}/${rId}/reviews`).then((response) => 
+  fetch(`${RECIPES_URL}/${rId}/reviews`).then((response) =>
    response.json());
 
 export const findReviewForUser = (uId) =>
