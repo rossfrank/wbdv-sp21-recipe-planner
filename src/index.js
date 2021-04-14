@@ -8,18 +8,28 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
-
+import {saveToLocalStorage, loadFromLocalStorage} from "./reducers/local-storage-util"
+import userReducer from "./reducers/user-reducer";
 import recipeReducer from "./reducers/recipe-reducer";
 import reviewReducer from "./reducers/review-reducer";
 import favoriteReducer from "./reducers/favorite-reducer";
 
+const persistedState = loadFromLocalStorage();
 const reducer = combineReducers({
-  recipeReducer: recipeReducer,
-  reviewReducer: reviewReducer,
-  favoriteReducer: favoriteReducer,
+    recipeReducer: recipeReducer,
+    userReducer: userReducer,
+    reviewReducer: reviewReducer,
+    favoriteReducer: favoriteReducer,
 });
 
-const store = createStore(reducer);
+const store = createStore(reducer, persistedState);
+
+
+store.subscribe(() => {
+    saveToLocalStorage({
+        userReducer: store.getState().userReducer
+    })
+});
 
 ReactDOM.render(
   <Provider store={store}>
