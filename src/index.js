@@ -9,9 +9,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
 import {saveToLocalStorage, loadFromLocalStorage} from "./reducers/local-storage-util"
-import recipeReducer from "./reducers/recipe-reducer";
 import userReducer from "./reducers/user-reducer";
-import {saveToLocalStorage, loadFromLocalStorage} from "./reducers/local-storage-util"
 import recipeReducer from "./reducers/recipe-reducer";
 import reviewReducer from "./reducers/review-reducer";
 import favoriteReducer from "./reducers/favorite-reducer";
