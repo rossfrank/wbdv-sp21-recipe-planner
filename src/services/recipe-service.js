@@ -75,4 +75,4 @@ function RecipeService() {
 
 }
 
-export default RecipeService
+export default RecipeService;
