@@ -1,8 +1,8 @@
-const USERS_URL = "http://localhost:8080/api/users";
-const FAVORITES_URL = "http://localhost:8080/api/favorites";
+// const USERS_URL = "http://localhost:8080/api/users";
+// const FAVORITES_URL = "http://localhost:8080/api/favorites";
 
-// const USERS_URL = "https://wbdv-recipe-planner-server.herokuapp.com//api/users";
-// const RECIPES_URL = "https://wbdv-recipe-planner-server.herokuapp.com//api/recipes";
+const USERS_URL = "https://wbdv-recipe-planner-server.herokuapp.com//api/users";
+const RECIPES_URL = "https://wbdv-recipe-planner-server.herokuapp.com//api/recipes";
 
 export const createFavorite = (uId, rid, favorite) =>
   fetch(`${USERS_URL}/${uId}/recipe/${rid}/favorite`, {
