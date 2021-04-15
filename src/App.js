@@ -49,7 +49,8 @@ function App({userCredential,}) {
 
                     <Route path={[
                         "/profile",
-                        "/profile/:tab"
+                        "/profile/:user",
+                        "/profile/:user/:tab"
                     ]} exact>
                         <Profile/>
                     </Route>

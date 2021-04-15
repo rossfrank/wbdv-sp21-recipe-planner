@@ -6,7 +6,7 @@ const ProfileTabs = ({}) => {
 
     const items = ["Favorites", "Basket", "Basket Recipes", "Reviews", "My Recipes"];
 
-    const {tab} = useParams();
+    const {user, tab} = useParams();
 
     const isActive =(item) => {
         return item === tab;
@@ -19,7 +19,7 @@ const ProfileTabs = ({}) => {
                         <div key={item} className="nav-item">
                             <li className="nav-item">
                                 <Link className={`nav-link ${isActive(item)?'active white':''}`}
-                                      to={`/profile/${item}`}>
+                                      to={`/profile/${user}/${item}`}>
                                     {item}
                                 </Link>
                             </li>
