@@ -39,12 +39,12 @@ const NewRecipe = () => {
           <div className="form-group">
             <label>Instructions</label>
             <textarea
-            placeholder="Type instructions here."
-            className="form-control instruction-box"
-        ></textarea>
+                placeholder="Type instructions here."
+                className="form-control instruction-box">
+            </textarea>
           </div>
           <div className="form-group">
-            <a className="btn btn-primary btn-block wbdv-login" href="">
+            <a className="btn btn-primary btn-block wbdv-login bg-theme border-0" href="">
               Upload
             </a>
           </div>

@@ -35,15 +35,15 @@ function App({userCredential,}) {
 
                     {/*protect Search function*/}
                     <Route exact path={["/recipes/search", "/recipes/search/:keyword"]}>
-                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/homepage" />}
+                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/login" />}
                     </Route>
 
 
-                    <Route path="/recipes/:recipeId">
+                    <Route path="/recipes/:recipeId" exact>
                         <RecipeProfile />
                     </Route>
 
-                    <Route path="/newrecipe" exact>
+                    <Route path="/form" exact>
                         <NewRecipe/>
                     </Route>
 
