@@ -14,8 +14,6 @@ import recipeReducer from "./reducers/recipe-reducer";
 import reviewReducer from "./reducers/review-reducer";
 import favoriteReducer from "./reducers/favorite-reducer";
 
-
-
 const persistedState = loadFromLocalStorage();
 const reducer = combineReducers({
     recipeReducer: recipeReducer,

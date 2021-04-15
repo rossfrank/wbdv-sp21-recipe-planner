@@ -2,8 +2,8 @@ function UserService(){
 
     this.userLogin = userLogin;
     this.userRegister = userRegister;
-    // this.url = "http://localhost:8080"
-    this.url = "https://wbdv-recipe-planner-server.herokuapp.com"
+    this.url = "http://localhost:8080"
+    // this.url = "https://wbdv-recipe-planner-server.herokuapp.com"
     const self = this
 
     function userLogin(userCredential){

@@ -9,9 +9,9 @@ import { useParams } from "react-router-dom";
 
 import RecipeService from "../../services/recipe-service";
 
-const RecipeProfile = ({ recipe = [], findRecipeById }) => {
-  const { recipeId } = useParams();
 
+const RecipeProfile = ({ recipe = [], userCredential, findRecipeById }) => {
+  const { recipeId } = useParams();
   useEffect(() => {
     findRecipeById(recipeId);
   }, []);
@@ -45,6 +45,7 @@ const RecipeProfile = ({ recipe = [], findRecipeById }) => {
 const stpm = (state) => {
   return {
     recipe: state.recipeReducer.recipe,
+    userCredential: state.userReducer.userCredential,
   };
 };
 const dtpm = (dispatch) => {
