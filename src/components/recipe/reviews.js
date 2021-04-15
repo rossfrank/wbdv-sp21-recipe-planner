@@ -6,6 +6,7 @@ import reviewService from "../../services/review-service";
 import { useParams } from "react-router";
 
 const Reviews = ({
+  user,
   reviews = [],
   createReview,
   findReviewsForRecipe,
@@ -24,25 +25,27 @@ const Reviews = ({
         </div>
       </div>
       <ul className="percentage70-item center-element">
-        {reviews.map((review) => {
-          return (
-            <div key={review.reviewId}>
-              <div className="media">
-                <img
-                  src={User}
-                  className="align-self-start mr-3 user-photo"
-                  alt="..."
-                />
-                <div className="media-body">
-                  <a className="mt-0" href="/profile">
-                    {review.userId}
-                  </a>
-                  <p>{review.text}</p>
+        {
+          reviews.map((review) => {
+            return (
+              <div key={review.reviewId}>
+                <div className="media">
+                  <img
+                    src={User}
+                    className="align-self-start mr-3 user-photo"
+                    alt="..."
+                  />
+                  <div className="media-body">
+                    <a className="mt-0" href="/profile">
+                      {review.userId}
+                    </a>
+                    <p>{review.text}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </ul>
       <div className="percentage70-item center-element">
         <textarea
@@ -54,7 +57,10 @@ const Reviews = ({
         <br />
         <button
           className="btn btn-warning float-right"
-          onClick={() => createReview(recipeId, newReview)}
+          onClick={() => {
+            createReview(user, recipeId, newReview);
+            setNewReview("");
+          }}
         >
           Submit
         </button>
@@ -66,15 +72,16 @@ const Reviews = ({
 const stpm = (state) => {
   return {
     reviews: state.reviewReducer.reviews,
+    user: state.userReducer.userCredential,
   };
 };
 
 const dtpm = (dispatch) => {
   return {
-    createReview: (recipeId, newReview) => {
+    createReview: (user, recipeId, newReview) => {
       reviewService
         .createReview(recipeId, {
-          userId: "1",
+          userId: user.userId,
           text: newReview,
         })
         .then((theReview) =>
@@ -84,7 +91,7 @@ const dtpm = (dispatch) => {
           })
         );
     },
-    
+
     findReviewsForRecipe: (recipeId) =>
       reviewService.findReviewForRecipe(recipeId).then((theReviews) =>
         dispatch({
