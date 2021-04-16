@@ -2,8 +2,7 @@ function UserService(){
 
     this.userLogin = userLogin;
     this.userRegister = userRegister;
-    // this.url = "http://localhost:8080"
-    this.url = "https://wbdv-recipe-planner-server.herokuapp.com"
+    this.url = `${process.env.REACT_APP_JAVA_SERVER}`
     const self = this
 
     function userLogin(userCredential){
@@ -30,3 +29,4 @@ function UserService(){
 }
 
 export default UserService
+

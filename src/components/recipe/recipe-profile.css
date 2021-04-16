@@ -45,3 +45,8 @@
 .favorite {
   color:orange;
 }
+
+.bg-theme {
+    background-color: #efbe69;
+    color: black;
+}
