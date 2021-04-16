@@ -13,21 +13,17 @@ export const findRecipeById = id =>
     fetch(`${RECIPE_URL}/${id}/information`, GET_HEADER)
         .then(response => response.json())
 
-
 export const findRecipeByKeyword = keyword =>
     fetch(`${RECIPE_URL}/searchComplex?query=${keyword}&apiKey=${RECIPE_API_KEY}`, GET_HEADER)
         .then(response => response.json())
-
 
 export const findRecipeByRandom = () =>
     fetch(`${RECIPE_URL}/random?number=1`, GET_HEADER)
         .then(response => response.json())
 
-
 export const findRecipeTopRating = number =>
     fetch(`${RECIPE_URL}/searchComplex?limitLicense=null&offset=0&number=${number}`, GET_HEADER)
         .then(response => response.json())
-
 
 const api = {
     findRecipeById,

@@ -48,7 +48,6 @@ const stpm = (state) => {
   };
 };
 const dtpm = (dispatch) => {
-
   return {
     findRecipeById: (recipeId) =>
       recipeService.findRecipeById(recipeId).then((theRecipe) =>
