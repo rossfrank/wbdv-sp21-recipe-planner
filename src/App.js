@@ -44,7 +44,7 @@ function App({userCredential,}) {
                     </Route>
 
                     <Route path="/form" exact>
-                        <NewRecipe/>
+                        {userCredential["isAuthenticated"] ?  <NewRecipe /> : <Redirect to="/login" />}
                     </Route>
 
                     <Route path={[
