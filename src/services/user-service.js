@@ -5,8 +5,9 @@ export const userLogin = userCredential =>
         method: "POST",
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(userCredential)
-        }).then((res)=>
-            res.json())
+        }).then((res)=>{
+            return res.json()
+    })
 
 export const userRegister = user =>
     fetch(`${SERVER_URL}/register`, {

@@ -4,7 +4,7 @@ function RecipeIngredientService(){
     this.createRecipeIngredient = createRecipeIngredient;
     this.updateRecipeIngredient = updateRecipeIngredient;
     this.deleteRecipeIngredient = deleteRecipeIngredient;
-    this.url = `${process.env.REACT_APP_JAVA_SERVER}/api`
+    this.url = `${process.env.REACT_APP_SERVER_API}/api`
     const self = this
 
 
