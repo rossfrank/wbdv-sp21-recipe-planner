@@ -14,8 +14,7 @@ export const findFavoriteForUser = (uId) =>
   fetch(`${USERS_URL}/${uId}/favorites`).then((response) => response.json());
 
 export const findFavorite = (uId, rId) =>
-  fetch(`${USERS_URL}/${uId}/recipe/${rId}/favorite`).then((response) => 
-    response.json());
+  fetch(`${USERS_URL}/${uId}/recipe/${rId}/favorite`).then((response) => response.json());
 
 export const deleteFavorite = (fId) =>
   fetch(`${FAVORITES_URL}/${fId}`, {
