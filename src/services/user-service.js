@@ -1,33 +1,23 @@
 const SERVER_URL = process.env.REACT_APP_SERVER_API
 
-function UserService(){
+export const userLogin = userCredential =>
+    fetch(`${SERVER_URL}/login`, {
+        method: "POST",
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(userCredential)
+        }).then((res)=>
+            res.json())
 
-    this.userLogin = userLogin;
-    this.userRegister = userRegister;
-    this.url = process.env.REACT_APP_SERVER_API
-    const self = this
+export const userRegister = user =>
+    fetch(`${SERVER_URL}/register`, {
+        method: "POST",
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(user)
+        }).then((res)=>res.json())
 
-    function userLogin(userCredential){
-        return fetch(`${self.url}/login`, {
-            method: "POST",
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(userCredential)
-        }).then((res)=>{
-            return res.json()
-        })
-    }
-
-    function userRegister(user){
-        return fetch(`${self.url}/register`, {
-            method: "POST",
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(user)
-        }).then((res)=>{
-            return res.json()
-        })
-    }
-
-
+const api = {
+    userLogin,
+    userRegister
 }
 
-export default UserService
+export default api
