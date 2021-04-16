@@ -3,6 +3,7 @@ const initialState = {
         userId: "",
         authorization: "",
         isAuthenticated: false,
+        username: "",
     }
 }
 
@@ -26,6 +27,7 @@ const userReducer = (state=initialState, action) => {
                         userId: "",
                         authorization: "",
                         isAuthenticated: false,
+                        username: ""
                     }
                 }
             }
@@ -36,6 +38,7 @@ const userReducer = (state=initialState, action) => {
                     userId: "",
                     authorization: "",
                     isAuthenticated: false,
+                    username: ""
                 }
             }
         default:
