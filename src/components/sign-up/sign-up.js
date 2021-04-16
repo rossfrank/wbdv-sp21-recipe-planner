@@ -3,7 +3,7 @@ import "./sign-up.css";
 import userService from "../../services/user-service";
 import {connect} from "react-redux";
 
-const SignUp = ({userCredential, userRegister}) => {
+const SignUp = ({userCredential, userLogin}) => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -11,6 +11,35 @@ const SignUp = ({userCredential, userRegister}) => {
   const [validPassword, setValidPassword] = useState("")
   const [role, setRole] = useState("")
 
+
+  function ValidateEmail(mail)
+  {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
+    {
+      return true;
+    }
+    alert("You have entered an invalid email address!")
+    return false;
+  }
+
+  const userRegister = ()=>{
+    userService.userRegister({
+      email: email,
+      name: username,
+      password: password,
+      role: role,
+    })
+        .then((res)=>{
+          if (res["status"] === 200){
+            userLogin({
+              email: email,
+              password: password
+            })
+          }else {
+            alert("Email already registered!")
+          }
+        })
+  }
 
   return (
     <div className="signup-page">
@@ -31,7 +60,7 @@ const SignUp = ({userCredential, userRegister}) => {
             <div className="form-group">
               <label>Password</label>
               <input
-                className="form-control"
+                className="form-control" type="password"
                 placeholder="At least 6 characters"
                 onChange={(e)=>setPassword(e.target.value)}
               />
@@ -44,7 +73,7 @@ const SignUp = ({userCredential, userRegister}) => {
             </div>
             <div className="form-group">
               <label>Verify Password</label>
-              <input className="form-control"
+              <input className="form-control" type="password"
                      onChange={(e)=>setValidPassword(e.target.value)}/>
             </div>
 
@@ -69,14 +98,8 @@ const SignUp = ({userCredential, userRegister}) => {
                  onClick={()=>{
                    if (validPassword !== password){
                      alert("Please verify your passwords.")
-                   }else {
-                     const userInput = {
-                       "email": email,
-                       "name": username,
-                       "password": password,
-                       "role": role
-                     };
-                     userRegister(userInput);
+                   }else if(ValidateEmail(email)){
+                     userRegister();
                    }
                  }}>
                 Sign Up
@@ -101,29 +124,15 @@ const stateToPropMapper = (state) => {
 
 const dispatchToPropMapper = (dispatch)=> {
   return {
-    userRegister: (user) => {
-      userService.userRegister({
-        "email": user["email"],
-        "name": user["name"],
-        "password": user["password"],
-        "role": user["role"]
-      }).
-      then((res)=>{
-        if (res["status"]===200){
-          userService.userLogin({
-            "email": user["email"],
-            "password": user["password"]
-          }).then((res)=>{
+    userLogin: (login) => {
+
+      userService.userLogin(login)
+          .then((res) => {
             dispatch({
               type: "USER_LOGIN",
               payload: res
-            })
-            return 1;
+            });
           })
-        }else {
-          return -1;
-        }
-      })
     }
   }
 }
