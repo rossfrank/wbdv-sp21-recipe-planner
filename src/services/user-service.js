@@ -1,9 +1,10 @@
+const SERVER_URL = process.env.REACT_APP_SERVER_API
+
 function UserService(){
 
     this.userLogin = userLogin;
     this.userRegister = userRegister;
-    // this.url = "http://localhost:8080"
-    this.url = "https://wbdv-recipe-planner-server.herokuapp.com"
+    this.url = process.env.REACT_APP_SERVER_API
     const self = this
 
     function userLogin(userCredential){

@@ -1,5 +1,5 @@
-const USERS_URL = `${process.env.REACT_APP_SERVER_API}/users`;
-const FAVORITES_URL = `${process.env.REACT_APP_SERVER_API}/favorites`;
+const USERS_URL = `${process.env.REACT_APP_SERVER_API}/api/users`;
+const FAVORITES_URL = `${process.env.REACT_APP_SERVER_API}/api/favorites`;
 
 export const createFavorite = (uId, rid, favorite) =>
   fetch(`${USERS_URL}/${uId}/recipe/${rid}/favorite`, {

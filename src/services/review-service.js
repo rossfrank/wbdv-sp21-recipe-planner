@@ -1,5 +1,5 @@
-const USERS_URL = `${process.env.REACT_APP_SERVER_API}/users`;
-const RECIPES_URL = `${process.env.REACT_APP_SERVER_API}/recipes`;
+const USERS_URL = `${process.env.REACT_APP_SERVER_API}/api/users`;
+const RECIPES_URL = `${process.env.REACT_APP_SERVER_API}/api/recipes`;
 
 export const createReview = (rId, review) =>
   fetch(`${RECIPES_URL}/${rId}/reviews`, {

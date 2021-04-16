@@ -1,4 +1,4 @@
-const SERVER_URL = `${process.env.REACT_APP_SERVER_API}/`
+const SERVER_URL = `${process.env.REACT_APP_SERVER_API}/api`
 
 
 
