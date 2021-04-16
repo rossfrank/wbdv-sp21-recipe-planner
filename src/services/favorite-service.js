@@ -20,8 +20,7 @@ export const findFavorite = (uId, rId) =>
 export const deleteFavorite = (fId) =>
   fetch(`${FAVORITES_URL}/${fId}`, {
     method: "DELETE",
-  });
-  //.then((response) => response.json())
+  }).then((response) => response.json())
 
 const api = {
   createFavorite,

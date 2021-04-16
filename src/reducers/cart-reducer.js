@@ -18,16 +18,10 @@ const cartReducer = (state = initialState, action) => {
         cart: action.cart,
       };
       return newStateA;
-    case "FIND_CART_ITEM":
-      const newStateC = {
-        ...state,
-        cart: action.cart,
-      };
-      return newStateC;
     case "DELETE_CART_ITEM":
       const newStateD = {
         cart: state.cart.filter((c) => {
-          if (c.cartRecipeId === action.itemToDelete.cartRecipeId) {
+          if (c.Id === action.itemToDelete.Id) {
             return false;
           } else {
             return true;

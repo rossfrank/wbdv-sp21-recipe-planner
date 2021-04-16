@@ -4,12 +4,13 @@ import recipeService from "../../../services/recipe-service";
 import {connect} from "react-redux";
 
 
-function ProfileRecipe({recipeId, findRecipeById, myRecipe}) {
+function ProfileRecipe({recipeId}) {
 
+    const [recipeDetail, setRecipeDetail] = useState({})
 
     useEffect(()=>{
-        console.log(recipeId)
-        findRecipeById(recipeId)
+        recipeService.findRecipeById(recipeId)
+            .then((res)=>setRecipeDetail(res))
     },[recipeId])
 
 
@@ -18,27 +19,27 @@ function ProfileRecipe({recipeId, findRecipeById, myRecipe}) {
             <div className="card">
                 <div className="card-header">
                     <h5 className="mb-1">
-                            {myRecipe.title}
+                            {recipeDetail.title}
                     </h5>
                 </div>
                 <div className="card-body">
                     <div className="row">
                         <div className="col-4">
-                            <a className="stretched-link" href={`/recipes/${myRecipe.id}`}>
-                                <img src={myRecipe.image} className="w-100" alt="..."/>
+                            <a className="stretched-link" href={`/recipes/${recipeDetail.id}`}>
+                                <img src={recipeDetail.image} className="w-100" alt="..."/>
                             </a>
                         </div>
                         <div className="col-8">
                             <h6>Ingredients</h6>
                             <div>
-                                {myRecipe.extendedIngredients !== undefined &&
-                                myRecipe.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
+                                {recipeDetail.extendedIngredients !== undefined &&
+                                recipeDetail.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
                                 }
                             </div>
                             <small>
                                 <span className="card-timer">
                                     <i className="far fa-clock" />
-                                    {myRecipe.readyInMinutes} min
+                                    {recipeDetail.readyInMinutes} min
                                 </span>
                             </small>
                         </div>
@@ -50,24 +51,4 @@ function ProfileRecipe({recipeId, findRecipeById, myRecipe}) {
     )
 }
 
-
-const stpm = (state) => {
-    return {
-        myRecipe: state.recipeReducer.recipe
-    };
-};
-const dtpm = (dispatch) => {
-    return {
-        findRecipeById: (recipeId) => {
-            recipeService
-                .findRecipeById(recipeId)
-                .then(theRecipe =>
-                    dispatch({
-                        type: "FIND_RECIPE_BY_ID",
-                        recipe: theRecipe
-                    }))
-        }
-    };
-}
-
-export default connect(stpm, dtpm)(ProfileRecipe);
+export default ProfileRecipe;

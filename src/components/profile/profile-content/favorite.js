@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import ProfileRecipe from "./../profile-content/profile-recipe";
 import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
@@ -12,6 +12,7 @@ const Favorite = (
 
     useEffect(()=>{
         findFavoriteForUser(user)
+        console.log(myFavorite)
     },[user])
 
     return(
@@ -49,8 +50,7 @@ const dtpm = (dispatch) => {
                 .then(theFavs =>
                     dispatch({
                         type: "FIND_FAVORITE_FOR_USER",
-                        //favorites: theFavs
-                        favorites: [{"userId": 3,"id": 1, "recipeId": 1438341}]
+                        favorites: theFavs
                     }))
         },
     };

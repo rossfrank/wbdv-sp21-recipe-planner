@@ -1,6 +1,7 @@
  import React from 'react'
 import {useParams} from "react-router-dom";
  import Favorite from "./profile-content/favorite";
+ import BasketRecipe from "./profile-content/basket-recipes";
 
 const ProfileCards = ({}) => {
 
@@ -15,6 +16,10 @@ const ProfileCards = ({}) => {
             <div className="container">
                 {isFavorite() &&
                     <Favorite />
+                }
+                {
+                    tab === "Basket Recipes" &&
+                        <BasketRecipe />
                 }
             </div>
         </div>
