@@ -24,7 +24,6 @@ function App({userCredential,}) {
                     <Route path={["/", "/homepage"]} exact>
                         <Homepage/>
                     </Route>
-
                     <Route exact path="/signup">
                         {userCredential["isAuthenticated"] ? <Redirect to="/homepage" /> : <SignUp />}
                     </Route>
