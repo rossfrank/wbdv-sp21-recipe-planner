@@ -4,7 +4,7 @@ function RecipeDbService(){
     this.createRecipeDB = createRecipeDB;
     this.updateRecipeDB = updateRecipeDB;
     this.deleteRecipeDB = deleteRecipeDB;
-    this.url = `${process.env.REACT_APP_JAVA_SERVER}/api/recipes`
+    this.url = `${process.env.REACT_APP_SERVER_API}/api/recipes`
     const self = this
 
 
