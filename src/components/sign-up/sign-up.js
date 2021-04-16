@@ -72,7 +72,7 @@ const SignUp = ({userCredential, userRegister}) => {
                    }else {
                      const userInput = {
                        "email": email,
-                       "username": username,
+                       "name": username,
                        "password": password,
                        "role": role
                      };
@@ -104,7 +104,7 @@ const dispatchToPropMapper = (dispatch)=> {
     userRegister: (user) => {
       userService.userRegister({
         "email": user["email"],
-        "username": user["username"],
+        "name": user["name"],
         "password": user["password"],
         "role": user["role"]
       }).
