@@ -8,6 +8,7 @@ function ProfileRecipe({recipeId, findRecipeById, myRecipe}) {
 
 
     useEffect(()=>{
+        console.log(recipeId)
         findRecipeById(recipeId)
     },[recipeId])
 

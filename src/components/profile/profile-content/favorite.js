@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import RecipeService from "../../../services/recipe-service";
 import ProfileRecipe from "./../profile-content/profile-recipe";
 import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
@@ -10,7 +9,6 @@ const Favorite = (
         myFavorite,
         findFavoriteForUser}) => {
     const {user} = useParams();
-    const recipeService = new RecipeService()
 
     useEffect(()=>{
         findFavoriteForUser(user)
@@ -20,10 +18,10 @@ const Favorite = (
         <div className="mt-4">
             <div className="container">
                 {myFavorite &&
-                myFavorite.map(recipeId =>
-                    <div key={recipeId}>
+                myFavorite.map(favorite =>
+                    <div key={favorite.recipeId}>
                         {
-                            <ProfileRecipe recipeId={recipeId} />
+                            <ProfileRecipe recipeId={favorite.recipeId} />
                         }
                     </div>
                 )
@@ -51,7 +49,8 @@ const dtpm = (dispatch) => {
                 .then(theFavs =>
                     dispatch({
                         type: "FIND_FAVORITE_FOR_USER",
-                        favorites: theFavs
+                        //favorites: theFavs
+                        favorites: [{"userId": 3,"id": 1, "recipeId": 1438341}]
                     }))
         },
     };
