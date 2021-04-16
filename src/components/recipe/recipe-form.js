@@ -2,50 +2,39 @@ import React, {useState, useEffect} from "react";
 import "./recipe-profile.css";
 import RecipeDbService from "../../services/recipe-db-service";
 import RecipeIngredientService from "../../services/recipe-ingredient-service";
-import {useParams} from "react-router-dom";
+import UserService from "../../services/user-service";
+import {connect} from "react-redux";
 
-
-const EditableRecipe = () => {
+const RecipeForm = ({userCredential}) =>{
 
     const recipeService = new RecipeDbService();
     const ingredientService = new RecipeIngredientService();
-    const {recipeId} = useParams();
 
-    const [recipe, setRecipe] = useState({});
+    const [recipe, setRecipe] = useState({
+        title: "",
+        image: "",
+        directions: "",
+        readyInMinutes: 0,
+        userId: userCredential["userId"]
+    })
+    const [ingredients, setIngredients] = useState([{name:"first", unit:"", amount:1}])
 
-    const [ingredients, setIngredients] = useState([])
 
-
-
-    useEffect(()=>{
-        recipeService.findRecipeDBById(recipeId)
+    const createRecipe = ()=>{
+        return recipeService.createRecipeDB(recipe)
             .then((res)=>{
-                setRecipe(res);
+                return res["id"];
             });
-
-        ingredientService.findRecipeIngredientsForRecipe(recipeId)
-            .then((res)=>{
-                setIngredients(res);
-            })
-
-    }, [])
-
-
-    const updateRecipe = ()=>{
-        recipeService.updateRecipeDB(recipeId, recipe);
     }
 
-    const updateIngredients = ()=>{
+    const createIngredients = (recipeId)=>{
         for(let i=0; i<ingredients.length; i++){
-            if (ingredients[i]["id"] !== undefined && ingredients[i]["id"] !== ""){
-                ingredientService.updateRecipeIngredient(ingredients[i]["id"], ingredients[i]);
-            }else {
-                ingredientService.createRecipeIngredient(recipeId, ingredients[i])
-                    .then((res)=>{});
+            if (ingredients[i]["name"] !== "" ){
+                ingredientService.createRecipeIngredient(recipeId, ingredients[i]).then(r => r);
             }
         }
-    }
 
+    }
 
     return(
         <div className="whole-page">
@@ -56,8 +45,10 @@ const EditableRecipe = () => {
                         <input className="form-control"
                                value={recipe["title"]}
                                onChange={(e)=>{
-                                   setRecipe(prev=>{return {...prev, title: e.target.value}})}
-                               }
+                                   setRecipe(prev=>{
+                                       return {...prev, title: e.target.value}
+                                   })
+                               }}
                         />
                     </div>
                     <div className="form-group">
@@ -65,8 +56,10 @@ const EditableRecipe = () => {
                         <input className="form-control"
                                value={recipe["image"]}
                                onChange={(e)=>{
-                                   setRecipe(prev=>{return {...prev, image: e.target.value}})}
-                               }
+                                   setRecipe(prev=>{
+                                       return {...prev, image: e.target.value}
+                                   })
+                               }}
                         />
                     </div>
                     <div className="form-group">
@@ -74,21 +67,24 @@ const EditableRecipe = () => {
                         <input className="form-control"
                                value={recipe["readyInMinutes"]}
                                onChange={(e)=>{
-                                   setRecipe(prev=>{return {...prev, readyInMinutes: e.target.value}})}
-                               }
+                                   setRecipe(prev=>{
+                                       return {...prev, readyInMinutes: e.target.value}
+                                   })
+                               }}
                         />
                     </div>
                     <div className="form-group">
                         <label>Ingredients</label>
+                        {JSON.stringify(recipe)}
 
-                        {ingredients.map((ingredient) => (
-                            <div className="row mb-2">
+                        {ingredients.map((each,i) => (
+                            <div className="row mb-2" key={i}>
                                 <div className="col-6">
                                     <input className="form-control" placeholder="Ingredient Name"
-                                           value={ingredient["name"]}
+                                           value={each["name"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                                   if (item.id === ingredient.id){
+                                               const newArr = ingredients.map((item, index) =>{
+                                                   if (index === i){
                                                        item.name = e.target.value;
                                                        return item
                                                    }
@@ -100,25 +96,25 @@ const EditableRecipe = () => {
                                 </div>
                                 <div className="col-3">
                                     <input className="form-control" placeholder="amount"
-                                           value={ingredient["amount"]}
+                                           value={each["amount"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                               if (item.id === ingredient.id){
-                                               item.amount = e.target.value;
-                                               return item
-                                           }
-                                               return item
-                                           })
+                                               const newArr = ingredients.map((item, index) =>{
+                                                   if (index === i){
+                                                       item.amount = e.target.value;
+                                                       return item
+                                                   }
+                                                   return item
+                                               })
                                                setIngredients(newArr)
                                            }}
                                     />
                                 </div>
                                 <div className="col-3">
                                     <input className="form-control" placeholder="unit"
-                                           value={ingredient["unit"]}
+                                           value={each["unit"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                                   if (item.id === ingredient.id){
+                                               const newArr = ingredients.map((item, index) =>{
+                                                   if (index === i){
                                                        item.unit = e.target.value;
                                                        return item
                                                    }
@@ -135,7 +131,7 @@ const EditableRecipe = () => {
                                onClick={()=>{
                                    setIngredients(prev=>{
                                        return [...prev,
-                                           { name: "", amount: "1", unit: "", recipeId: recipeId}]
+                                           { name: "", amount: "1", unit: ""}]
                                    })
                                }}>
                                 Add new ingredients
@@ -150,26 +146,38 @@ const EditableRecipe = () => {
                             className="form-control instruction-box"
                             value={recipe["directions"]}
                             onChange={(e)=>{
-                                setRecipe(prev=>{return {...prev, directions: e.target.value}})}
-                            }
+                                setRecipe(prev=>{
+                                    return {...prev, directions: e.target.value}
+                                })
+                            }}
                         >
             </textarea>
                     </div>
                     <div className="form-group">
                         <a className="btn btn-primary btn-block wbdv-login bg-theme border-0"
                            onClick={()=>{
-                               updateRecipe();
-                               updateIngredients()
+                               createRecipe()
+                                   .then((res)=>{
+                                       createIngredients(res)
+                                   })
                            }}
                         >
-                            Update
+                            Upload
                         </a>
                     </div>
                 </form>
             </div>
         </div>
     )
-
+};
+const stateToPropMapper = (state) => {
+    return {
+        userCredential: state.userReducer.userCredential
+    }
 }
 
-export default EditableRecipe
+const dispatchToPropMapper = (dispatch)=> {
+    return {}
+}
+
+export default connect(stateToPropMapper, dispatchToPropMapper)(RecipeForm);

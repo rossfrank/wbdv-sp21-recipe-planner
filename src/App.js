@@ -12,6 +12,7 @@ import Navbar from "./components/homepage/navbar";
 import {connect} from "react-redux";
 import NewRecipe from "./components/recipe/new-recipe";
 import EditableRecipe from "./components/recipe/editable-recipe";
+import RecipeForm from "./components/recipe/recipe-form";
 
 function App({userCredential,}) {
   return (
@@ -34,12 +35,17 @@ function App({userCredential,}) {
                     <Route exact path={["/recipes/search", "/recipes/search/:keyword"]}>
                         {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/homepage" />}
                     </Route>
-                    <Route path="/recipes/:recipeId">
-                        <RecipeProfile />
+
+                    <Route path="/recipes/form" exact>
+                        {userCredential["isAuthenticated"] ?  <RecipeForm /> : <Redirect to="/login" />}
                     </Route>
 
-                    <Route path="/newrecipe" exact>
-                        <NewRecipe/>
+                    <Route path="/recipes/:recipeId/form" exact>
+                        {userCredential["isAuthenticated"] ?  <EditableRecipe/> : <Redirect to="/login" />}
+                    </Route>
+
+                    <Route path="/recipes/:recipeId" exact>
+                        <RecipeProfile />
                     </Route>
 
                     <Route path={[

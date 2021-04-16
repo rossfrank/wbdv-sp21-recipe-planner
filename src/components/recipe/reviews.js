@@ -6,6 +6,7 @@ import reviewService from "../../services/review-service";
 import { useParams } from "react-router";
 
 const Reviews = ({
+  user,
   reviews = [],
   createReview,
   findReviewsForRecipe,
@@ -14,8 +15,8 @@ const Reviews = ({
   const { recipeId } = useParams();
   const [newReview, setNewReview] = useState("");
   useEffect(() => {
-    findReviewsForRecipe(recipeId);
-  }, [recipeId]);
+    reviews = findReviewsForRecipe(recipeId);
+  }, [recipeId, newReview]);
   return (
     <>
       <div className="row center-element percentage70-item">
@@ -34,8 +35,8 @@ const Reviews = ({
                   alt="..."
                 />
                 <div className="media-body">
-                  <a className="mt-0" href="/profile">
-                    {review.userId}
+                  <a className="mt-0" href={`/profile/${review.userId}`}>
+                    {review.userName}
                   </a>
                   <p>{review.text}</p>
                 </div>
@@ -54,7 +55,14 @@ const Reviews = ({
         <br />
         <button
           className="btn btn-warning float-right"
-          onClick={() => createReview(recipeId, newReview)}
+          onClick={() => {
+            if (user.isAuthenticated) {
+              createReview(user, recipeId, newReview);
+              setNewReview("");
+            } else {
+              alert("Please Log in first!");
+            }
+          }}
         >
           Submit
         </button>
@@ -66,16 +74,18 @@ const Reviews = ({
 const stpm = (state) => {
   return {
     reviews: state.reviewReducer.reviews,
+    user: state.userReducer.userCredential,
   };
 };
 
 const dtpm = (dispatch) => {
   return {
-    createReview: (recipeId, newReview) => {
+    createReview: (user, recipeId, newReview) => {
       reviewService
         .createReview(recipeId, {
-          userId: "1",
+          userId: user.userId,
           text: newReview,
+          userName: user.username,
         })
         .then((theReview) =>
           dispatch({
@@ -84,7 +94,7 @@ const dtpm = (dispatch) => {
           })
         );
     },
-    
+
     findReviewsForRecipe: (recipeId) =>
       reviewService.findReviewForRecipe(recipeId).then((theReviews) =>
         dispatch({

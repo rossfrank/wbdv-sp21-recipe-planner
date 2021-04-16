@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import reviewService, { createReview } from "../../services/review-service";
 import { useParams } from "react-router";
 import service, { createFavorite } from "../../services/favorite-service";
 
 
-const Favorite = ({ favorite = [], findFavorite, createFavorite, deleteFavorite }) => {
+const Favorite = ({ favorite = [],user, findFavorite, createFavorite, deleteFavorite }) => {
     const [Collect, setCollect] = useState(false);
     const {recipeId} = useParams()
     const [Record, setRecord] = useState(undefined);
-    useEffect(()=>{
-        service.findFavorite("1", recipeId)
+    function handleClick() {
+        if (Collect === true) {
+          setCollect(false);
+          deleteFavorite(Record.id);
+        } else {
+          setCollect(true);
+          createFavorite(user.userId, recipeId, {})
+        }
+      }
+      useEffect(()=>{
+        service.findFavorite(user.userId, recipeId)
             .then((res)=> {
                 if(res.userId === -1){
                     setCollect(false)
@@ -19,21 +27,19 @@ const Favorite = ({ favorite = [], findFavorite, createFavorite, deleteFavorite 
                     setRecord(res)
                 }
             })
-    },[])
-    function handleClick() {
-        if (Collect === true) {
-          setCollect(false);
-          deleteFavorite(Record.id);
-        } else {
-          setCollect(true);
-          createFavorite("1", recipeId, {})
-        }
-      }
+    },[Collect])
     return(
         <div className="col-7 collect-op">
         <i
           className={`far fa-heart fa-lg ${Collect ? "favorite" : ""}`}
-          onClick={() => handleClick()}
+          onClick={() => {
+            if(user.isAuthenticated){
+              handleClick()
+            }else{
+              alert("Please Log in first!")
+            }
+            
+          }}
         />
       </div>)
 }
@@ -41,6 +47,7 @@ const Favorite = ({ favorite = [], findFavorite, createFavorite, deleteFavorite 
 const stpm = (state) => {
     return {
       favorite: state.favoriteReducer.favorites,
+      user: state.userReducer.userCredential,
     };
   };
   const dtpm = (dispatch) => {
@@ -52,13 +59,13 @@ const stpm = (state) => {
             favorite: theF,
           })
         ),
-        deleteFavorite: (uId, rId) => {
-            service.deleteFavorite(uId, rId)
-            // .then((status) =>
-            //     dispatch({
-            //         type: 'DELETE_FAVORITE',
-            //     })
-            // )
+        deleteFavorite: (fId) => {
+            service.deleteFavorite(fId)
+            .then((status) =>
+                dispatch({
+                    type: 'DELETE_FAVORITE',
+                })
+            )
         },
         createFavorite: (userId, recipeId, theF) => {
             service
