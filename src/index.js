@@ -13,8 +13,7 @@ import userReducer from "./reducers/user-reducer";
 import recipeReducer from "./reducers/recipe-reducer";
 import reviewReducer from "./reducers/review-reducer";
 import favoriteReducer from "./reducers/favorite-reducer";
-
-
+import cartReducer from "./reducers/cart-reducer";
 
 const persistedState = loadFromLocalStorage();
 const reducer = combineReducers({
@@ -22,6 +21,7 @@ const reducer = combineReducers({
     userReducer: userReducer,
     reviewReducer: reviewReducer,
     favoriteReducer: favoriteReducer,
+    cartReducer: cartReducer
 });
 
 const store = createStore(reducer, persistedState);

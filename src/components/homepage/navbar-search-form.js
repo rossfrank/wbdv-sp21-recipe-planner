@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 function NavbarSearchForm(){
     const [query, setQuery] = useState("");
 
-
     return(
         <>
             <div className="form-row w-100">
@@ -20,7 +19,7 @@ function NavbarSearchForm(){
                     <Link to={`/recipes/search/${query}`}
                           className="btn my-2 mr-sm-2 bg-theme"
                     >
-                        <i className="fas fa-search"></i>
+                        <i className="fas fa-search"/>
                     </Link>
                 </div>
             </div>

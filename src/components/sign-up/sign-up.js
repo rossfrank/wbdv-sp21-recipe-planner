@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./sign-up.css";
-import UserService from "../../services/user-service";
+import userService from "../../services/user-service";
 import {connect} from "react-redux";
 
 const SignUp = ({userCredential, userRegister}) => {
@@ -100,7 +100,6 @@ const stateToPropMapper = (state) => {
 }
 
 const dispatchToPropMapper = (dispatch)=> {
-  const userService = new UserService();
   return {
     userRegister: (user) => {
       userService.userRegister({
