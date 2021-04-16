@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Route, Redirect, NavLink, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./log-in.css";
 import {connect} from 'react-redux'
 import userService from "../../services/user-service";

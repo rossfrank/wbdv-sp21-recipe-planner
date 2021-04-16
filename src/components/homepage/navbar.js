@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import './navbar.css'
 import NavbarSearchForm from "./navbar-search-form";
 import {Link} from "react-router-dom";
