@@ -8,9 +8,6 @@ const Ingredients = ({ ingred = [] }) => {
         <div className="col-8">
           <h4>Ingredients</h4>
         </div>
-        <div className="col-4 align-to-right">
-          <i className="fas fa-shopping-basket" />
-        </div>
       </div>
       <table className="center-element table-frame">
         <tbody>
@@ -25,5 +22,6 @@ const Ingredients = ({ ingred = [] }) => {
     </>
   );
 };
+
 
 export default Ingredients;

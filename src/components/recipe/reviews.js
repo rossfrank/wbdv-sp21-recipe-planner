@@ -15,8 +15,8 @@ const Reviews = ({
   const { recipeId } = useParams();
   const [newReview, setNewReview] = useState("");
   useEffect(() => {
-    findReviewsForRecipe(recipeId);
-  }, [recipeId]);
+    reviews = findReviewsForRecipe(recipeId);
+  }, [recipeId, newReview]);
   return (
     <>
       <div className="row center-element percentage70-item">
@@ -25,27 +25,25 @@ const Reviews = ({
         </div>
       </div>
       <ul className="percentage70-item center-element">
-        {
-          reviews.map((review) => {
-            return (
-              <div key={review.reviewId}>
-                <div className="media">
-                  <img
-                    src={User}
-                    className="align-self-start mr-3 user-photo"
-                    alt="..."
-                  />
-                  <div className="media-body">
-                    <a className="mt-0" href="/profile">
-                      {review.userId}
-                    </a>
-                    <p>{review.text}</p>
-                  </div>
+        {reviews.map((review) => {
+          return (
+            <div key={review.reviewId}>
+              <div className="media">
+                <img
+                  src={User}
+                  className="align-self-start mr-3 user-photo"
+                  alt="..."
+                />
+                <div className="media-body">
+                  <a className="mt-0" href={`/profile/${review.userId}`}>
+                    {review.userName}
+                  </a>
+                  <p>{review.text}</p>
                 </div>
               </div>
-            );
-          }
-        )}
+            </div>
+          );
+        })}
       </ul>
       <div className="percentage70-item center-element">
         <textarea
@@ -58,8 +56,12 @@ const Reviews = ({
         <button
           className="btn btn-warning float-right"
           onClick={() => {
-            createReview(user, recipeId, newReview);
-            setNewReview("");
+            if (user.isAuthenticated) {
+              createReview(user, recipeId, newReview);
+              setNewReview("");
+            } else {
+              alert("Please Log in first!");
+            }
           }}
         >
           Submit
@@ -83,6 +85,7 @@ const dtpm = (dispatch) => {
         .createReview(recipeId, {
           userId: user.userId,
           text: newReview,
+          userName: user.username,
         })
         .then((theReview) =>
           dispatch({
