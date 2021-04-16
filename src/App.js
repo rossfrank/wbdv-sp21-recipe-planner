@@ -9,7 +9,6 @@ import Profile from "./components/profile/profile";
 import RecipeProfile from "./components/recipe/recipe-profile";
 import React from "react";
 import Navbar from "./components/homepage/navbar";
-import UserService from "./services/user-service";
 import {connect} from "react-redux";
 import NewRecipe from "./components/recipe/new-recipe";
 import EditableRecipe from "./components/recipe/editable-recipe";
@@ -53,7 +52,8 @@ function App({userCredential,}) {
 
                     <Route path={[
                         "/profile",
-                        "/profile/:tab"
+                        "/profile/:user",
+                        "/profile/:user/:tab"
                     ]} exact>
                         <Profile/>
                     </Route>
@@ -72,7 +72,6 @@ const stateToPropMapper = (state) => {
 }
 
 const dispatchToPropMapper = (dispatch)=> {
-    const userService = new UserService();
     return {}
 }
 
