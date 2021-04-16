@@ -22,6 +22,7 @@ const EditableRecipe = () => {
             .then((res)=>{
                 setRecipe(res);
             });
+
         ingredientService.findRecipeIngredientsForRecipe(recipeId)
             .then((res)=>{
                 setIngredients(res);
@@ -62,18 +63,18 @@ const EditableRecipe = () => {
                     <div className="form-group">
                         <label>Image Link</label>
                         <input className="form-control"
-                               value={recipe["imageUrl"]}
+                               value={recipe["image"]}
                                onChange={(e)=>{
-                                   setRecipe(prev=>{return {...prev, imageUrl: e.target.value}})}
+                                   setRecipe(prev=>{return {...prev, image: e.target.value}})}
                                }
                         />
                     </div>
                     <div className="form-group">
                         <label>Cooking Time (mins)</label>
                         <input className="form-control"
-                               value={recipe["time"]}
+                               value={recipe["readyInMinutes"]}
                                onChange={(e)=>{
-                                   setRecipe(prev=>{return {...prev, time: e.target.value}})}
+                                   setRecipe(prev=>{return {...prev, readyInMinutes: e.target.value}})}
                                }
                         />
                     </div>

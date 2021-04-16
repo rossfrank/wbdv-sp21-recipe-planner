@@ -12,7 +12,6 @@ function Homepage() {
 
         const persistedState = loadFromLocalStorage();
         console.log(persistedState)
-
         recipeService.findRecipeTopRating(2)
             .then((res)=>{
                 setHomeRecipes(res.results)

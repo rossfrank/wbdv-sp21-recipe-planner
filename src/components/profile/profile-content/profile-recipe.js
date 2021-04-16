@@ -1,16 +1,24 @@
 import React, {useState, useEffect} from 'react'
 import '../../homepage/recipe-card.css'
-import recipeService from "../../../services/recipe-service";
+import RecipeDbService from "../../../services/recipe-db-service";
+import RecipeIngredientService from "../../../services/recipe-ingredient-service";
 import {connect} from "react-redux";
 
 
 function ProfileRecipe({recipeId}) {
 
+    const recipeService = new RecipeDbService();
+    const ingredientService = new RecipeIngredientService();
     const [recipeDetail, setRecipeDetail] = useState({})
+    const [ingredients, setIngredients] = useState([])
 
     useEffect(()=>{
         recipeService.findRecipeById(recipeId)
             .then((res)=>setRecipeDetail(res))
+
+        ingredientService.findRecipeIngredientsForRecipe(recipeId)
+            .then((res)=>{setIngredients(res)})
+
     },[recipeId])
 
 
@@ -32,8 +40,8 @@ function ProfileRecipe({recipeId}) {
                         <div className="col-8">
                             <h6>Ingredients</h6>
                             <div>
-                                {recipeDetail.extendedIngredients !== undefined &&
-                                recipeDetail.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
+                                {ingredients !== undefined &&
+                                ingredients.map(ingredient=>{return `${ingredient.name}, `})
                                 }
                             </div>
                             <small>

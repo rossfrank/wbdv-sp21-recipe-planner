@@ -31,10 +31,9 @@ function App({userCredential,}) {
                     <Route exact path="/login">
                         {userCredential["isAuthenticated"] ? <Redirect to="/homepage" /> : <LogIn />}
                     </Route>
-
                     {/*protect Search function*/}
                     <Route exact path={["/recipes/search", "/recipes/search/:keyword"]}>
-                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/login" />}
+                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/homepage" />}
                     </Route>
 
                     <Route path="/recipes/form" exact>
