@@ -14,6 +14,7 @@ import NewRecipe from "./components/recipe/new-recipe";
 import EditableRecipe from "./components/recipe/editable-recipe";
 
 function App({userCredential,}) {
+
   return (
       <BrowserRouter>
         <div>
@@ -34,11 +35,13 @@ function App({userCredential,}) {
                     <Route exact path={["/recipes/search", "/recipes/search/:keyword"]}>
                         {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/homepage" />}
                     </Route>
+
+
                     <Route path="/recipes/:recipeId">
                         <RecipeProfile />
                     </Route>
 
-                    <Route path="/newrecipe" exact>
+                    <Route path="/form" exact>
                         <NewRecipe/>
                     </Route>
 
