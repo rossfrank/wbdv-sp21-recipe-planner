@@ -5,7 +5,7 @@ export const findCartForUser = uId =>
         .then(response => response.json());
 
 export const addItemToCart = (uId, cartItem) =>
-    fetch(`${CART_URL}/${uId}/`, {
+    fetch(`${CART_URL}/${uId}`, {
         method: "POST",
         body: JSON.stringify(cartItem),
         headers: {

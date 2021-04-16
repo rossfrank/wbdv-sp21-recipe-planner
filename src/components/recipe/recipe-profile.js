@@ -8,13 +8,22 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import recipeService from "../../services/recipe-service";
+import cartService from "../../services/cart-service";
 
-
-const RecipeProfile = ({ recipe = [], userCredential, findRecipeById }) => {
+const RecipeProfile = ({ recipe = [], user, addItemToCart, findRecipeById }) => {
   const { recipeId } = useParams();
   useEffect(() => {
     findRecipeById(recipeId);
   }, []);
+  function handleClick(){
+    if(user.isAuthenticated){
+      addItemToCart(user.userId, {userId: user.userId, recipeId: recipeId})
+    alert("Successfully Added！")
+    }else{
+      alert("Please Log In First!")
+    }
+    
+  }
   return (
     <div className="container whole-page">
       <div className="row">
@@ -33,6 +42,9 @@ const RecipeProfile = ({ recipe = [], userCredential, findRecipeById }) => {
         
       </div>
       <img src={recipe.image} className="image-display" />
+      <div className="col-10 align-to-right">
+          <i className="fas fa-shopping-basket" onClick={() => handleClick()}/>
+        </div>
       <Ingredients ingred={recipe.extendedIngredients} />
       &nbsp;
       <Directions recipe={recipe} />
@@ -45,7 +57,7 @@ const RecipeProfile = ({ recipe = [], userCredential, findRecipeById }) => {
 const stpm = (state) => {
   return {
     recipe: state.recipeReducer.recipe,
-    userCredential: state.userReducer.userCredential,
+    user: state.userReducer.userCredential,
   };
 };
 const dtpm = (dispatch) => {
@@ -57,6 +69,13 @@ const dtpm = (dispatch) => {
           recipe: theRecipe,
         })
       ),
+    
+    addItemToCart: (userId, item) =>
+      cartService.addItemToCart(userId, item).then((item) =>
+      dispatch({
+        type: "ADD_ITEM_TO_CART",
+        item: item,
+      }))
   };
 };
 

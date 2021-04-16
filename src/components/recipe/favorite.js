@@ -14,11 +14,11 @@ const Favorite = ({ favorite = [],user, findFavorite, createFavorite, deleteFavo
           deleteFavorite(Record.id);
         } else {
           setCollect(true);
-          createFavorite(user, recipeId, {})
+          createFavorite(user.userId, recipeId, {})
         }
       }
       useEffect(()=>{
-        service.findFavorite(user, recipeId)
+        service.findFavorite(user.userId, recipeId)
             .then((res)=> {
                 if(res.userId === -1){
                     setCollect(false)
@@ -32,7 +32,14 @@ const Favorite = ({ favorite = [],user, findFavorite, createFavorite, deleteFavo
         <div className="col-7 collect-op">
         <i
           className={`far fa-heart fa-lg ${Collect ? "favorite" : ""}`}
-          onClick={() => handleClick()}
+          onClick={() => {
+            if(user.isAuthenticated){
+              handleClick()
+            }else{
+              alert("Please Log in first!")
+            }
+            
+          }}
         />
       </div>)
 }
@@ -40,7 +47,7 @@ const Favorite = ({ favorite = [],user, findFavorite, createFavorite, deleteFavo
 const stpm = (state) => {
     return {
       favorite: state.favoriteReducer.favorites,
-      user: state.userReducer.userCredential.userId,
+      user: state.userReducer.userCredential,
     };
   };
   const dtpm = (dispatch) => {
