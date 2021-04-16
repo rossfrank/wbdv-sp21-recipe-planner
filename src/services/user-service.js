@@ -1,32 +1,25 @@
-function UserService(){
+const SERVER_URL = process.env.REACT_APP_SERVER_API
 
-    this.userLogin = userLogin;
-    this.userRegister = userRegister;
-    this.url = "http://localhost:8080"
-    // this.url = "https://wbdv-recipe-planner-server.herokuapp.com"
-    const self = this
 
-    function userLogin(userCredential){
-        return fetch(`${self.url}/login`, {
-            method: "POST",
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(userCredential)
+export const userLogin = userCredential =>
+    fetch(`${SERVER_URL}/login`, {
+        method: "POST",
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(userCredential)
         }).then((res)=>{
             return res.json()
-        })
-    }
+    })
 
-    function userRegister(user){
-        return fetch(`${self.url}/register`, {
-            method: "POST",
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(user)
-        }).then((res)=>{
-            return res.json()
-        })
-    }
+export const userRegister = user =>
+    fetch(`${SERVER_URL}/register`, {
+        method: "POST",
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(user)
+        }).then((res)=>res.json())
 
-
+const api = {
+    userLogin,
+    userRegister
 }
 
-export default UserService
+export default api

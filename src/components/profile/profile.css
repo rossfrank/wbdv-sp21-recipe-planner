@@ -1,0 +1,13 @@
+.profile-page {
+    padding-top:80px;
+}
+
+.recipe {
+    textDecoration: none;
+    color:black;
+}
+
+.recipe:focus {
+    outline: none;
+    box-shadow: none;
+}

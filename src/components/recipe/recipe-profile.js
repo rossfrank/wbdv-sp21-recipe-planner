@@ -7,7 +7,7 @@ import Favorite from "./favorite";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import RecipeService from "../../services/recipe-service";
+import recipeService from "../../services/recipe-service";
 
 
 const RecipeProfile = ({ recipe = [], userCredential, findRecipeById }) => {
@@ -49,11 +49,9 @@ const stpm = (state) => {
   };
 };
 const dtpm = (dispatch) => {
-  const service = new RecipeService();
-
   return {
     findRecipeById: (recipeId) =>
-      service.findRecipeById(recipeId).then((theRecipe) =>
+      recipeService.findRecipeById(recipeId).then((theRecipe) =>
         dispatch({
           type: "FIND_RECIPE_BY_ID",
           recipe: theRecipe,

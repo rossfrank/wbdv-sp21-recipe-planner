@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Route, Redirect, NavLink, Link} from "react-router-dom";
 import "./log-in.css";
 import {connect} from 'react-redux'
-import UserService from "../../services/user-service";
+import userService from "../../services/user-service";
 
 const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
 
@@ -62,7 +62,6 @@ const stateToPropMapper = (state) => {
 }
 
 const dispatchToPropMapper = (dispatch)=> {
-  const userService = new UserService();
   return {
     userLogin: (login) => {
 

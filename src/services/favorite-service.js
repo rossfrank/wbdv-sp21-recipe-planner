@@ -1,9 +1,6 @@
 
-// const USERS_URL = "http://localhost:8080/api/users";
-// const FAVORITES_URL = "http://localhost:8080/api/favorites";
-
-const USERS_URL = "https://wbdv-recipe-planner-server.herokuapp.com/api/users";
-const FAVORITES_URL = "https://wbdv-recipe-planner-server.herokuapp.com/api/favorites";
+const USERS_URL = `${process.env.REACT_APP_SERVER_API}/api/users`;
+const FAVORITES_URL = `${process.env.REACT_APP_SERVER_API}/api/favorites`;
 
 export const createFavorite = (uId, rid, favorite) =>
   fetch(`${USERS_URL}/${uId}/recipe/${rid}/favorite`, {
@@ -23,7 +20,7 @@ export const findFavorite = (uId, rId) =>
 export const deleteFavorite = (fId) =>
   fetch(`${FAVORITES_URL}/${fId}`, {
     method: "DELETE",
-  }).then((response) => response.json());
+  }).then((response) => response.json())
 
 const api = {
   createFavorite,

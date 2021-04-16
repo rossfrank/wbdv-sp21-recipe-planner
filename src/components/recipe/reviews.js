@@ -15,8 +15,9 @@ const Reviews = ({
   const { recipeId } = useParams();
   const [newReview, setNewReview] = useState("");
   useEffect(() => {
-    findReviewsForRecipe(recipeId);
-  }, [recipeId]);
+    reviews = findReviewsForRecipe(recipeId);
+  }, [recipeId, newReview]);
+  console.log(reviews);
   return (
     <>
       <div className="row center-element percentage70-item">
@@ -28,7 +29,7 @@ const Reviews = ({
         {
           reviews.map((review) => {
             return (
-              <div key={review.reviewId}>
+              <div key={review[0]}>
                 <div className="media">
                   <img
                     src={User}
@@ -37,9 +38,9 @@ const Reviews = ({
                   />
                   <div className="media-body">
                     <a className="mt-0" href="/profile">
-                      {review.userId}
+                      {review[4]}
                     </a>
-                    <p>{review.text}</p>
+                    <p>{review[2]}</p>
                   </div>
                 </div>
               </div>
@@ -83,6 +84,7 @@ const dtpm = (dispatch) => {
         .createReview(recipeId, {
           userId: user.userId,
           text: newReview,
+          userName: user.name,
         })
         .then((theReview) =>
           dispatch({
