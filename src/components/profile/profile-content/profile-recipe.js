@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '../../homepage/recipe-card.css'
-import RecipeService from "../../../services/recipe-service";
+import recipeService from "../../../services/recipe-service";
 import {connect} from "react-redux";
 
 
@@ -59,7 +59,7 @@ const stpm = (state) => {
 const dtpm = (dispatch) => {
     return {
         findRecipeById: (recipeId) => {
-            (new RecipeService())
+            recipeService
                 .findRecipeById(recipeId)
                 .then(theRecipe =>
                     dispatch({

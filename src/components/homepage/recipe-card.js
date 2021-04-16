@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import './recipe-card.css'
-import RecipeService from "../../services/recipe-service";
+import recipeService from "../../services/recipe-service";
 import {Link} from "react-router-dom";
 
 
 function RecipeCard({recipe={}}) {
 
-    const service = new RecipeService();
     const [recipeDetail, setRecipeDetail] = useState({})
 
     useEffect(()=>{
-        service.findRecipeById(recipe.id)
+        recipeService.findRecipeById(recipe.id)
             .then((res)=>setRecipeDetail(res))
     },[])
 
@@ -24,14 +23,12 @@ function RecipeCard({recipe={}}) {
                           to={`/recipes/${recipeDetail.id}`}>
                         {recipeDetail.title}
                     </Link>
-
                     <h6 className="card-subtitle">Ingredients</h6>
                     <div className="card-summary">
                         {recipeDetail.extendedIngredients !== undefined &&
                         recipeDetail.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
                         }
                     </div>
-
                     <span className="card-timer">
                         <i className="far fa-clock " />
                         {recipeDetail.readyInMinutes} min
