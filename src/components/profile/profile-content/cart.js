@@ -5,10 +5,14 @@ import {connect} from "react-redux";
 import cartService from "../../../services/cart-service";
 import recipeService from "../../../services/recipe-service";
 
+<<<<<<< HEAD:src/components/profile/profile-content/basket.js
+const Basket = ({myCart, findCartForUser}) => {
+=======
 const Cart = (
     {
         myCart,
         findCartForUser}) => {
+>>>>>>> fix api on cart:src/components/profile/profile-content/cart.js
     const {user} = useParams();
 
     useEffect(()=>{
@@ -74,4 +78,8 @@ const dtpm = (dispatch) => {
     };
 }
 
+<<<<<<< HEAD:src/components/profile/profile-content/basket.js
+export default connect(stpm, dtpm)(Basket);
+=======
 export default connect(stpm, dtpm)(Cart);
+>>>>>>> fix api on cart:src/components/profile/profile-content/cart.js
