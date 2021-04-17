@@ -23,7 +23,7 @@ const Reviews = (
                             <div className="card">
                                 <div className="card-header">
                                     <h5 className="mb-1">
-                                        {review.title}
+                                        {review.recipeName}
                                     </h5>
                                 </div>
                                 <div className="card-body">
