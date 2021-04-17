@@ -48,9 +48,6 @@ function App({userCredential,}) {
                         <RecipeProfile />
                     </Route>
 
-                    <Route path="/form" exact>
-                        {userCredential["isAuthenticated"] ?  <NewRecipe /> : <Redirect to="/login" />}
-                    </Route>
 
                     <Route path={[
                         "/profile",
