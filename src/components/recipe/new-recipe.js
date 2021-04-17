@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./recipe-profile.css";
-import RecipeDbService from "../../services/recipe-db-service";
-import RecipeIngredientService from "../../services/recipe-ingredient-service";
+import recipeDBService from "../../services/recipe-db-service";
+import ingredientService from "../../services/recipe-ingredient-service";
 import UserService from "../../services/user-service";
 import {connect} from "react-redux";
 
@@ -56,8 +56,6 @@ const NewRecipe = ({userCredential}) => {
 
   const createRecipeIngredients = (rid)=>{
 
-    const ingredientService = new RecipeIngredientService();
-
     for(let i=0; i<count; i++){
       if (ingredientNames[i]!==""){
         const ingredient = {
@@ -87,8 +85,6 @@ const NewRecipe = ({userCredential}) => {
       score: 0,
       userId: userCredential["userId"]
     }
-
-    const recipeDBService = new RecipeDbService();
 
     recipeDBService.createRecipeDB(recipe)
         .then((res)=>{
