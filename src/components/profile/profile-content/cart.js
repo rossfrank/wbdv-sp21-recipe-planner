@@ -20,9 +20,9 @@ const Cart = (
             <div className="container">
                 {myCart &&
                 myCart.map(recipe =>
-                    <div key={recipe.Id}>
+                    <div key={recipe.recipeId}>
                         {
-                            <ProfileRecipe recipe={recipe} />
+                            <ProfileRecipe recipe={recipe} ingredients={recipe.extendedIngredients}/>
                         }
                     </div>
                 )
@@ -46,32 +46,31 @@ const dtpm = (dispatch) => {
     return {
         findCartForUser: (userId) => {
             cartService.findCartForUser(userId)
-                .then(((res)=>
-                        recipeService.findRecipeByIdBulk(res.map(r => r.id))
+                .then(((res)=>  {
+                    if(res) {
+                        return recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
                             .then(theCart =>
                                 dispatch({
                                     type: "FIND_CART_FOR_USER",
                                     cart: theCart
                                 }))
-                ))
-        },
+                    }
+                    return []
+                }))},
         addItemToCart: (userId, recipeId) => {
             cartService.addItemToCart(userId, recipeId)
                 .then(cartItem =>
                     dispatch({
                         type: "ADD_ITEM_TO_CART",
                         item: cartItem
-                    }))
-        },
+                    }))},
         removeItemFromCart: (userId, cartId) => {
             cartService.removeItemFromCart(userId, cartId)
                 .then(cartItem =>
                     dispatch({
                         type: "ADD_ITEM_TO_CART",
                         itemToDelete: cartItem
-                    }))
-        }
-    };
+                    }))}};
 }
 
 export default connect(stpm, dtpm)(Cart);

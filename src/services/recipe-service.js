@@ -31,6 +31,7 @@ export const findRecipeByIdBulk = ids =>
     fetch(`${RECIPE_URL}/informationBulk?ids=${ids.join("%2C")}`, GET_HEADER)
         .then(response => response.json())
 
+
 const api = {
     findRecipeById,
     findRecipeByKeyword,
