@@ -3,6 +3,7 @@ import ProfileRecipe from "./../profile-content/profile-recipe";
 import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import favoriteService from "../../../services/favorite-service";
+import recipeService from "../../../services/recipe-service";
 
 const Favorite = (
     {
@@ -12,7 +13,6 @@ const Favorite = (
 
     useEffect(()=>{
         findFavoriteForUser(user)
-        console.log(myFavorite)
     },[user])
 
     return(
@@ -20,9 +20,9 @@ const Favorite = (
             <div className="container">
                 {myFavorite &&
                 myFavorite.map(favorite =>
-                    <div key={favorite.recipeId}>
+                    <div key={favorite.id}>
                         {
-                            <ProfileRecipe recipeId={favorite.recipeId} />
+                            <ProfileRecipe recipe={favorite} />
                         }
                     </div>
                 )
@@ -39,6 +39,7 @@ const Favorite = (
 
 const stpm = (state) => {
     return {
+        myRecipes: state.recipeReducer.recipes,
         myFavorite: state.favoriteReducer.favorites
     };
 };
@@ -47,11 +48,15 @@ const dtpm = (dispatch) => {
         findFavoriteForUser: (userId) => {
             favoriteService
                 .findFavoriteForUser(userId)
-                .then(theFavs =>
-                    dispatch({
-                        type: "FIND_FAVORITE_FOR_USER",
-                        favorites: theFavs
-                    }))
+                .then(((res)=>
+                        recipeService.findRecipeByIdBulk(res.map(r => r.id))
+                            .then(theFavs =>
+                                dispatch({
+                                    type: "FIND_FAVORITE_FOR_USER",
+                                    favorites: theFavs
+                                }))
+                ))
+
         },
     };
 }

@@ -1,7 +1,7 @@
  import React from 'react'
 import {useParams} from "react-router-dom";
  import Favorite from "./profile-content/favorite";
- import BasketRecipe from "./profile-content/basket-recipes";
+ import Cart from "./profile-content/cart";
 
 const ProfileCards = ({}) => {
 
@@ -18,8 +18,8 @@ const ProfileCards = ({}) => {
                     <Favorite />
                 }
                 {
-                    tab === "Basket Recipes" &&
-                        <BasketRecipe />
+                    tab === "Cart" &&
+                        <Cart />
                 }
             </div>
         </div>

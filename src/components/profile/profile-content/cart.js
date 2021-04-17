@@ -3,8 +3,9 @@ import ProfileRecipe from "./../profile-content/profile-recipe";
 import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import cartService from "../../../services/cart-service";
+import recipeService from "../../../services/recipe-service";
 
-const BasketRecipe = (
+const Cart = (
     {
         myCart,
         findCartForUser}) => {
@@ -19,9 +20,9 @@ const BasketRecipe = (
             <div className="container">
                 {myCart &&
                 myCart.map(recipe =>
-                    <div key={recipe.recipeId}>
+                    <div key={recipe.Id}>
                         {
-                            <ProfileRecipe recipeId={recipe.recipeId} />
+                            <ProfileRecipe recipe={recipe} />
                         }
                     </div>
                 )
@@ -45,11 +46,14 @@ const dtpm = (dispatch) => {
     return {
         findCartForUser: (userId) => {
             cartService.findCartForUser(userId)
-                .then(theCart =>
-                    dispatch({
-                        type: "FIND_CART_FOR_USER",
-                        cart: theCart
-                    }))
+                .then(((res)=>
+                        recipeService.findRecipeByIdBulk(res.map(r => r.id))
+                            .then(theCart =>
+                                dispatch({
+                                    type: "FIND_CART_FOR_USER",
+                                    cart: theCart
+                                }))
+                ))
         },
         addItemToCart: (userId, recipeId) => {
             cartService.addItemToCart(userId, recipeId)
@@ -70,4 +74,4 @@ const dtpm = (dispatch) => {
     };
 }
 
-export default connect(stpm, dtpm)(BasketRecipe);
+export default connect(stpm, dtpm)(Cart);

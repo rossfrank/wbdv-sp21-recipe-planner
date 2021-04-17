@@ -1,14 +1,11 @@
 import React, {useState, useEffect} from "react";
 import "./recipe-profile.css";
-import RecipeDbService from "../../services/recipe-db-service";
-import RecipeIngredientService from "../../services/recipe-ingredient-service";
+import recipeService from "../../services/recipe-db-service";
+import ingredientService from "../../services/recipe-ingredient-service";
 import UserService from "../../services/user-service";
 import {connect} from "react-redux";
 
 const RecipeForm = ({userCredential}) =>{
-
-    const recipeService = new RecipeDbService();
-    const ingredientService = new RecipeIngredientService();
 
     const [recipe, setRecipe] = useState({
         title: "",
