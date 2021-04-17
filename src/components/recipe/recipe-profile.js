@@ -49,7 +49,7 @@ const RecipeProfile = ({ recipe = [], user, addItemToCart, findRecipeById }) => 
       &nbsp;
       <Directions recipe={recipe} />
       &nbsp;
-      <Reviews />
+      <Reviews recipe={recipe.title}/>
     </div>
   );
 };

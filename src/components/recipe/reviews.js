@@ -8,6 +8,7 @@ import { useParams } from "react-router";
 const Reviews = ({
   user,
   reviews = [],
+  recipe="",
   createReview,
   findReviewsForRecipe,
   findReviewsForUser,
@@ -57,7 +58,7 @@ const Reviews = ({
           className="btn btn-warning float-right"
           onClick={() => {
             if (user.isAuthenticated) {
-              createReview(user, recipeId, newReview);
+              createReview(user, recipe, recipeId, newReview);
               setNewReview("");
             } else {
               alert("Please Log in first!");
@@ -80,12 +81,13 @@ const stpm = (state) => {
 
 const dtpm = (dispatch) => {
   return {
-    createReview: (user, recipeId, newReview) => {
+    createReview: (user, recipe, recipeId, newReview) => {
       reviewService
         .createReview(recipeId, {
           userId: user.userId,
           text: newReview,
           userName: user.username,
+          recipeName: recipe,
         })
         .then((theReview) =>
           dispatch({
