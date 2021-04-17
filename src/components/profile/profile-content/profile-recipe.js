@@ -3,7 +3,7 @@ import '../../homepage/recipe-card.css'
 import {Link} from "react-router-dom";
 
 
-function ProfileRecipe({recipe}) {
+function ProfileRecipe({recipe , ingredients}) {
 
     return(
         <div className="col">
@@ -24,8 +24,8 @@ function ProfileRecipe({recipe}) {
                         <div className="col-8">
                             <h6 className="card-subtitle">Ingredients</h6>
                             <div className="card-summary">
-                                {recipe.extendedIngredients !== undefined &&
-                                recipe.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
+                                {ingredients !== undefined &&
+                                ingredients.map(i => i.name).join(', ')
                                 }
                             </div>
                             <small>

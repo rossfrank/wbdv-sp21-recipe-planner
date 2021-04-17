@@ -22,7 +22,7 @@ const Favorite = (
                 myFavorite.map(favorite =>
                     <div key={favorite.id}>
                         {
-                            <ProfileRecipe recipe={favorite} />
+                            <ProfileRecipe recipe={favorite} ingredients={favorite.extendedIngredients}/>
                         }
                     </div>
                 )
@@ -48,13 +48,17 @@ const dtpm = (dispatch) => {
         findFavoriteForUser: (userId) => {
             favoriteService
                 .findFavoriteForUser(userId)
-                .then(((res)=>
-                        recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
+                .then(((res)=> {
+                    if (res){
+                        return recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
                             .then(theFavs =>
                                 dispatch({
                                     type: "FIND_FAVORITE_FOR_USER",
                                     favorites: theFavs
                                 }))
+                    }
+                    return []
+                }
                 ))
 
         },
