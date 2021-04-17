@@ -1,4 +1,5 @@
 const RECIPES_URL = `${process.env.REACT_APP_SERVER_API}/api/recipes`
+const USERS_URL = `${process.env.REACT_APP_SERVER_API}/api/users`;
 
 export const findRecipeDBById = (rid)=>
         fetch(`${RECIPES_URL}/${rid}`)
@@ -34,11 +35,15 @@ export const deleteRecipeDB = (rid) =>
             res.json()
         )
 
+export const findRecipeForUser = (uId) =>
+    fetch(`${USERS_URL}/${uId}/recipes`).then((response) => response.json());
+
 const api = {
     findRecipeDBById,
     createRecipeDB,
     updateRecipeDB,
-    deleteRecipeDB
+    deleteRecipeDB,
+    findRecipeForUser
 }
 
 

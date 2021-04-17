@@ -15,7 +15,6 @@ import EditableRecipe from "./components/recipe/editable-recipe";
 import RecipeForm from "./components/recipe/recipe-form";
 
 function App({userCredential,}) {
-
   return (
       <BrowserRouter>
         <div>
