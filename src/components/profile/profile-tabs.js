@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 
 const ProfileTabs = ({}) => {
 
-    const items = ["Favorites", "Basket", "Basket Recipes", "Reviews", "My Recipes"];
+    const items = ["Favorites", "Cart", "Cart Items", "Reviews", "My Recipes"];
 
     const {user, tab} = useParams();
 
