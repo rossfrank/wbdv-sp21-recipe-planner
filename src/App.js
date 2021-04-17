@@ -44,8 +44,12 @@ function App({userCredential,}) {
                         {userCredential["isAuthenticated"] ?  <EditableRecipe/> : <Redirect to="/login" />}
                     </Route>
 
-                    <Route path="/recipes/:recipeId" exact>
+                    <Route path="/recipes/:recipeId">
                         <RecipeProfile />
+                    </Route>
+
+                    <Route path="/form" exact>
+                        <NewRecipe/>
                     </Route>
 
                     <Route path={[
