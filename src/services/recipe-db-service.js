@@ -46,5 +46,6 @@ const api = {
     findRecipeForUser
 }
 
+}
 
 export default api
