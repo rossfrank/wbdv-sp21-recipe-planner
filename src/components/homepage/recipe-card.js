@@ -6,32 +6,32 @@ import {Link} from "react-router-dom";
 
 function RecipeCard({recipe={}}) {
 
-    const [recipeDetail, setRecipeDetail] = useState({})
+    //const [recipeDetail, setRecipeDetail] = useState({})
 
     useEffect(()=>{
-        recipeService.findRecipeById(recipe.id)
-            .then((res)=>setRecipeDetail(res))
+        //recipeService.findRecipeById(recipe.id)
+            //.then((res)=>setRecipeDetail(res))
     },[])
 
 
     return(
         <div className="col mb-4">
             <div className="card h-100">
-                <img src={recipeDetail.image} className="card-img-top" alt="..."/>
+                <img src={recipe.image} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <Link className="card-title"
-                          to={`/recipes/${recipeDetail.id}`}>
-                        {recipeDetail.title}
+                          to={`/recipes/${recipe.id}`}>
+                        {recipe.title}
                     </Link>
                     <h6 className="card-subtitle">Ingredients</h6>
                     <div className="card-summary">
-                        {recipeDetail.extendedIngredients !== undefined &&
-                        recipeDetail.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
+                        {recipe.extendedIngredients !== undefined &&
+                        recipe.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
                         }
                     </div>
                     <span className="card-timer">
                         <i className="far fa-clock " />
-                        {recipeDetail.readyInMinutes} min
+                        {recipe.readyInMinutes} min
                     </span>
                 </div>
             </div>

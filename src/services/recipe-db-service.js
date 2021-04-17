@@ -1,49 +1,45 @@
-function RecipeDbService(){
+const RECIPES_URL = `${process.env.REACT_APP_SERVER_API}/api/recipes`
 
-    this.findRecipeDBById = findRecipeDBById;
-    this.createRecipeDB = createRecipeDB;
-    this.updateRecipeDB = updateRecipeDB;
-    this.deleteRecipeDB = deleteRecipeDB;
-    this.url = `${process.env.REACT_APP_SERVER_API}/api/recipes`
-    const self = this
-
+export const findRecipeDBById = (rid)=>
+        fetch(`${RECIPES_URL}/${rid}`)
+            .then((res)=>
+                res.json()
+            )
 
 
-    function findRecipeDBById(rid){
-        return fetch(`${self.url}/${rid}`)
-            .then((res)=>{
-                return res.json()
-            })
-    }
-
-    function createRecipeDB(recipe){
-        return fetch(`${self.url}`, {
+export const createRecipeDB = (recipe) =>
+        fetch(`${RECIPES_URL}`, {
             method: "POST",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(recipe)
-        }).then((res)=>{
-            return res.json()
-        })
-    }
+        }).then((res)=>
+            res.json()
+        )
 
-    function updateRecipeDB(rid, recipe){
-        return fetch(`${self.url}/${rid}`, {
+
+export const updateRecipeDB = (rid, recipe) =>
+        fetch(`${RECIPES_URL}/${rid}`, {
             method: "PUT",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(recipe)
-        }).then((res)=>{
-            return res.json()
-        })
-    }
+        }).then((res)=>
+            res.json()
+        )
 
-    function deleteRecipeDB(rid){
-        return fetch(`${self.url}/${rid}`, {
+
+export const deleteRecipeDB = (rid) =>
+        fetch(`${RECIPES_URL}/${rid}`, {
             method: "DELETE"
-        }).then((res)=>{
-            return res.json()
-        })
-    }
+        }).then((res)=>
+            res.json()
+        )
 
+const api = {
+    findRecipeDBById,
+    createRecipeDB,
+    updateRecipeDB,
+    deleteRecipeDB
 }
 
-export default RecipeDbService
+
+export default api
