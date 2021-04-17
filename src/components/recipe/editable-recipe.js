@@ -2,10 +2,11 @@ import React, {useState, useEffect} from "react";
 import "./recipe-profile.css";
 import recipeService from "../../services/recipe-db-service";
 import ingredientService from "../../services/recipe-ingredient-service";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import {connect} from "react-redux";
 
 
-const EditableRecipe = () => {
+const EditableRecipe = ({userCredential}) => {
 
     const {recipeId} = useParams();
 
@@ -154,14 +155,15 @@ const EditableRecipe = () => {
             </textarea>
                     </div>
                     <div className="form-group">
-                        <a className="btn btn-primary btn-block wbdv-login bg-theme border-0"
+                        <Link className="btn btn-primary btn-block wbdv-login bg-theme border-0"
                            onClick={()=>{
                                updateRecipe();
                                updateIngredients()
                            }}
+                           to={`/profile/${userCredential["userId"]}`}
                         >
                             Update
-                        </a>
+                        </Link>
                     </div>
                 </form>
             </div>
@@ -170,4 +172,14 @@ const EditableRecipe = () => {
 
 }
 
-export default EditableRecipe
+const stateToPropMapper = (state) => {
+    return {
+        userCredential: state.userReducer.userCredential
+    }
+}
+
+const dispatchToPropMapper = (dispatch)=> {
+    return {}
+}
+
+export default connect(stateToPropMapper, dispatchToPropMapper)(EditableRecipe)
