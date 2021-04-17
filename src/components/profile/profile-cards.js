@@ -1,7 +1,7 @@
- import React from 'react'
+import React from 'react'
 import {useParams} from "react-router-dom";
- import Favorite from "./profile-content/favorite";
- import Cart from "./profile-content/cart";
+import Favorite from "./profile-content/favorite";
+import Cart from "./profile-content/cart";
 
 const ProfileCards = ({}) => {
 
