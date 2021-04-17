@@ -47,7 +47,7 @@ const dtpm = (dispatch) => {
         findCartForUser: (userId) => {
             cartService.findCartForUser(userId)
                 .then(((res)=>
-                        recipeService.findRecipeByIdBulk(res.map(r => r.id))
+                        recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
                             .then(theCart =>
                                 dispatch({
                                     type: "FIND_CART_FOR_USER",

@@ -1,18 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import './recipe-card.css'
-import recipeService from "../../services/recipe-service";
 import {Link} from "react-router-dom";
 
 
 function RecipeCard({recipe={}}) {
-
-    //const [recipeDetail, setRecipeDetail] = useState({})
-
-    useEffect(()=>{
-        //recipeService.findRecipeById(recipe.id)
-            //.then((res)=>setRecipeDetail(res))
-    },[])
-
 
     return(
         <div className="col mb-4">
