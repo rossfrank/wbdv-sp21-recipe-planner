@@ -49,7 +49,7 @@ const dtpm = (dispatch) => {
             favoriteService
                 .findFavoriteForUser(userId)
                 .then(((res)=>
-                        recipeService.findRecipeByIdBulk(res.map(r => r.id))
+                        recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
                             .then(theFavs =>
                                 dispatch({
                                     type: "FIND_FAVORITE_FOR_USER",
