@@ -1,50 +1,41 @@
-function RecipeIngredientService(){
+const INGREDIENTS_URL = `${process.env.REACT_APP_SERVER_API}/api`
 
-    this.findRecipeIngredientsForRecipe = findRecipeIngredientsForRecipe;
-    this.createRecipeIngredient = createRecipeIngredient;
-    this.updateRecipeIngredient = updateRecipeIngredient;
-    this.deleteRecipeIngredient = deleteRecipeIngredient;
-    this.url = `${process.env.REACT_APP_SERVER_API}/api`
-    const self = this
+export const findRecipeIngredientsForRecipe = (recipeId) =>
+        fetch(`${INGREDIENTS_URL}/recipes/${recipeId}/ingredients`)
+            .then((res)=>
+                res.json()
+            )
 
-
-    function findRecipeIngredientsForRecipe(recipeId){
-        return fetch(`${self.url}/recipes/${recipeId}/ingredients`)
-            .then((res)=>{
-                return res.json()
-            })
-    }
-
-
-    function createRecipeIngredient(recipeId, ri){
-        return fetch(`${self.url}/recipes/${recipeId}/ingredients`, {
+export const createRecipeIngredient = (recipeId, ri) =>
+        fetch(`${INGREDIENTS_URL}/recipes/${recipeId}/ingredients`, {
             method: "POST",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(ri)
-        }).then((res)=>{
-            return res.json()
-        })
-    }
+        }).then((res)=>
+            res.json()
+        )
 
-    function updateRecipeIngredient(id, ri){
-        return fetch(`${self.url}/ingredients/${id}`, {
+export const updateRecipeIngredient = (id, ri) =>
+        fetch(`${INGREDIENTS_URL}/ingredients/${id}`, {
             method: "PUT",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(ri)
-        }).then((res)=>{
-            return res.json()
-        })
-    }
+        }).then((res)=>
+            res.json()
+        )
 
-    function deleteRecipeIngredient(id){
-        return fetch(`${self.url}/ingredients/${id}`, {
+ export const deleteRecipeIngredient = (id) =>
+     fetch(`${INGREDIENTS_URL}/ingredients/${id}`, {
             method: "DELETE"
-        }).then((res)=>{
-            return res.json()
-        })
-    }
+        }).then((res)=>
+            res.json()
+        )
 
-
+const api = {
+    findRecipeIngredientsForRecipe,
+    createRecipeIngredient,
+    updateRecipeIngredient,
+    deleteRecipeIngredient
 }
 
-export default RecipeIngredientService
+export default api

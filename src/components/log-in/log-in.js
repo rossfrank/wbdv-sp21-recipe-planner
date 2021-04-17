@@ -64,13 +64,16 @@ const stateToPropMapper = (state) => {
 const dispatchToPropMapper = (dispatch)=> {
   return {
     userLogin: (login) => {
-
       userService.userLogin(login)
           .then((res) => {
-              dispatch({
-              type: "USER_LOGIN",
-              payload: res
-            });
+              if (res["status"] === 200){
+                  dispatch({
+                      type: "USER_LOGIN",
+                      payload: res
+                  });
+              }else {
+                  alert("Please check email and password")
+              }
           })
     }
   }

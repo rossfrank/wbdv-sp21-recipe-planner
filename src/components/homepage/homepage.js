@@ -13,9 +13,10 @@ function Homepage() {
         const persistedState = loadFromLocalStorage();
         console.log(persistedState)
         recipeService.findRecipeTopRating(2)
-            .then((res)=>{
-                setHomeRecipes(res.results)
-            })
+            .then((res)=>
+                recipeService.findRecipeByIdBulk(res.results.map(r => r.id))
+                    .then(x => setHomeRecipes(x))
+            )
     },[])
 
     return(

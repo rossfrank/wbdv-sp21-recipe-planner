@@ -9,9 +9,11 @@ const GET_HEADER = {
     }
 }
 
-export const findRecipeById = id =>
-    fetch(`${RECIPE_URL}/${id}/information`, GET_HEADER)
+export const findRecipeById = id => {
+    console.log("bad")
+    return fetch(`${RECIPE_URL}/${id}/information`, GET_HEADER)
         .then(response => response.json())
+}
 
 export const findRecipeByKeyword = keyword =>
     fetch(`${RECIPE_URL}/searchComplex?query=${keyword}&apiKey=${RECIPE_API_KEY}`, GET_HEADER)
@@ -25,11 +27,16 @@ export const findRecipeTopRating = number =>
     fetch(`${RECIPE_URL}/searchComplex?limitLicense=null&offset=0&number=${number}`, GET_HEADER)
         .then(response => response.json())
 
+export const findRecipeByIdBulk = ids =>
+    fetch(`${RECIPE_URL}/informationBulk?ids=${ids.join("%2C")}`, GET_HEADER)
+        .then(response => response.json())
+
 const api = {
     findRecipeById,
     findRecipeByKeyword,
     findRecipeByRandom,
-    findRecipeTopRating
+    findRecipeTopRating,
+    findRecipeByIdBulk
 }
 
 export default api
