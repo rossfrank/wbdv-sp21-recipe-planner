@@ -11,7 +11,7 @@ function RecipeCard({recipe={}}) {
                 <img src={recipe.image} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <Link className="card-title"
-                          to={`/recipes/${recipe.id}`}>
+                          to={`/details/${recipe.id}`}>
                         {recipe.title}
                     </Link>
                     <h6 className="card-subtitle">Ingredients</h6>

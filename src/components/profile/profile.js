@@ -3,27 +3,34 @@ import UserDescription from "./user-description";
 import "./profile.css";
 import ProfileTabs from "./profile-tabs";
 import ProfileCards from "./profile-cards";
+import {connect} from "react-redux";
 
-export default class Profile extends React.Component {
+const Profile = ({}) => {
 
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
-        return(
-            <div className="profile-page">
-                <h1>Profile</h1>
-                <div className="row">
-                    <div className="col-2">
-                        <UserDescription />
-                    </div>
-                    <div className="col-8">
-                        <ProfileTabs/>
-                        <ProfileCards/>
-                    </div>
+    return(
+        <div className="profile-page">
+            <div className="row">
+                <div className="col-2">
+                    <UserDescription />
+                </div>
+                <div className="col-8">
+                    <ProfileTabs />
+                    <ProfileCards/>
                 </div>
             </div>
-        )
+        </div>
+    )
+}
+
+const stpm = (state) => {
+    return {
+        userCredential: state.userReducer.userCredential
     }
 }
+
+const dtpm = (dispatch)=> {
+
+    return {}
+}
+
+export default connect(stpm, dtpm)(Profile)

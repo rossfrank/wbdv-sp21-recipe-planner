@@ -3,7 +3,8 @@ import "./recipe-profile.css";
 import User from "./pic/user.jpeg";
 import { connect } from "react-redux";
 import reviewService from "../../services/review-service";
-import { useParams } from "react-router";
+import {useParams} from "react-router";
+import {Link} from "react-router-dom";
 
 const Reviews = ({
   user,
@@ -11,48 +12,49 @@ const Reviews = ({
   recipe="",
   createReview,
   findReviewsForRecipe,
-  findReviewsForUser,
 }) => {
   const { recipeId } = useParams();
   const [newReview, setNewReview] = useState("");
   useEffect(() => {
-    reviews = findReviewsForRecipe(recipeId);
-  }, [recipeId, newReview]);
+    findReviewsForRecipe(recipeId)
+  }, [recipeId])
   return (
-    <>
+    <div>
       <div className="row center-element percentage70-item">
         <div className="col-8">
           <h4>Reviews</h4>
         </div>
       </div>
       <ul className="percentage70-item center-element">
-        {reviews.map((review) => {
-          return (
-            <div key={review.reviewId}>
-              <div className="media">
-                <img
-                  src={User}
-                  className="align-self-start mr-3 user-photo"
-                  alt="..."
-                />
-                <div className="media-body">
-                  <a className="mt-0" href={`/profile/${review.userId}`}>
-                    {review.userName}
-                  </a>
-                  <p>{review.text}</p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+          {reviews &&
+          reviews.map((review) => {
+              return (
+                  <div key={review.reviewId}>
+                      <div className="media">
+                          <Link to={`/profile/${review.userId}`}>
+                              <img
+                                  src={User}
+                                  className="align-self-start mr-3 user-photo"
+                                  alt="..."
+                              />
+                          </Link>
+                          <div className="media-body">
+                              <a className="mt-0" href={`/profile/${review.userId}`}>
+                                  {review.email}
+                              </a>
+                              <p>{review.text}</p>
+                          </div>
+                      </div>
+                  </div>
+              );
+          })}
       </ul>
       <div className="percentage70-item center-element">
         <textarea
           placeholder="Please leave your review here."
           className="form-control"
           onChange={(e) => setNewReview(e.target.value)}
-          value={newReview}
-        ></textarea>
+          value={newReview} />
         <br />
         <button
           className="btn btn-warning float-right"
@@ -68,7 +70,7 @@ const Reviews = ({
           Submit
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
