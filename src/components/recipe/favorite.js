@@ -64,6 +64,7 @@ const stpm = (state) => {
             .then((status) =>
                 dispatch({
                     type: 'DELETE_FAVORITE',
+                    itemToDelete: {id: fId}
                 })
             )
         },
