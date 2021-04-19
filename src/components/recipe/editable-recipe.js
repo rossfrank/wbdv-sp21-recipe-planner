@@ -32,9 +32,6 @@ const EditableRecipe = ({userCredential}) => {
 
     const updateRecipe = ()=>{
         recipeService.updateRecipeDB(recipeId, recipe);
-    }
-
-    const updateIngredients = ()=>{
         for(let i=0; i<ingredients.length; i++){
             if (ingredients[i]["id"] !== undefined && ingredients[i]["id"] !== ""){
                 ingredientService.updateRecipeIngredient(ingredients[i]["id"], ingredients[i]);
@@ -44,6 +41,17 @@ const EditableRecipe = ({userCredential}) => {
             }
         }
     }
+
+
+    const deleteRecipe = ()=>{
+        ingredients.map((each)=>{
+            if(each["id"] !== undefined && each["id"] !== ""){
+                ingredientService.deleteRecipeIngredient(each["id"])
+            }
+        });
+        recipeService.deleteRecipeDB(recipeId);
+    }
+
 
 
     return(
@@ -154,16 +162,26 @@ const EditableRecipe = ({userCredential}) => {
                         >
             </textarea>
                     </div>
-                    <div className="form-group">
-                        <Link className="btn btn-primary btn-block wbdv-login bg-theme border-0"
-                           onClick={()=>{
-                               updateRecipe();
-                               updateIngredients()
-                           }}
-                           to={`/profile/${userCredential["userId"]}`}
-                        >
+
+
+                    <div className="btn-group float-right mb-5 mt-3" role="group" aria-label="Basic example">
+                        <Link type="button" className="btn btn-primary border-0 color-me-white"
+                              onClick={()=>{
+                                  updateRecipe();
+                                  alert("Successfully updated the recipe");
+                              }}
+                              to={`/profile/${userCredential["userId"]}`}>
                             Update
                         </Link>
+                        <Link type="button" className="btn btn-danger border-0 mr-2"
+                              onClick={()=>{
+                                  deleteRecipe();
+                                  alert("Successfully deleted the recipe");
+                              }}
+                              to={`/profile/${userCredential["userId"]}`}>
+                            Delete
+                        </Link>
+
                     </div>
                 </form>
             </div>

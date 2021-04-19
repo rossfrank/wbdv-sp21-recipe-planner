@@ -58,3 +58,8 @@
 .color-me-black{
     color: black;
 }
+
+.color-me-white {
+    background-color: #efbe69;
+    color: white;
+}
