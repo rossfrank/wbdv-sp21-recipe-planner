@@ -35,13 +35,25 @@ function App({userCredential,}) {
                         {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/login" />}
                     </Route>
 
-                    <Route path="/details/form" exact>
-                        {userCredential["isAuthenticated"] ?  <RecipeForm /> : <Redirect to="/login" />}
-                    </Route>
+                    { !userCredential["isAuthenticated"] &&
+                        <Route path={["/details/form", "/details/:recipeId/form"]} exact>
+                            <Redirect to="/login" />
+                        </Route>
+                    }
+                    {
+                        (userCredential["isAuthenticated"]) && (userCredential["role"] === "CREATOR") &&
+                        <Route path="/details/form" exact>
+                            <RecipeForm />
+                        </Route>
+                    }
 
-                    <Route path="/details/:recipeId/form" exact>
-                        {userCredential["isAuthenticated"] ?  <EditableRecipe/> : <Redirect to="/login" />}
-                    </Route>
+                    {
+                        (userCredential["isAuthenticated"]) && (userCredential["role"] === "CREATOR") &&
+                        <Route path="/details/:recipeId/form" exact>
+                            <EditableRecipe />
+                        </Route>
+                    }
+
 
                     <Route path="/details/:recipeId" exact>
                         <RecipeProfile />
