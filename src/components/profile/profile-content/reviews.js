@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import reviewService from "../../../services/review-service";
 
@@ -16,19 +16,20 @@ const Reviews = (
     return(
         <div className="mt-4">
             <div className="container">
-                {myReviews &&
+                {myReviews.length > 0 &&
                 myReviews.map(review =>
                     <div key={review.reviewId}>
-                        {
+                        <div className="col">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5 className="mb-1">
-                                        {review.recipeName}
-                                    </h5>
+                                    <Link className="card-title" to={`/details/${review.recipeId}`}>
+                                        <h5 className="mb-1">
+                                            {review.recipeName}
+                                        </h5>
+                                    </Link>
                                 </div>
                                 <div className="card-body">
                                     <div className="row">
-                                        <a className="stretched-link" href={`/recipes/${review.recipeId}`} />
                                         <div>
                                             <h6>Review</h6>
                                             <div>
@@ -38,11 +39,12 @@ const Reviews = (
                                     </div>
                                 </div>
                             </div>
-                        }
+                        </div>
+                        <br />
                     </div>
                 )
                 }
-                {!myReviews &&
+                {myReviews.length === 0 &&
                 <p>
                     No Reviews written
                 </p>

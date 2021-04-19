@@ -18,7 +18,7 @@ const Favorite = (
     return(
         <div className="mt-4">
             <div className="container">
-                {myFavorite &&
+                {myFavorite.length > 0 &&
                 myFavorite.map(favorite =>
                     <div key={favorite.id}>
                         {
@@ -27,7 +27,7 @@ const Favorite = (
                     </div>
                 )
                 }
-                {!myFavorite &&
+                {myFavorite.length === 0 &&
                     <p>
                         No Favorites Available
                     </p>
@@ -49,7 +49,7 @@ const dtpm = (dispatch) => {
             favoriteService
                 .findFavoriteForUser(userId)
                 .then(((res)=> {
-                    if (res){
+                    if (res.length !== 0){
                         return recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
                             .then(theFavs =>
                                 dispatch({

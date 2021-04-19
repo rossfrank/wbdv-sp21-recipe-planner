@@ -46,7 +46,7 @@ const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
             </div>
             <div className="form-group URL-link">
               Do not have an account?
-              <a href="/signup">Create an account</a>
+              <a href="/registration">Create an account</a>
             </div>
           </form>
         </div>

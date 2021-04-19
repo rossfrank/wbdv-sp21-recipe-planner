@@ -1,5 +1,4 @@
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import Home from "./components/home"
 import "./App.css";
 import SignUp from "./components/sign-up/sign-up"
 import LogIn from "./components/log-in/log-in"
@@ -24,7 +23,7 @@ function App({userCredential,}) {
                     <Route path={["/", "/homepage"]} exact>
                         <Homepage/>
                     </Route>
-                    <Route exact path="/signup">
+                    <Route exact path="/registration">
                         {userCredential["isAuthenticated"] ? <Redirect to="/homepage" /> : <SignUp />}
                     </Route>
 
@@ -32,19 +31,19 @@ function App({userCredential,}) {
                         {userCredential["isAuthenticated"] ? <Redirect to="/homepage" /> : <LogIn />}
                     </Route>
                     {/*protect Search function*/}
-                    <Route exact path={["/recipes/search", "/recipes/search/:keyword"]}>
+                    <Route exact path={["/search", "/search/:keyword"]}>
                         {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/login" />}
                     </Route>
 
-                    <Route path="/recipes/form" exact>
+                    <Route path="/details/form" exact>
                         {userCredential["isAuthenticated"] ?  <RecipeForm /> : <Redirect to="/login" />}
                     </Route>
 
-                    <Route path="/recipes/:recipeId/form" exact>
+                    <Route path="/details/:recipeId/form" exact>
                         {userCredential["isAuthenticated"] ?  <EditableRecipe/> : <Redirect to="/login" />}
                     </Route>
 
-                    <Route path="/recipes/:recipeId" exact>
+                    <Route path="/details/:recipeId" exact>
                         <RecipeProfile />
                     </Route>
 
