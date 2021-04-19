@@ -10,6 +10,7 @@ import {Link, useParams} from "react-router-dom";
 import recipeService from "../../services/recipe-service";
 import cartService from "../../services/cart-service";
 import recipeLocalService from "../../services/recipe-db-service";
+import {findRecipeIngredientsForRecipe} from "../../services/recipe-ingredient-service";
 
 const RecipeProfile = ({ recipe = [],
                            user,
@@ -19,20 +20,27 @@ const RecipeProfile = ({ recipe = [],
                            findLocalRecipeById}) => {
   const { recipeId } = useParams();
 
+  const [isDbRecipe, setIsDbRecipe] = useState(false);
   const [addCart, setAddCart] = useState(false);
   const [cartId, setCartId] = useState("")
   const [editAllowed, setEditAllowed] = useState(false);
+  const [ingredientsFromDb, setIngredientsFromDb] = useState([])
 
 
   useEffect(() => {
     if(recipeId.substring(0, 3)==="rcp"){
         findLocalRecipeById(recipeId);
+        setIsDbRecipe(true);
         recipeLocalService.findRecipeDBById(recipeId)
             .then((res)=>{
                 if (res["userId"].toString() === user["userId"].toString()){
                     setEditAllowed(true)
-
                 }
+            })
+        findRecipeIngredientsForRecipe(recipeId)
+            .then((res)=>{
+                const newArr = res.map((each)=>{return {...each, nameClean: each["name"]}})
+                setIngredientsFromDb(newArr);
             })
     }else{
       findRecipeById(recipeId);
@@ -104,9 +112,30 @@ const RecipeProfile = ({ recipe = [],
 
       <img src={recipe.image} className="image-display" />
 
-      <Ingredients ingred={recipe.extendedIngredients} />
+
+        { !isDbRecipe &&
+        <Ingredients ingred={recipe.extendedIngredients} />
+        }
+        { isDbRecipe &&
+        <Ingredients ingred={ingredientsFromDb} />
+        }
       &nbsp;
-      <Directions recipe={recipe} />
+        { !isDbRecipe &&
+        <Directions recipe={recipe} />
+        }
+        {
+            isDbRecipe &&
+            <>
+                <div className="row center-element percentage70-item">
+                    <div className="col">
+                        <h4>Directions</h4>
+                    </div>
+                </div>
+                <ol className="percentage70-item center-element">
+                    {recipe.directions}
+                </ol>
+            </>
+        }
       &nbsp;
       <Reviews recipe={recipe.title}/>
     </div>
