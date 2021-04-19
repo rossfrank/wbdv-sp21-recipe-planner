@@ -1,25 +1,24 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import stick from "./img.png";
+import {useParams} from "react-router-dom";
+import userService from "../../services/user-service";
 
-export default class UserDescription extends React.Component {
+const UserDescription = ({}) => {
 
-    state = {
-        user_name:"Username",
-        user_description: "Description",
-        //user_image: "./img.png"
-    }
+    const {user} = useParams();
+    const [userInfo, setUserInfo] = useState({})
 
-    constructor(props) {
-        super(props)
-    }
+    useEffect(() => {
+        userService.findUserById(user)
+            .then(response => setUserInfo(response))
+    }, [user])
 
-    render() {
-        return(
-            <div>
-                <img src={stick} alt="User Profile Image"/>
-                <h2>{this.state.user_name}</h2>
-                <h3>{this.state.user_description}</h3>
-            </div>
-        )
-    }
+    return(
+        <div className="container">
+            <img src={stick} alt="User Profile Image"/>
+            <h2>{userInfo.email}</h2>
+        </div>
+    )
 }
+
+export default UserDescription

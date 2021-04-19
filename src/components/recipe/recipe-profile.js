@@ -49,7 +49,7 @@ const RecipeProfile = ({ recipe = [], user, addItemToCart, findRecipeById, findL
       <img src={recipe.image} className="image-display" />
       <div className="col-10 align-to-right">
           <i className="fas fa-shopping-basket" onClick={() => handleClick()}/>
-        </div>
+      </div>
       <Ingredients ingred={recipe.extendedIngredients} />
       &nbsp;
       <Directions recipe={recipe} />
