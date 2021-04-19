@@ -9,11 +9,16 @@ import { useParams } from "react-router-dom";
 
 import recipeService from "../../services/recipe-service";
 import cartService from "../../services/cart-service";
+import recipeLocalService from "../../services/recipe-db-service";
 
-const RecipeProfile = ({ recipe = [], user, addItemToCart, findRecipeById }) => {
+const RecipeProfile = ({ recipe = [], user, addItemToCart, findRecipeById, findLocalRecipeById }) => {
   const { recipeId } = useParams();
   useEffect(() => {
-    findRecipeById(recipeId);
+    if(recipeId.substring(0, 3)==="rcp"){
+      findLocalRecipeById(recipeId)
+    }else{
+      findRecipeById(recipeId);
+    }
   }, []);
   function handleClick(){
     if(user.isAuthenticated){
@@ -75,7 +80,15 @@ const dtpm = (dispatch) => {
       dispatch({
         type: "ADD_ITEM_TO_CART",
         item: item,
-      }))
+      })),
+
+      findLocalRecipeById: (recipeId) =>
+      recipeLocalService.findRecipeDBById(recipeId).then((theRecipe) =>
+        dispatch({
+          type: "FIND_RECIPE_BY_ID",
+          recipe: theRecipe,
+        })
+      ),
   };
 };
 
