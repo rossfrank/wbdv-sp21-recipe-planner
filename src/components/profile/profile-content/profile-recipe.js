@@ -11,7 +11,7 @@ function ProfileRecipe({recipe , ingredients}) {
                 <div className="card-header">
                     <h5 className="mb-1">
                         <Link className="card-title"
-                              to={`/recipes/${recipe.id}`}>
+                              to={`/details/${recipe.id}`}>
                             {recipe.title}
                         </Link>
                     </h5>

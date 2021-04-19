@@ -1,12 +1,19 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
+import {connect} from "react-redux";
 
-const ProfileTabs = ({}) => {
-
-    const items = ["Favorites", "Cart", "Cart Items", "Reviews", "My Recipes"];
+const ProfileTabs = ({userCredential}) => {
 
     const {user, tab} = useParams();
+    const [items, setItems] = useState(["Favorites", "Reviews", "My Recipes"])
+
+    useEffect(() => {
+        console.log(userCredential)
+        if(user === userCredential.userId){
+            setItems([...items, "Cart"])
+            }
+    }, [user])
 
     const isActive =(item) => {
         return item === tab;
@@ -30,5 +37,15 @@ const ProfileTabs = ({}) => {
         </div>
     )
 }
+const stpm = (state) => {
+    return {
+        userCredential: state.userReducer.userCredential
+    }
+}
 
-export default ProfileTabs
+const dtpm = (dispatch)=> {
+
+    return {}
+}
+
+export default connect(stpm, dtpm)(ProfileTabs)

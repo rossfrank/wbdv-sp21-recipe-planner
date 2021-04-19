@@ -8,6 +8,7 @@ import recipeService from "../../../services/recipe-service";
 const Cart = (
     {
         myCart,
+        userCredential,
         findCartForUser}) => {
     const {user} = useParams();
 
@@ -18,7 +19,7 @@ const Cart = (
     return(
         <div className="mt-4">
             <div className="container">
-                {myCart &&
+                {myCart && user === userCredential.userId &&
                 myCart.map(recipe =>
                     <div key={recipe.recipeId}>
                         {
@@ -39,7 +40,8 @@ const Cart = (
 
 const stpm = (state) => {
     return {
-        myCart: state.cartReducer.cart
+        myCart: state.cartReducer.cart,
+        userCredential: state.userReducer.userCredential
     };
 };
 const dtpm = (dispatch) => {
