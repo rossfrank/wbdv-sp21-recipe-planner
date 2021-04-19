@@ -14,12 +14,17 @@ const EditableRecipe = ({userCredential}) => {
 
     const [ingredients, setIngredients] = useState([])
 
+    const [editAllowed, setEditAllowed] = useState(false)
+
 
 
     useEffect(()=>{
         recipeService.findRecipeDBById(recipeId)
             .then((res)=>{
                 setRecipe(res);
+                if(res["userId"].toString() === userCredential["userId"].toString()){
+                    setEditAllowed(true);
+                }
             });
 
         ingredientService.findRecipeIngredientsForRecipe(recipeId)
@@ -163,26 +168,29 @@ const EditableRecipe = ({userCredential}) => {
             </textarea>
                     </div>
 
+                    {
+                        editAllowed &&
+                        <div className="btn-group float-right mb-5 mt-3" role="group" aria-label="Basic example">
+                            <Link type="button" className="btn btn-primary border-0 color-me-white"
+                                  onClick={()=>{
+                                      updateRecipe();
+                                      alert("Successfully updated the recipe");
+                                  }}
+                                  to={`/profile/${userCredential["userId"]}`}>
+                                Update
+                            </Link>
+                            <Link type="button" className="btn btn-danger border-0 mr-2"
+                                  onClick={()=>{
+                                      deleteRecipe();
+                                      alert("Successfully deleted the recipe");
+                                  }}
+                                  to={`/profile/${userCredential["userId"]}`}>
+                                Delete
+                            </Link>
 
-                    <div className="btn-group float-right mb-5 mt-3" role="group" aria-label="Basic example">
-                        <Link type="button" className="btn btn-primary border-0 color-me-white"
-                              onClick={()=>{
-                                  updateRecipe();
-                                  alert("Successfully updated the recipe");
-                              }}
-                              to={`/profile/${userCredential["userId"]}`}>
-                            Update
-                        </Link>
-                        <Link type="button" className="btn btn-danger border-0 mr-2"
-                              onClick={()=>{
-                                  deleteRecipe();
-                                  alert("Successfully deleted the recipe");
-                              }}
-                              to={`/profile/${userCredential["userId"]}`}>
-                            Delete
-                        </Link>
+                        </div>
+                    }
 
-                    </div>
                 </form>
             </div>
         </div>

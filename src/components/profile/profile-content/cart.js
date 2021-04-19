@@ -50,7 +50,6 @@ const dtpm = (dispatch) => {
             cartService.findCartForUser(userId)
                 .then(((res)=>  {
                     if(res.length !== 0) {
-                        console.log("test")
                         return recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
                             .then(theCart =>
                                 dispatch({

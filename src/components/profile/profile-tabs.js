@@ -9,7 +9,6 @@ const ProfileTabs = ({userCredential}) => {
     const [items, setItems] = useState(["Favorites", "Reviews"])
 
     useEffect(() => {
-        console.log(userCredential)
         if(user === userCredential.userId)
             setItems([...items, "Cart"])
         userService.findUserById(user)
