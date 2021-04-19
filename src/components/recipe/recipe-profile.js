@@ -46,17 +46,17 @@ const RecipeProfile = ({ recipe = [],
       findRecipeById(recipeId);
     }
 
-    cartService.findCartForUser(user["userId"])
-        .then((res)=>{
-            res.map((eachItem)=>{
-                if(eachItem["recipeId"] === recipeId){
-                    setAddCart(true);
-                    setCartId(eachItem["id"]);
-                }
+    if(user["isAuthenticated"]){
+        cartService.findCartForUser(user["userId"])
+            .then((res)=>{
+                res.map((eachItem)=>{
+                    if(eachItem["recipeId"] === recipeId){
+                        setAddCart(true);
+                        setCartId(eachItem["id"]);
+                    }
+                })
             })
-        })
-
-
+    }
   }, []);
 
   function handleCartClick(){
