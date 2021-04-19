@@ -80,8 +80,8 @@ const EditableRecipe = ({userCredential}) => {
                     <div className="form-group">
                         <label>Ingredients</label>
 
-                        {ingredients.map((ingredient) => (
-                            <div className="row mb-2">
+                        {ingredients.map((ingredient, index) => (
+                            <div className="row mb-2" key={index}>
                                 <div className="col-6">
                                     <input className="form-control" placeholder="Ingredient Name"
                                            value={ingredient["name"]}

@@ -29,7 +29,7 @@ const Favorite = ({ favorite = [],user, findFavorite, createFavorite, deleteFavo
             })
     },[Collect])
     return(
-        <div className="col-7 collect-op">
+        <div className="col-1 collect-op pr-1 pl-0">
         <i
           className={`far fa-heart fa-lg ${Collect ? "favorite" : ""}`}
           onClick={() => {
