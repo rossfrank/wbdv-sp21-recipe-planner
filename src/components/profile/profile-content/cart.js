@@ -19,7 +19,7 @@ const Cart = (
     return(
         <div className="mt-4">
             <div className="container">
-                {myCart && user === userCredential.userId &&
+                {myCart.length > 0 && user === userCredential.userId &&
                 myCart.map(recipe =>
                     <div key={recipe.recipeId}>
                         {
@@ -28,7 +28,7 @@ const Cart = (
                     </div>
                 )
                 }
-                {!myCart &&
+                {myCart.length === 0 &&
                 <p>
                     No Recipes in the Cart
                 </p>
@@ -49,7 +49,8 @@ const dtpm = (dispatch) => {
         findCartForUser: (userId) => {
             cartService.findCartForUser(userId)
                 .then(((res)=>  {
-                    if(res) {
+                    if(res.length !== 0) {
+                        console.log("test")
                         return recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
                             .then(theCart =>
                                 dispatch({

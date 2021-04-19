@@ -16,7 +16,7 @@ const Reviews = (
     return(
         <div className="mt-4">
             <div className="container">
-                {myReviews &&
+                {myReviews.length > 0 &&
                 myReviews.map(review =>
                     <div key={review.reviewId}>
                         <div className="col">
@@ -44,7 +44,7 @@ const Reviews = (
                     </div>
                 )
                 }
-                {!myReviews &&
+                {myReviews.length === 0 &&
                 <p>
                     No Reviews written
                 </p>
