@@ -71,7 +71,7 @@ const dtpm = (dispatch) => {
             cartService.removeItemFromCart(userId, cartId)
                 .then(cartItem =>
                     dispatch({
-                        type: "ADD_ITEM_TO_CART",
+                        type: "DELETE_CART_ITEM",
                         itemToDelete: cartItem
                     }))}};
 }

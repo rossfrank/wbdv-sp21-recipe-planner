@@ -54,8 +54,11 @@ function Navbar({userCredential, userLogout}){
             {
                 userCredential["isAuthenticated"] &&
                 <div className="d-inline-flex flex-row-reverse">
+
                     <button className="border-0 bg-theme mr-3">
-                        <i className="fas fa-shopping-cart"/>
+                        <Link to={`/profile/${userCredential["userId"]}/Cart`}>
+                            <i className="fas fa-shopping-cart bg-theme"/>
+                        </Link>
                     </button>
 
                     <button type="button" className="btn bg-theme mr-1" data-toggle="dropdown"
@@ -79,7 +82,7 @@ const stateToPropMapper = (state) => {
     }
 }
 
-const dispatchToPropMapper = (dispatch)=> {
+const dispatchToPropMapper =(dispatch)=> {
 
     return {
         userLogout: ()=>{

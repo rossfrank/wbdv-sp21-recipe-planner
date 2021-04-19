@@ -14,11 +14,13 @@ import recipeLocalService from "../../services/recipe-db-service";
 const RecipeProfile = ({ recipe = [],
                            user,
                            addItemToCart,
+                           removeItemFromCart,
                            findRecipeById,
-                           findLocalRecipeById }) => {
+                           findLocalRecipeById}) => {
   const { recipeId } = useParams();
 
   const [addCart, setAddCart] = useState(false);
+  const [cartId, setCartId] = useState("")
   const [editAllowed, setEditAllowed] = useState(false);
 
 
@@ -29,16 +31,37 @@ const RecipeProfile = ({ recipe = [],
             .then((res)=>{
                 if (res["userId"].toString() === user["userId"].toString()){
                     setEditAllowed(true)
+
                 }
             })
     }else{
       findRecipeById(recipeId);
     }
+
+    cartService.findCartForUser(user["userId"])
+        .then((res)=>{
+            res.map((eachItem)=>{
+                if(eachItem["recipeId"] === recipeId){
+                    setAddCart(true);
+                    setCartId(eachItem["id"]);
+                }
+            })
+        })
+
+
   }, []);
-  function handleClick(){
+
+  function handleCartClick(){
     if(user.isAuthenticated){
-      addItemToCart(user.userId, {userId: user.userId, recipeId: recipeId})
-    alert("Successfully Added！")
+        if (addCart){
+            removeItemFromCart(user["userId"], cartId);
+            setAddCart(false);
+            alert("Successfully removed the item from your cart.")
+        }else {
+            addItemToCart(user.userId, {userId: user.userId, recipeId: recipeId});
+            setAddCart(true);
+            alert("Successfully added the item from your cart.")
+        }
     }else{
       alert("Please Log In First!")
     }
@@ -58,15 +81,12 @@ const RecipeProfile = ({ recipe = [],
         <div className="col-3">
           <a>{recipe.sourceName}</a>
         </div>
-        {/*  <div className="col-10 align-to-right">*/}
-        {/*      <i className="fas fa-shopping-basket" onClick={() => handleClick()}/>*/}
-        {/*  </div>*/}
-        {/*<Favorite/>*/}
       </div>
         <div className="row mr-5 mb-2">
             <div className="col-9 "></div>
             <div className="col-1 collect-op pr-1 pl-0">
-                <i className={`fas fa-shopping-cart ${addCart ? "color-me-orange": ""}`} onClick={() => {handleClick(); setAddCart(true)}}/>
+                <i className={`fas fa-shopping-cart ${addCart ? "color-me-orange": ""}`}
+                   onClick={() => {handleCartClick()}}/>
             </div>
             <Favorite/>
             {
@@ -108,13 +128,6 @@ const dtpm = (dispatch) => {
           recipe: theRecipe,
         })
       ),
-    
-    addItemToCart: (userId, item) =>
-      cartService.addItemToCart(userId, item).then((item) =>
-      dispatch({
-        type: "ADD_ITEM_TO_CART",
-        item: item,
-      })),
 
       findLocalRecipeById: (recipeId) =>
       recipeLocalService.findRecipeDBById(recipeId).then((theRecipe) =>
@@ -123,6 +136,22 @@ const dtpm = (dispatch) => {
           recipe: theRecipe,
         })
       ),
+
+      addItemToCart: (userId, item) =>
+          cartService.addItemToCart(userId, item).then((item) =>
+              dispatch({
+                  type: "ADD_ITEM_TO_CART",
+                  item: item,
+              })),
+
+      removeItemFromCart: (userId, cartId) => {
+          cartService.removeItemFromCart(userId, cartId)
+              .then(cartItem =>
+                  dispatch({
+                      type: "DELETE_CART_ITEM",
+                      itemToDelete: cartItem
+                  })
+              )}
   };
 };
 
