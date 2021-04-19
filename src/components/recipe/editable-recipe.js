@@ -88,14 +88,14 @@ const EditableRecipe = ({userCredential}) => {
                     <div className="form-group">
                         <label>Ingredients</label>
 
-                        {ingredients.map((ingredient, index) => (
-                            <div className="row mb-2" key={index}>
+                        {ingredients.map((ingredient,ingredientIndex) => (
+                            <div className="row mb-2" key={ingredientIndex}>
                                 <div className="col-6">
                                     <input className="form-control" placeholder="Ingredient Name"
                                            value={ingredient["name"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                                   if (item.id === ingredient.id){
+                                               const newArr = ingredients.map((item,itemIndex) =>{
+                                                   if (itemIndex === ingredientIndex){
                                                        item.name = e.target.value;
                                                        return item
                                                    }
@@ -109,13 +109,13 @@ const EditableRecipe = ({userCredential}) => {
                                     <input className="form-control" placeholder="amount"
                                            value={ingredient["amount"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                               if (item.id === ingredient.id){
-                                               item.amount = e.target.value;
-                                               return item
-                                           }
-                                               return item
-                                           })
+                                               const newArr = ingredients.map((item,itemIndex) =>{
+                                                   if (itemIndex === ingredientIndex){
+                                                       item.amount = e.target.value;
+                                                       return item
+                                                   }
+                                                   return item
+                                               })
                                                setIngredients(newArr)
                                            }}
                                     />
@@ -124,8 +124,8 @@ const EditableRecipe = ({userCredential}) => {
                                     <input className="form-control" placeholder="unit"
                                            value={ingredient["unit"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                                   if (item.id === ingredient.id){
+                                               const newArr = ingredients.map((item,itemIndex) =>{
+                                                   if (itemIndex === ingredientIndex){
                                                        item.unit = e.target.value;
                                                        return item
                                                    }
