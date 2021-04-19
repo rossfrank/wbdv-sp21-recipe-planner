@@ -18,9 +18,8 @@ export const userRegister = user =>
         }).then((res)=>res.json())
 
 export const findUserById = (uId) =>
-    fetch(`${SERVER_URL}/users/${uId}`).then((response) => {
-        console.log(response)
-        return response.json()});
+    fetch(`${SERVER_URL}/api/users/${uId}`)
+        .then((response) => response.json())
 
 const api = {
     userLogin,

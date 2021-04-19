@@ -40,6 +40,7 @@ const Reviews = (
                                 </div>
                             </div>
                         </div>
+                        <br />
                     </div>
                 )
                 }
