@@ -4,7 +4,7 @@ export const findRecipeIngredientsForRecipe = (recipeId) =>
         fetch(`${INGREDIENTS_URL}/recipes/${recipeId}/ingredients`)
             .then((res)=>
                 res.json()
-            )
+        )
 
 export const createRecipeIngredient = (recipeId, ri) =>
         fetch(`${INGREDIENTS_URL}/recipes/${recipeId}/ingredients`, {

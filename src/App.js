@@ -15,7 +15,6 @@ import EditableRecipe from "./components/recipe/editable-recipe";
 import RecipeForm from "./components/recipe/recipe-form";
 
 function App({userCredential,}) {
-
   return (
       <BrowserRouter>
         <div>
@@ -34,7 +33,7 @@ function App({userCredential,}) {
                     </Route>
                     {/*protect Search function*/}
                     <Route exact path={["/recipes/search", "/recipes/search/:keyword"]}>
-                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/homepage" />}
+                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/login" />}
                     </Route>
 
                     <Route path="/recipes/form" exact>
