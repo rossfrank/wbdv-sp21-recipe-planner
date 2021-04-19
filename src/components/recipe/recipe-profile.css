@@ -50,3 +50,20 @@
     background-color: #efbe69;
     color: black;
 }
+
+.color-me-orange {
+    color:orange;
+}
+
+.color-me-black{
+    color: black;
+}
+
+.color-me-white {
+    background-color: #efbe69;
+    color: white;
+}
+
+.percentage50-item {
+    width: 50%;
+}

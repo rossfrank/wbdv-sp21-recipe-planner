@@ -11,7 +11,6 @@ function Homepage() {
     useEffect(()=>{
 
         const persistedState = loadFromLocalStorage();
-        console.log(persistedState)
         recipeService.findRecipeTopRating(2)
             .then((res)=>
                 recipeService.findRecipeByIdBulk(res.results.map(r => r.id))

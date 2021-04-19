@@ -10,7 +10,6 @@ const GET_HEADER = {
 }
 
 export const findRecipeById = id => {
-    console.log("bad")
     return fetch(`${RECIPE_URL}/${id}/information`, GET_HEADER)
         .then(response => response.json())
 }

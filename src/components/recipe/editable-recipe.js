@@ -14,12 +14,17 @@ const EditableRecipe = ({userCredential}) => {
 
     const [ingredients, setIngredients] = useState([])
 
+    const [editAllowed, setEditAllowed] = useState(false)
+
 
 
     useEffect(()=>{
         recipeService.findRecipeDBById(recipeId)
             .then((res)=>{
                 setRecipe(res);
+                if(res["userId"].toString() === userCredential["userId"].toString()){
+                    setEditAllowed(true);
+                }
             });
 
         ingredientService.findRecipeIngredientsForRecipe(recipeId)
@@ -32,9 +37,6 @@ const EditableRecipe = ({userCredential}) => {
 
     const updateRecipe = ()=>{
         recipeService.updateRecipeDB(recipeId, recipe);
-    }
-
-    const updateIngredients = ()=>{
         for(let i=0; i<ingredients.length; i++){
             if (ingredients[i]["id"] !== undefined && ingredients[i]["id"] !== ""){
                 ingredientService.updateRecipeIngredient(ingredients[i]["id"], ingredients[i]);
@@ -44,6 +46,17 @@ const EditableRecipe = ({userCredential}) => {
             }
         }
     }
+
+
+    const deleteRecipe = ()=>{
+        ingredients.map((each)=>{
+            if(each["id"] !== undefined && each["id"] !== ""){
+                ingredientService.deleteRecipeIngredient(each["id"])
+            }
+        });
+        recipeService.deleteRecipeDB(recipeId);
+    }
+
 
 
     return(
@@ -80,14 +93,14 @@ const EditableRecipe = ({userCredential}) => {
                     <div className="form-group">
                         <label>Ingredients</label>
 
-                        {ingredients.map((ingredient) => (
-                            <div className="row mb-2">
+                        {ingredients.map((ingredient,ingredientIndex) => (
+                            <div className="row mb-2" key={ingredientIndex}>
                                 <div className="col-6">
                                     <input className="form-control" placeholder="Ingredient Name"
                                            value={ingredient["name"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                                   if (item.id === ingredient.id){
+                                               const newArr = ingredients.map((item,itemIndex) =>{
+                                                   if (itemIndex === ingredientIndex){
                                                        item.name = e.target.value;
                                                        return item
                                                    }
@@ -101,13 +114,13 @@ const EditableRecipe = ({userCredential}) => {
                                     <input className="form-control" placeholder="amount"
                                            value={ingredient["amount"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                               if (item.id === ingredient.id){
-                                               item.amount = e.target.value;
-                                               return item
-                                           }
-                                               return item
-                                           })
+                                               const newArr = ingredients.map((item,itemIndex) =>{
+                                                   if (itemIndex === ingredientIndex){
+                                                       item.amount = e.target.value;
+                                                       return item
+                                                   }
+                                                   return item
+                                               })
                                                setIngredients(newArr)
                                            }}
                                     />
@@ -116,8 +129,8 @@ const EditableRecipe = ({userCredential}) => {
                                     <input className="form-control" placeholder="unit"
                                            value={ingredient["unit"]}
                                            onChange={(e)=>{
-                                               const newArr = ingredients.map(item =>{
-                                                   if (item.id === ingredient.id){
+                                               const newArr = ingredients.map((item,itemIndex) =>{
+                                                   if (itemIndex === ingredientIndex){
                                                        item.unit = e.target.value;
                                                        return item
                                                    }
@@ -154,17 +167,30 @@ const EditableRecipe = ({userCredential}) => {
                         >
             </textarea>
                     </div>
-                    <div className="form-group">
-                        <Link className="btn btn-primary btn-block wbdv-login bg-theme border-0"
-                           onClick={()=>{
-                               updateRecipe();
-                               updateIngredients()
-                           }}
-                           to={`/profile/${userCredential["userId"]}`}
-                        >
-                            Update
-                        </Link>
-                    </div>
+
+                    {
+                        editAllowed &&
+                        <div className="btn-group float-right mb-5 mt-3" role="group" aria-label="Basic example">
+                            <Link type="button" className="btn btn-primary border-0 color-me-white"
+                                  onClick={()=>{
+                                      updateRecipe();
+                                      alert("Successfully updated the recipe");
+                                  }}
+                                  to={`/profile/${userCredential["userId"]}`}>
+                                Update
+                            </Link>
+                            <Link type="button" className="btn btn-danger border-0 mr-2"
+                                  onClick={()=>{
+                                      deleteRecipe();
+                                      alert("Successfully deleted the recipe");
+                                  }}
+                                  to={`/profile/${userCredential["userId"]}`}>
+                                Delete
+                            </Link>
+
+                        </div>
+                    }
+
                 </form>
             </div>
         </div>
