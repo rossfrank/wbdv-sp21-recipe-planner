@@ -1,7 +1,7 @@
 import React from 'react'
 
 const initialState = {
-    recipe: []
+    recipes: []
 }
 
 const recipeReducer = (state = initialState, action) => {
@@ -14,6 +14,12 @@ const recipeReducer = (state = initialState, action) => {
             return newState
         default:
             return state
+        case 'FIND_RECIPES':
+            const newStateA = {
+                ...state,
+                recipes: action.recipes,
+            }
+            return newStateA
     }
 }
 

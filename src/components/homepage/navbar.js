@@ -15,13 +15,13 @@ function Navbar({userCredential, userLogout}){
                     <span className="d-none d-lg-inline-block d-xl-inline-block">explore</span>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                    <Link to="/recipes/search/breakfast" type="button" className="dropdown-item btn btn-outline-warning">
+                    <Link to="/search/breakfast" type="button" className="dropdown-item btn btn-outline-warning">
                         Breakfast
                     </Link>
-                    <Link to="/recipes/search/lunch" type="button" className="dropdown-item btn btn-outline-warning">
+                    <Link to="/search/lunch" type="button" className="dropdown-item btn btn-outline-warning">
                         Lunch
                     </Link>
-                    <Link to="/recipes/search/dinner" type="button" className="dropdown-item btn btn-outline-warning">
+                    <Link to="/search/dinner" type="button" className="dropdown-item btn btn-outline-warning">
                         Dinner
                     </Link>
                 </div>
@@ -38,7 +38,7 @@ function Navbar({userCredential, userLogout}){
                     <>
                         <div className="d-inline-flex flex-row-reverse">
                             <a className="float-left bg-theme mr-4 my-2 d-none d-lg-inline-block d-xl-inline-block"
-                               href="/signup">
+                               href="/registration">
                                 Register
                             </a>
                             <a className="float-left bg-theme mr-4 my-2 d-none d-lg-inline-block d-xl-inline-block"

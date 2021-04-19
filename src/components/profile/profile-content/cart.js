@@ -8,6 +8,7 @@ import recipeService from "../../../services/recipe-service";
 const Cart = (
     {
         myCart,
+        userCredential,
         findCartForUser}) => {
     const {user} = useParams();
 
@@ -18,16 +19,16 @@ const Cart = (
     return(
         <div className="mt-4">
             <div className="container">
-                {myCart &&
+                {myCart.length > 0 && user === userCredential.userId &&
                 myCart.map(recipe =>
-                    <div key={recipe.Id}>
+                    <div key={recipe.recipeId}>
                         {
-                            <ProfileRecipe recipe={recipe} />
+                            <ProfileRecipe recipe={recipe} ingredients={recipe.extendedIngredients}/>
                         }
                     </div>
                 )
                 }
-                {!myCart &&
+                {myCart.length === 0 &&
                 <p>
                     No Recipes in the Cart
                 </p>
@@ -39,39 +40,40 @@ const Cart = (
 
 const stpm = (state) => {
     return {
-        myCart: state.cartReducer.cart
+        myCart: state.cartReducer.cart,
+        userCredential: state.userReducer.userCredential
     };
 };
 const dtpm = (dispatch) => {
     return {
         findCartForUser: (userId) => {
             cartService.findCartForUser(userId)
-                .then(((res)=>
-                        recipeService.findRecipeByIdBulk(res.map(r => r.id))
+                .then(((res)=>  {
+                    if(res.length !== 0) {
+                        console.log("test")
+                        return recipeService.findRecipeByIdBulk(res.map(r => r.recipeId))
                             .then(theCart =>
                                 dispatch({
                                     type: "FIND_CART_FOR_USER",
                                     cart: theCart
                                 }))
-                ))
-        },
+                    }
+                    return []
+                }))},
         addItemToCart: (userId, recipeId) => {
             cartService.addItemToCart(userId, recipeId)
                 .then(cartItem =>
                     dispatch({
                         type: "ADD_ITEM_TO_CART",
                         item: cartItem
-                    }))
-        },
+                    }))},
         removeItemFromCart: (userId, cartId) => {
             cartService.removeItemFromCart(userId, cartId)
                 .then(cartItem =>
                     dispatch({
                         type: "ADD_ITEM_TO_CART",
                         itemToDelete: cartItem
-                    }))
-        }
-    };
+                    }))}};
 }
 
 export default connect(stpm, dtpm)(Cart);

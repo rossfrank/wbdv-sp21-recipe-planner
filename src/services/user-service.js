@@ -17,9 +17,14 @@ export const userRegister = user =>
         body: JSON.stringify(user)
         }).then((res)=>res.json())
 
+export const findUserById = (uId) =>
+    fetch(`${SERVER_URL}/api/users/${uId}`)
+        .then((response) => response.json())
+
 const api = {
     userLogin,
-    userRegister
+    userRegister,
+    findUserById
 }
 
 export default api

@@ -16,7 +16,7 @@ function NavbarSearchForm(){
                     />
                 </div>
                 <div className="col-3 float-right">
-                    <Link to={`/recipes/search/${query}`}
+                    <Link to={`/search/${query}`}
                           className="btn my-2 mr-sm-2 bg-theme"
                     >
                         <i className="fas fa-search"/>
