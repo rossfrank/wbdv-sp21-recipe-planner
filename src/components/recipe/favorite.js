@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
-import service, { createFavorite } from "../../services/favorite-service";
+import service from "../../services/favorite-service";
 
 
 const Favorite = ({ favorite = [],user, findFavorite, createFavorite, deleteFavorite }) => {
@@ -38,7 +38,7 @@ const Favorite = ({ favorite = [],user, findFavorite, createFavorite, deleteFavo
             }else{
               alert("Please Log in first!")
             }
-            
+
           }}
         />
       </div>)

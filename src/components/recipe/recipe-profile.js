@@ -73,7 +73,7 @@ const RecipeProfile = ({ recipe = [],
     }else{
       alert("Please Log In First!")
     }
-    
+
   }
   return (
     <div className="container whole-page">
@@ -91,7 +91,7 @@ const RecipeProfile = ({ recipe = [],
         </div>
       </div>
         <div className="row mr-5 mb-2">
-            <div className="col-9 "></div>
+            <div className="col-9 " />
             <div className="col-1 collect-op pr-1 pl-0">
                 <i className={`fas fa-shopping-cart ${addCart ? "color-me-orange": ""}`}
                    onClick={() => {handleCartClick()}}/>
@@ -101,7 +101,7 @@ const RecipeProfile = ({ recipe = [],
                 editAllowed &&
                 <div className="col-1 collect-op pr-1">
                     <Link to={`/details/${recipeId}/form`}>
-                        <i className="fas fa-edit color-me-black"></i>
+                        <i className="fas fa-edit color-me-black" />
                     </Link>
                 </div>
             }
