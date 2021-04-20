@@ -9,11 +9,11 @@ function Navbar({userCredential, userLogout}){
     return(
         <nav className="navbar navbar-light bg-theme">
             <div className="d-inline-flex">
-                <a className="nav-link  bg-theme" href="#" id="navbarScrollingDropdown" role="button"
+                <Link className="nav-link  bg-theme" to="#" id="navbarScrollingDropdown" role="button"
                    data-toggle="dropdown" aria-expanded="false">
                     <span className="d-inline-block navbar-toggler-icon" />
                     <span className="d-none d-lg-inline-block d-xl-inline-block">explore</span>
-                </a>
+                </Link>
                 <div className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                     <Link to="/search/breakfast" type="button" className="dropdown-item btn btn-outline-warning">
                         Breakfast
@@ -37,17 +37,17 @@ function Navbar({userCredential, userLogout}){
                 !userCredential["isAuthenticated"] &&
                     <>
                         <div className="d-inline-flex flex-row-reverse">
-                            <a className="float-left bg-theme mr-4 my-2 d-none d-lg-inline-block d-xl-inline-block"
-                               href="/registration">
+                            <Link className="float-left bg-theme mr-4 my-2 d-none d-lg-inline-block d-xl-inline-block"
+                               to="/registration">
                                 Register
-                            </a>
-                            <a className="float-left bg-theme mr-4 my-2 d-none d-lg-inline-block d-xl-inline-block"
-                               href="/login">
+                            </Link>
+                            <Link className="float-left bg-theme mr-4 my-2 d-none d-lg-inline-block d-xl-inline-block"
+                               to="/login">
                                 Login
-                            </a>
-                            <a className="btn border-0 bg-theme" href='/login'>
+                            </Link>
+                            <Link className="btn border-0 bg-theme" to='/login'>
                                 <i className="fas fa-user-lock" />
-                            </a>
+                            </Link>
                         </div>
                     </>
             }
@@ -69,7 +69,7 @@ function Navbar({userCredential, userLogout}){
                     <div className="dropdown-menu">
                         <Link className="dropdown-item" to={`/profile/${userCredential["userId"]}`}>Your Account</Link>
                         <div className="dropdown-divider"/>
-                        <a className="dropdown-item" href="#" onClick={userLogout}>Log Out</a>
+                        <Link className="dropdown-item" to="#" onClick={userLogout}>Log Out</Link>
                     </div>
                 </div>
             }

@@ -5,7 +5,7 @@ import ProfileTabs from "./profile-tabs";
 import ProfileCards from "./profile-cards";
 import {connect} from "react-redux";
 
-const Profile = ({}) => {
+const Profile = () => {
 
     return(
         <div className="profile-page">

@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import "./recipe-profile.css";
 import recipeDBService from "../../services/recipe-db-service";
 import ingredientService from "../../services/recipe-ingredient-service";
-import UserService from "../../services/user-service";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 const NewRecipe = ({userCredential}) => {
 
@@ -12,8 +12,6 @@ const NewRecipe = ({userCredential}) => {
   const [image, setImage] = useState("");
   const [time, setTime] = useState(0);
   const [instructions, setInstructions] = useState("");
-  const [newRecipeId, setNewRecipeId] = useState("")
-
   const [ingredientNames, setIngredientNames] = useState({ 0:"", 1:"", 2:"", 3:"", 4:"", 5:"", 6: "", 7: "", 8:"", 9:""});
   const [ingredientAmounts, setIngredientAmounts] = useState({ 0:"1", 1:"1", 2:"1", 3:"1", 4:"1", 5:"1", 6: "1", 7: "1", 8:"1", 9:"1"});
   const [ingredientUnits, setIngredientUnits] = useState({ 0:"", 1:"", 2:"", 3:"", 4:"", 5:"", 6: "", 7: "", 8:"", 9:""});
@@ -128,7 +126,7 @@ const NewRecipe = ({userCredential}) => {
 
 
             <div className="row">
-              <a className="col-6 pwd-info" onClick={()=>{
+              <Link className="col-6 pwd-info" onClick={()=>{
                 if (count<=9){
                   setCount(count+1);
                 }else {
@@ -136,7 +134,7 @@ const NewRecipe = ({userCredential}) => {
                 }
               }}>
                 Add new ingredients
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -149,9 +147,9 @@ const NewRecipe = ({userCredential}) => {
             </textarea>
           </div>
           <div className="form-group">
-            <a className="btn btn-primary btn-block wbdv-login bg-theme border-0" onClick={createNewRecipe}>
+            <Link className="btn btn-primary btn-block wbdv-login bg-theme border-0" onClick={createNewRecipe}>
               Upload
-            </a>
+            </Link>
           </div>
         </form>
       </div>

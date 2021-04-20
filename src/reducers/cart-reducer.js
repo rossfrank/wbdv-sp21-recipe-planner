@@ -1,5 +1,3 @@
-import React from "react";
-
 const initialState = {
   cart: [],
 };
@@ -7,28 +5,21 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_ITEM_TO_CART":
-      const newState = {
+      return {
         ...state,
         cart: [...state.cart, action.item],
       };
-      return newState;
     case "FIND_CART_FOR_USER":
-      const newStateA = {
+      return {
         ...state,
         cart: action.cart,
       };
-      return newStateA;
     case "DELETE_CART_ITEM":
-      const newStateD = {
+      return {
         cart: state.cart.filter((c) => {
-          if (c.Id === action.itemToDelete.Id) {
-            return false;
-          } else {
-            return true;
-          }
+          return c.Id !== action.itemToDelete.Id;
         }),
       };
-      return newStateD;
     default:
       return state;
   }

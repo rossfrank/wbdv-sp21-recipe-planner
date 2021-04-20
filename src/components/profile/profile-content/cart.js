@@ -5,11 +5,7 @@ import {connect} from "react-redux";
 import cartService from "../../../services/cart-service";
 import recipeService from "../../../services/recipe-service";
 
-const Cart = (
-    {
-        myCart,
-        userCredential,
-        findCartForUser}) => {
+const Cart = ({myCart, userCredential, findCartForUser}) => {
     const {user} = useParams();
 
     useEffect(()=>{

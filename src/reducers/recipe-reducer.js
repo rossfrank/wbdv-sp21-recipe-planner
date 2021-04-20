@@ -1,5 +1,3 @@
-import React from 'react'
-
 const initialState = {
     recipes: []
 }
@@ -7,19 +5,17 @@ const initialState = {
 const recipeReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'FIND_RECIPE_BY_ID':
-            const newState = {
+            return {
                 ...state,
                 recipe: action.recipe,
             }
-            return newState
         default:
             return state
         case 'FIND_RECIPES':
-            const newStateA = {
+            return {
                 ...state,
                 recipes: action.recipes,
             }
-            return newStateA
     }
 }
 

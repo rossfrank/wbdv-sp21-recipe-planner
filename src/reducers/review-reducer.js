@@ -1,5 +1,3 @@
-import React from 'react'
-
 const initialState = {
     reviews: []
 }
@@ -7,23 +5,20 @@ const initialState = {
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'CREATE_REVIEW':
-            const newState = {
+            return {
                 ...state,
                 reviews: [...state.reviews, action.review],
             }
-            return newState
         case 'FIND_REVIEWS_FOR_RECIPE':
-            const newStateA = {
+            return {
                 ...state,
                 reviews: action.reviews,
             }
-            return newStateA
         case 'FIND_REVIEWS_FOR_USER':
-            const newStateB = {
+            return {
                 ...state,
                 reviews: action.reviews,
             }
-            return newStateB
         default:
             return state
     }

@@ -16,7 +16,7 @@ const UserDescription = ({userCredential}) => {
 
     return(
         <div className="container">
-            <img src={stick} alt="User Profile Image"/>
+            <img src={stick} alt="User Profile"/>
             <h2>{userInfo.email}</h2>
             {user ===userCredential.userId &&
             <Link to="/details/form">

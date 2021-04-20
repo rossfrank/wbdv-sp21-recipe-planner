@@ -3,10 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import reviewService from "../../../services/review-service";
 
-const Reviews = (
-    {
-        myReviews,
-        findReviewForUser}) => {
+const Reviews = ({myReviews, findReviewForUser}) => {
     const {user} = useParams();
 
     useEffect(()=>{

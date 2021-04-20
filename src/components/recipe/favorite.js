@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import service from "../../services/favorite-service";
 
 
-const Favorite = ({ favorite = [],user, findFavorite, createFavorite, deleteFavorite }) => {
+const Favorite = ({user, createFavorite, deleteFavorite}) => {
     const [Collect, setCollect] = useState(false);
     const {recipeId} = useParams()
     const [Record, setRecord] = useState(undefined);

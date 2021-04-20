@@ -57,7 +57,7 @@ const RecipeProfile = ({ recipe = [],
                 })
             })
     }
-  }, []);
+  }, [recipeId]);
 
   function handleCartClick(){
     if(user.isAuthenticated){
@@ -87,7 +87,7 @@ const RecipeProfile = ({ recipe = [],
           )}
         </div>
         <div className="col-3">
-          <a>{recipe.sourceName}</a>
+          <Link>{recipe.sourceName}</Link>
         </div>
       </div>
         <div className="row mr-5 mb-2">
