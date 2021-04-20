@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Route, Redirect, NavLink, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./log-in.css";
 import {connect} from 'react-redux'
 import userService from "../../services/user-service";
@@ -46,7 +46,7 @@ const LogIn = ({userCredential, userLogin=()=>{alert("init")}}) => {
             </div>
             <div className="form-group URL-link">
               Do not have an account?
-              <a href="/registration">Create an account</a>
+              <Link to="/registration">Create an account</Link>
             </div>
           </form>
         </div>

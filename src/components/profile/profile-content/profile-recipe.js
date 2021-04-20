@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 
 
 function ProfileRecipe({recipe , ingredients}) {
-
     return(
         <div className="col">
             <div className="card">

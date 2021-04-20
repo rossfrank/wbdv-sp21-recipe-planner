@@ -9,7 +9,6 @@ import RecipeProfile from "./components/recipe/recipe-profile";
 import React from "react";
 import Navbar from "./components/homepage/navbar";
 import {connect} from "react-redux";
-import NewRecipe from "./components/recipe/new-recipe";
 import EditableRecipe from "./components/recipe/editable-recipe";
 import RecipeForm from "./components/recipe/recipe-form";
 

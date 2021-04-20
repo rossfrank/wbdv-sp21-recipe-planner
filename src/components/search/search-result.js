@@ -33,10 +33,6 @@ function SearchResult(){
                 <div className="container mb-4">
                     <div className="row row-cols-1 row-cols-md-4">
                         {
-                            resultRecipes === undefined &&
-                            <div></div>
-                        }
-                        {
                             resultRecipes !== undefined &&
                             resultRecipes.map(r =><RecipeCard key={r.id} recipe={r}/>)
                         }

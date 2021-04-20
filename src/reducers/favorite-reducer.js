@@ -1,5 +1,3 @@
-import React from "react";
-
 const initialState = {
   favorites: [],
 };
@@ -7,40 +5,31 @@ const initialState = {
 const favoriteReducer = (state = initialState, action) => {
   switch (action.type) {
     case "CREATE_FAVORITE":
-      const newState = {
+      return {
         ...state,
         favorite: [...state.favorites, action.favorite],
       };
-      return newState;
     case "FIND_FAVORITE_FOR_USER":
-      const newStateA = {
+      return {
         ...state,
         favorites: action.favorites,
       };
-      return newStateA;
     case "FIND_FAVORITE_FOR_RECIPE":
-      const newStateB = {
+      return {
         ...state,
         favorites: action.favorites,
       };
-      return newStateB;
     case "FIND_FAVORITE":
-      const newStateC = {
+      return {
         ...state,
         favorites: action.favorites,
       };
-      return newStateC;
     case "DELETE_FAVORITE":
-      const newStateD = {
+      return {
         favorites: state.favorites.filter((f) => {
-          if (f.id === action.itemToDelete.id) {
-            return false;
-          } else {
-            return true;
-          }
+          return f.id !== action.itemToDelete.id;
         }),
       };
-      return newStateD;
     default:
       return state;
   }
