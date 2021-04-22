@@ -35,7 +35,7 @@ const MyRecipes = ({userinfo}) => {
                 recipes.map(recipe =>
                     <div key={recipe.id}>
                         {
-                            <ProfileRecipe recipe={recipe} ingredients={JSON.parse(recipe.ingredients)} />
+                            <ProfileRecipe recipe={recipe} ingredients={recipe.ingredientList} />
                         }
                     </div>
                 )

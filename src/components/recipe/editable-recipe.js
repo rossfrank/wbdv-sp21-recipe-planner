@@ -10,31 +10,21 @@ import IngredientsForm from "./ingredients-form";
 const EditableRecipe = ({userCredential}) => {
 
     const {recipeId} = useParams();
-
     const [recipe, setRecipe] = useState({});
-
     const [ingredients, setIngredients] = useState([])
-
     const [editAllowed, setEditAllowed] = useState(false)
-
-
 
     useEffect(()=>{
         recipeService.findRecipeDBById(recipeId)
             .then((res)=>{
                 setRecipe(res);
+                setIngredients(res.ingredientList)
                 if(res["userId"].toString() === userCredential["userId"].toString()){
                     setEditAllowed(true);
                 }
             });
 
-        ingredientService.findRecipeIngredientsForRecipe(recipeId)
-            .then((res)=>{
-                setIngredients(res);
-            })
-
     }, [recipeId])
-
 
     const updateRecipe = ()=>{
         recipeService.updateRecipeDB(recipeId, recipe).then(res => res);
@@ -48,17 +38,9 @@ const EditableRecipe = ({userCredential}) => {
         }
     }
 
-
     const deleteRecipe = ()=>{
-        ingredients.map((each)=>{
-            if(each["id"] !== undefined && each["id"] !== ""){
-                ingredientService.deleteRecipeIngredient(each["id"]).then(res => res)
-            }
-        });
         recipeService.deleteRecipeDB(recipeId).then(res => res);
     }
-
-
 
     return(
         <div className="whole-page">
