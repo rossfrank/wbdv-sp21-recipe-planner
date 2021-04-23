@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import "./sign-up.css";
 import userService from "../../services/user-service";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
-const SignUp = ({userCredential, userLogin}) => {
+const SignUp = ({userLogin}) => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ const SignUp = ({userCredential, userLogin}) => {
   const [role, setRole] = useState("")
 
 
-  function ValidateEmail(mail)
+  function ValidateEmail(email)
   {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
     {
@@ -94,7 +95,7 @@ const SignUp = ({userCredential, userLogin}) => {
 
 
             <div className="form-group">
-              <a className="btn btn-primary btn-block wbdv-login"
+              <Link className="btn btn-primary btn-block wbdv-login"
                  onClick={()=>{
                    if (validPassword !== password){
                      alert("Please verify your passwords.")
@@ -103,11 +104,11 @@ const SignUp = ({userCredential, userLogin}) => {
                    }
                  }}>
                 Sign Up
-              </a>
+              </Link>
             </div>
             <div className="form-group URL-link">
               Already have an account?
-              <a href="/login">Sign in</a>
+              <Link to="/login">Sign in</Link>
             </div>
           </form>
         </div>

@@ -4,19 +4,14 @@ import recipeService from "../../services/recipe-db-service";
 import ingredientService from "../../services/recipe-ingredient-service";
 import {Link, useParams} from "react-router-dom";
 import {connect} from "react-redux";
+import IngredientsForm from "./ingredients-form";
 
 
 const EditableRecipe = ({userCredential}) => {
 
     const {recipeId} = useParams();
-
     const [recipe, setRecipe] = useState({});
-
-    const [ingredients, setIngredients] = useState([])
-
     const [editAllowed, setEditAllowed] = useState(false)
-
-
 
     useEffect(()=>{
         recipeService.findRecipeDBById(recipeId)
@@ -27,37 +22,22 @@ const EditableRecipe = ({userCredential}) => {
                 }
             });
 
-        ingredientService.findRecipeIngredientsForRecipe(recipeId)
-            .then((res)=>{
-                setIngredients(res);
-            })
-
-    }, [])
-
+    }, [recipeId])
 
     const updateRecipe = ()=>{
-        recipeService.updateRecipeDB(recipeId, recipe);
-        for(let i=0; i<ingredients.length; i++){
-            if (ingredients[i]["id"] !== undefined && ingredients[i]["id"] !== ""){
-                ingredientService.updateRecipeIngredient(ingredients[i]["id"], ingredients[i]);
-            }else {
-                ingredientService.createRecipeIngredient(recipeId, ingredients[i])
-                    .then((res)=>{});
-            }
-        }
+        recipeService.updateRecipeDB(recipeId, recipe).then(res => res);
     }
 
+    const updateIngredients = (ingred) => {
+        console.log(ingred)
+        setRecipe(prev => {
+            return {...prev, ingredientList: ingred}
+        })
+    }
 
     const deleteRecipe = ()=>{
-        ingredients.map((each)=>{
-            if(each["id"] !== undefined && each["id"] !== ""){
-                ingredientService.deleteRecipeIngredient(each["id"])
-            }
-        });
-        recipeService.deleteRecipeDB(recipeId);
+        recipeService.deleteRecipeDB(recipeId).then(res => res);
     }
-
-
 
     return(
         <div className="whole-page">
@@ -90,70 +70,7 @@ const EditableRecipe = ({userCredential}) => {
                                }
                         />
                     </div>
-                    <div className="form-group">
-                        <label>Ingredients</label>
-
-                        {ingredients.map((ingredient,ingredientIndex) => (
-                            <div className="row mb-2" key={ingredientIndex}>
-                                <div className="col-6">
-                                    <input className="form-control" placeholder="Ingredient Name"
-                                           value={ingredient["name"]}
-                                           onChange={(e)=>{
-                                               const newArr = ingredients.map((item,itemIndex) =>{
-                                                   if (itemIndex === ingredientIndex){
-                                                       item.name = e.target.value;
-                                                       return item
-                                                   }
-                                                   return item
-                                               })
-                                               setIngredients(newArr)
-                                           }}
-                                    />
-                                </div>
-                                <div className="col-3">
-                                    <input className="form-control" placeholder="amount"
-                                           value={ingredient["amount"]}
-                                           onChange={(e)=>{
-                                               const newArr = ingredients.map((item,itemIndex) =>{
-                                                   if (itemIndex === ingredientIndex){
-                                                       item.amount = e.target.value;
-                                                       return item
-                                                   }
-                                                   return item
-                                               })
-                                               setIngredients(newArr)
-                                           }}
-                                    />
-                                </div>
-                                <div className="col-3">
-                                    <input className="form-control" placeholder="unit"
-                                           value={ingredient["unit"]}
-                                           onChange={(e)=>{
-                                               const newArr = ingredients.map((item,itemIndex) =>{
-                                                   if (itemIndex === ingredientIndex){
-                                                       item.unit = e.target.value;
-                                                       return item
-                                                   }
-                                                   return item
-                                               })
-                                               setIngredients(newArr)
-                                           }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                        <div className="row">
-                            <a className="col-6 pwd-info"
-                               onClick={()=>{
-                                   setIngredients(prev=>{
-                                       return [...prev,
-                                           { name: "", amount: "1", unit: "", recipeId: recipeId}]
-                                   })
-                               }}>
-                                Add new ingredients
-                            </a>
-                        </div>
-                    </div>
+                    <IngredientsForm ingredients={recipe.ingredientList} setIngredients={updateIngredients} recipeId={recipeId}/>
 
                     <div className="form-group">
                         <label>Instructions</label>

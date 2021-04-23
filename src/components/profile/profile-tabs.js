@@ -9,12 +9,22 @@ const ProfileTabs = ({userCredential}) => {
     const [items, setItems] = useState(["Favorites", "Reviews"])
 
     useEffect(() => {
-        if(user === userCredential.userId)
-            setItems([...items, "Cart"])
-        userService.findUserById(user)
-            .then(response => {
-                if (response.role === "CREATOR")
-            setItems([...items, "My Recipes"])})
+        setItems(["Favorites", "Reviews"])
+        if(user === userCredential.userId) {
+            if(userCredential.role === "CREATOR"){
+                setItems([...items,"Cart", "My Recipes"])
+            }
+            else{
+                setItems([...items, "Cart"])
+            }
+        }
+        else {
+            userService.findUserById(user)
+                .then(response => {
+                    if (response.role === "CREATOR")
+                        setItems([...items, "My Recipes"])
+                })
+        }
     }, [user])
 
     const isActive =(item) => {

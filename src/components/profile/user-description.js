@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import stick from "./img.png";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import userService from "../../services/user-service";
+import {connect} from "react-redux";
 
-const UserDescription = ({}) => {
+const UserDescription = ({userCredential}) => {
 
     const {user} = useParams();
     const [userInfo, setUserInfo] = useState({})
@@ -15,10 +16,25 @@ const UserDescription = ({}) => {
 
     return(
         <div className="container">
-            <img src={stick} alt="User Profile Image"/>
+            <img src={stick} alt="User Profile"/>
             <h2>{userInfo.email}</h2>
+            {user ===userCredential.userId &&
+            <Link to="/details/form">
+                <button className="btn btn-success">Update User Info</button>
+            </Link>
+            }
         </div>
     )
 }
+const stpm = (state) => {
+    return {
+        userCredential: state.userReducer.userCredential
+    }
+}
 
-export default UserDescription
+const dtpm = (dispatch)=> {
+
+    return {}
+}
+
+export default connect(stpm, dtpm)(UserDescription)

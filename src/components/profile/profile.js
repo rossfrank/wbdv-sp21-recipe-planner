@@ -5,12 +5,12 @@ import ProfileTabs from "./profile-tabs";
 import ProfileCards from "./profile-cards";
 import {connect} from "react-redux";
 
-const Profile = ({}) => {
+const Profile = () => {
 
     return(
         <div className="profile-page">
             <div className="row">
-                <div className="col-2">
+                <div className="col-3">
                     <UserDescription />
                 </div>
                 <div className="col-8">

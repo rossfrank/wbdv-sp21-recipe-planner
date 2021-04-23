@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 
 function NavbarSearchForm(){
     const [query, setQuery] = useState("");
 
     return(
-        <>
+        <div>
             <div className="form-row w-100">
                 <div className="col-9">
                     <input type="text" className="form-control my-2 mr-sm-2"
@@ -17,13 +17,12 @@ function NavbarSearchForm(){
                 </div>
                 <div className="col-3 float-right">
                     <Link to={`/search/${query}`}
-                          className="btn my-2 mr-sm-2 bg-theme"
-                    >
+                          className="btn my-2 mr-sm-2 bg-theme">
                         <i className="fas fa-search"/>
                     </Link>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
