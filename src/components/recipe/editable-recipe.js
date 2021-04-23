@@ -11,14 +11,12 @@ const EditableRecipe = ({userCredential}) => {
 
     const {recipeId} = useParams();
     const [recipe, setRecipe] = useState({});
-    const [ingredients, setIngredients] = useState([])
     const [editAllowed, setEditAllowed] = useState(false)
 
     useEffect(()=>{
         recipeService.findRecipeDBById(recipeId)
             .then((res)=>{
                 setRecipe(res);
-                setIngredients(res.ingredientList)
                 if(res["userId"].toString() === userCredential["userId"].toString()){
                     setEditAllowed(true);
                 }
@@ -28,14 +26,13 @@ const EditableRecipe = ({userCredential}) => {
 
     const updateRecipe = ()=>{
         recipeService.updateRecipeDB(recipeId, recipe).then(res => res);
-        for(let i=0; i<ingredients.length; i++){
-            if (ingredients[i]["id"] !== undefined && ingredients[i]["id"] !== ""){
-                ingredientService.updateRecipeIngredient(ingredients[i]["id"], ingredients[i]).then(res => res)
-            }else {
-                ingredientService.createRecipeIngredient(recipeId, ingredients[i])
-                    .then((res)=>res);
-            }
-        }
+    }
+
+    const updateIngredients = (ingred) => {
+        console.log(ingred)
+        setRecipe(prev => {
+            return {...prev, ingredientList: ingred}
+        })
     }
 
     const deleteRecipe = ()=>{
@@ -73,7 +70,7 @@ const EditableRecipe = ({userCredential}) => {
                                }
                         />
                     </div>
-                    <IngredientsForm ingredients={ingredients} setIngredients={setIngredients} recipeId={recipeId}/>
+                    <IngredientsForm ingredients={recipe.ingredientList} setIngredients={updateIngredients} recipeId={recipeId}/>
 
                     <div className="form-group">
                         <label>Instructions</label>

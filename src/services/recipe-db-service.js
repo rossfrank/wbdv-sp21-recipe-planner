@@ -8,14 +8,16 @@ export const findRecipeDBById = (rid)=>
             )
 
 
-export const createRecipeDB = (recipe) =>
-        fetch(`${RECIPES_URL}`, {
+export const createRecipeDB = (recipe) => {
+    console.log(recipe)
+    return fetch(`${RECIPES_URL}`, {
             method: "POST",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(recipe)
         }).then((res)=>
             res.json()
         )
+}
 
 
 export const updateRecipeDB = (rid, recipe) =>

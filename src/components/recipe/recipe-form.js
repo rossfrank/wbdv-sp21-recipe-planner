@@ -13,15 +13,18 @@ const RecipeForm = ({userCredential}) =>{
         directions: "",
         readyInMinutes: 0,
         userId: userCredential["userId"],
-        ingredientList: []
+        ingredientList: [{name:"", unit:"", amount:1}]
     })
-    const [ingredients, setIngredients] = useState([{name:"", unit:"", amount:1}])
+    //const [ingredients, setIngredients] = useState([{name:"", unit:"", amount:1}])
 
+    const updateIngredients = (ingred) => {
+        console.log(ingred)
+        setRecipe(prev => {
+            return {...prev, ingredientList: ingred}
+        })
+    }
 
     const createRecipe = ()=>{
-        setRecipe(prev=>{
-            return {...prev, ingredientList: ingredients}
-        })
         console.log(recipe)
         return recipeService.createRecipeDB(recipe)
             .then((res)=> res["id"]);
@@ -64,7 +67,7 @@ const RecipeForm = ({userCredential}) =>{
                                }}
                         />
                     </div>
-                    <IngredientsForm ingredients={ingredients} setIngredients={setIngredients} recipeId={""}/>
+                    <IngredientsForm ingredients={recipe.ingredientList} setIngredients={updateIngredients} recipeId={""}/>
 
                     <div className="form-group">
                         <label>Instructions</label>
@@ -84,7 +87,6 @@ const RecipeForm = ({userCredential}) =>{
                         <Link className="btn btn-primary btn-block wbdv-login bg-theme border-0"
                            onClick={()=>{
                                createRecipe()
-                                   .then((res)=>res)
                            }}
                            to={`/profile/${userCredential["userId"]}`}
                         >
