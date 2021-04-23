@@ -88,7 +88,7 @@ const dtpm = (dispatch) => {
       reviewService
         .createReview(recipeId, {
           text: newReview,
-          user: user,
+          user: {id: user.userId},
           recipeName: recipe,
         })
         .then((theReview) =>
