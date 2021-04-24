@@ -20,7 +20,7 @@ const UpdateUser = ({userCredential, updateUser}) => {
     const newUser = {
       name: username,
       email: email,
-      password: (passwordUpdate ? password: ""),
+      password: (passwordUpdate ? password: null),
       role: role
     }
     console.log(newUser)
