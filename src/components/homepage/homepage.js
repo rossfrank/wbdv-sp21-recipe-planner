@@ -17,8 +17,10 @@ function Homepage({userCredential}) {
                     .then(x => setHomeRecipes(x))
             )
         reviewService.findReviewForUser(userCredential["userId"])
-            .then((res)=>
-                recipeService.findRecipeByIdBulk(res.map(r=>r["recipeId"])).then(res => setUserRecipes(res))
+            .then((res)=>{
+                const uniqueIds = [... new Set(res.map(r=>r["recipeId"]))];
+                recipeService.findRecipeByIdBulk(uniqueIds.map(r=>r)).then(res => setUserRecipes(res))
+                }
             )
     },[])
 
