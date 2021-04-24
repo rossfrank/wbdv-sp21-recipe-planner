@@ -4,7 +4,8 @@ const initialState = {
         authorization: "",
         isAuthenticated: false,
         username: "",
-        role: ""
+        role: "",
+        email: ""
     }
 }
 
