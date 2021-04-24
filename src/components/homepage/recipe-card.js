@@ -16,23 +16,11 @@ function RecipeCard({recipe={}}) {
                         {recipe.title}
                     </Link>
                     <h6 className="card-subtitle">Ingredients</h6>
-                    {
-                        (recipe["id"].toString().substring(0, 3)!=="rcp") &&
-                        <div className="card-summary">
-                            {recipe.extendedIngredients !== undefined &&
-                            recipe.extendedIngredients.map(ingredient=>{return `${ingredient.name}, `})
-                            }
-                        </div>
-                    }
-                    {
-                        (recipe["id"].toString().substring(0, 3) ==="rcp") &&
-                        <div className="card-summary">
-                            {recipe.ingredientList !== undefined &&
-                            recipe.ingredientList.map(ingredient=>{return `${ingredient.name}, `})
-                            }
-                        </div>
-                    }
-
+                    <div className="card-summary">
+                        {recipe.extendedIngredients.length > 0 &&
+                        recipe.extendedIngredients.map(i => i.name).join(', ')
+                        }
+                    </div>
                     <span className="card-timer">
                         <i className="far fa-clock " />
                         {recipe.readyInMinutes} min
