@@ -17,21 +17,14 @@ const UpdateUser = ({userCredential, updateUser}) => {
   const [passwordUpdate, setPasswordUpdate] = useState(false)
 
   const userUpdate = () => {
-    if(passwordUpdate){
-      updateUser(user, {
-        name: username,
-        email: email,
-        password: password,
-        role: role
-      })
+    const newUser = {
+      name: username,
+      email: email,
+      password: (passwordUpdate ? password: ""),
+      role: role
     }
-    else{
-      updateUser(user, {
-        name: username,
-        email: email,
-        role: role
-      })
-    }
+    console.log(newUser)
+    updateUser(user, newUser)
   }
 
   return (

@@ -19,7 +19,7 @@ const UserDescription = ({userCredential}) => {
             <img src={stick} alt="User Profile"/>
             <h2>{userInfo.email}</h2>
             {user ===userCredential.userId &&
-            <Link to={`/user/${user}/update`}>
+            <Link to={`/profile/${user}/update`}>
                 <button className="btn btn-success">Update User Info</button>
             </Link>
             }
