@@ -29,7 +29,6 @@ const EditableRecipe = ({userCredential}) => {
     }
 
     const updateIngredients = (ingred) => {
-        console.log(ingred)
         setRecipe(prev => {
             return {...prev, ingredientList: ingred}
         })
@@ -82,7 +81,7 @@ const EditableRecipe = ({userCredential}) => {
                                 setRecipe(prev=>{return {...prev, directions: e.target.value}})}
                             }
                         >
-            </textarea>
+                        </textarea>
                     </div>
 
                     {
@@ -93,7 +92,7 @@ const EditableRecipe = ({userCredential}) => {
                                       updateRecipe();
                                       alert("Successfully updated the recipe");
                                   }}
-                                  to={`/profile/${userCredential["userId"]}`}>
+                                  to={`/details/${recipeId}`}>
                                 Update
                             </Link>
                             <Link type="button" className="btn btn-danger border-0 mr-2"
