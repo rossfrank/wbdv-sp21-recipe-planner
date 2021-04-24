@@ -7,6 +7,12 @@ export const findRecipeDBById = (rid)=>
                 res.json()
             )
 
+export const findRecipeDBByIdBulk = (ids)=>
+    fetch(`${RECIPES_URL}/bulk/${ids.join(",")}`)
+        .then((res)=>
+            res.json()
+        )
+
 
 export const createRecipeDB = (recipe) => {
     return fetch(`${RECIPES_URL}`, {
@@ -41,6 +47,7 @@ export const findRecipeForUser = (uId) =>
 
 const api = {
     findRecipeDBById,
+    findRecipeDBByIdBulk,
     createRecipeDB,
     updateRecipeDB,
     deleteRecipeDB,
