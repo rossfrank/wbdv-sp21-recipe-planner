@@ -17,7 +17,6 @@ const Reviews = ({
   const [newReview, setNewReview] = useState("");
   useEffect(() => {
       findReviewsForRecipe(recipeId)
-      console.log(reviews)
   }, [recipeId])
   return (
     <div>
@@ -27,10 +26,10 @@ const Reviews = ({
         </div>
       </div>
       <ul className="percentage70-item center-element">
-          {reviews &&
+          {reviews && (reviews.length >= 1) &&
           reviews.map((review) => {
               return (
-                  <div key={review.reviewId}>
+                  <div key={review.id}>
                       <div className="media">
                           <Link to={`/profile/${review.userId}`}>
                               <img

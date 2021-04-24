@@ -15,7 +15,6 @@ export const findRecipeDBByIdBulk = (ids)=>
 
 
 export const createRecipeDB = (recipe) => {
-    console.log(recipe)
     return fetch(`${RECIPES_URL}`, {
             method: "POST",
             headers: {'content-type': 'application/json'},

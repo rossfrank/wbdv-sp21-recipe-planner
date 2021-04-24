@@ -18,14 +18,12 @@ const RecipeForm = ({userCredential}) =>{
     //const [ingredients, setIngredients] = useState([{name:"", unit:"", amount:1}])
 
     const updateIngredients = (ingred) => {
-        console.log(ingred)
         setRecipe(prev => {
             return {...prev, extendedIngredients: ingred}
         })
     }
 
     const createRecipe = ()=>{
-        console.log(recipe)
         return recipeService.createRecipeDB(recipe)
             .then((res)=> res["id"]);
     }
