@@ -21,10 +21,18 @@ export const findUserById = (uId) =>
     fetch(`${SERVER_URL}/api/users/${uId}`)
         .then((response) => response.json())
 
+export const updateUser = (uId, user) =>
+    fetch(`${SERVER_URL}/api/users/${uId}`,{
+        method: "PUT",
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(user)
+    })
+
 const api = {
     userLogin,
     userRegister,
-    findUserById
+    findUserById,
+    updateUser
 }
 
 export default api

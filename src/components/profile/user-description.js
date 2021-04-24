@@ -17,9 +17,10 @@ const UserDescription = ({userCredential}) => {
     return(
         <div className="container">
             <img src={stick} alt="User Profile"/>
+            <h2>{userInfo.name}</h2>
             <h2>{userInfo.email}</h2>
             {user ===userCredential.userId &&
-            <Link to="/details/form">
+            <Link to={`/profile/${user}/update`}>
                 <button className="btn btn-success">Update User Info</button>
             </Link>
             }

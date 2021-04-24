@@ -19,7 +19,7 @@ const userReducer = (state=initialState, action) => {
                     userCredential: {
                         ...state["userCredential"],
                         ...res,
-                        isAuthenticated: true,
+                        isAuthenticated: true
                     }
                 }
             }else {
@@ -43,6 +43,15 @@ const userReducer = (state=initialState, action) => {
                     isAuthenticated: false,
                     username: "",
                     role: ""
+                }
+            }
+        case "UPDATE_USER":
+            const resp = action.payload
+            return {
+                ...state,
+                userCredential: {
+                    ...state["userCredential"],
+                    ...resp
                 }
             }
         default:

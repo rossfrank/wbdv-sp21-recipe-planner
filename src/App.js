@@ -11,6 +11,7 @@ import Navbar from "./components/homepage/navbar";
 import {connect} from "react-redux";
 import EditableRecipe from "./components/recipe/editable-recipe";
 import RecipeForm from "./components/recipe/recipe-form";
+import UpdateUser from "./components/profile/update-user";
 
 function App({userCredential,}) {
   return (
@@ -57,7 +58,9 @@ function App({userCredential,}) {
                     <Route path="/details/:recipeId" exact>
                         <RecipeProfile />
                     </Route>
-
+                    <Route path="/profile/:user/update">
+                        <UpdateUser />
+                    </Route>
                     <Route path={[
                         "/profile",
                         "/profile/:user",
@@ -65,7 +68,6 @@ function App({userCredential,}) {
                     ]} exact>
                         <Profile/>
                     </Route>
-
                 </Switch>
             </div>
         </div>

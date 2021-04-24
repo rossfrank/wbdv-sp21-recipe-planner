@@ -1,56 +1,41 @@
 import React, {useState} from "react";
-import "./sign-up.css";
+import "./../sign-up/sign-up.css";
 import userService from "../../services/user-service";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {useParams} from "react-router";
 
-const SignUp = ({userLogin}) => {
+const UpdateUser = ({userCredential, updateUser}) => {
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const {user} = useParams()
+
+  const [username, setUsername] = useState(userCredential.username);
   const [password, setPassword] = useState("")
+  const [email, setEmail] = useState(userCredential.email)
   const [validPassword, setValidPassword] = useState("")
-  const [role, setRole] = useState("")
+  const [role, setRole] = useState(userCredential.role)
+  const [passwordUpdate, setPasswordUpdate] = useState(false)
 
-
-  function ValidateEmail(email)
-  {
-    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
-    {
-      return true;
-    }
-    alert("You have entered an invalid email address!")
-    return false;
-  }
-
-  const userRegister = ()=>{
-    userService.userRegister({
-      email: email,
+  const userUpdate = () => {
+    const newUser = {
       name: username,
-      password: password,
-      role: role,
-    })
-        .then((res)=>{
-          if (res["status"] === 200){
-            userLogin({
-              email: email,
-              password: password
-            })
-          }else {
-            alert("Email already registered!")
-          }
-        })
+      email: email,
+      password: (passwordUpdate ? password: null),
+      role: role
+    }
+    console.log(newUser)
+    updateUser(user, newUser)
   }
 
   return (
     <div className="signup-page">
       <div className="a-box percentage40-item">
         <div className="a-box-inner">
-          <h3>Create Account</h3>
+          <h3>Update User</h3>
           <form>
             <div className="form-group">
               <label>Name</label>
-              <input className="form-control"
+              <input className="form-control" value={username}
                      onChange={(e)=>setUsername(e.target.value)}/>
             </div>
             <div className="form-group">
@@ -77,6 +62,14 @@ const SignUp = ({userLogin}) => {
               <input className="form-control" type="password"
                      onChange={(e)=>setValidPassword(e.target.value)}/>
             </div>
+            <div>
+              <label>
+                <input type="checkbox"
+                       name="password" onClick={(e) =>
+                    setPasswordUpdate(e.target.checked)}/>
+                Update Password
+              </label>
+            </div>
             <div className="form-check form-check-inline">
               <p>
                 Role
@@ -84,35 +77,29 @@ const SignUp = ({userLogin}) => {
             </div>
             <div className="form-check form-check-inline">
               <label>
-                <input type="radio"
-                       name="group1" onClick={()=> setRole("SHOPPER")}/>
+                <input type="radio" checked={role === "SHOPPER" ? "checked":""}
+                       name="role" onChange={()=> setRole("SHOPPER")}/>
                 As Shopper
               </label>
             </div>
             <div className="form-check form-check-inline">
               <label>
-                <input type="radio"
-                       name="group1" onClick={()=> setRole("CREATOR")}/>
+                <input type="radio" checked={role === "CREATOR" ? "checked":""}
+                       name="role" onChange={()=> setRole("CREATOR")}/>
                 As Creator
               </label>
             </div>
-
-
             <div className="form-group">
-              <Link className="btn btn-primary btn-block wbdv-login"
+              <button className="btn btn-primary btn-block wbdv-login"
                  onClick={()=>{
                    if (validPassword !== password){
                      alert("Please verify your passwords are the same")
-                   }else if(ValidateEmail(email)){
-                     userRegister();
+                   }else{
+                     userUpdate();
                    }
                  }}>
-                Sign Up
-              </Link>
-            </div>
-            <div className="form-group URL-link">
-              Already have an account?
-              <Link to="/login">Sign in</Link>
+                Update
+              </button>
             </div>
           </form>
         </div>
@@ -129,12 +116,11 @@ const stateToPropMapper = (state) => {
 
 const dispatchToPropMapper = (dispatch)=> {
   return {
-    userLogin: (login) => {
-
-      userService.userLogin(login)
+    updateUser: (user, userData) => {
+      userService.updateUser(user, userData)
           .then((res) => {
             dispatch({
-              type: "USER_LOGIN",
+              type: "UPDATE_USER",
               payload: res
             });
           })
@@ -142,4 +128,4 @@ const dispatchToPropMapper = (dispatch)=> {
   }
 }
 
-export default connect(stateToPropMapper, dispatchToPropMapper)(SignUp);
+export default connect(stateToPropMapper, dispatchToPropMapper)(UpdateUser);
