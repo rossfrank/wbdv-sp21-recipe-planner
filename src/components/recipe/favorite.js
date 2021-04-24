@@ -1,37 +1,39 @@
 import React, { useEffect, useState } from "react";
+import "./recipe-profile.css"
 import { connect } from "react-redux";
 import { useParams } from "react-router";
 import service from "../../services/favorite-service";
 
 
 const Favorite = ({user, createFavorite, deleteFavorite}) => {
-    const [Collect, setCollect] = useState(false);
+    const [collect, setCollect] = useState(false);
     const {recipeId} = useParams()
-    const [Record, setRecord] = useState(undefined);
+    const [record, setRecord] = useState(undefined);
     function handleClick() {
-        if (Collect === true) {
+        if (collect) {
           setCollect(false);
-          deleteFavorite(Record.id);
+          deleteFavorite(user.userId, recipeId);
         } else {
           setCollect(true);
           createFavorite(user.userId, recipeId, {})
         }
       }
+
       useEffect(()=>{
-        service.findFavorite(user.userId, recipeId)
+        service.findFavoriteForUser(user.userId)
             .then((res)=> {
-                if(res.userId === -1){
-                    setCollect(false)
-                }else{
-                    setCollect(true)
-                    setRecord(res)
-                }
+                res.map(r=>{
+                    if (r.recipeId === recipeId){
+                        setCollect(true);
+                        setRecord(r);
+                    }
+                })
             })
-    },[Collect])
+    },[])
     return(
         <div className="col-1 collect-op pr-1 pl-0">
         <i
-          className={`far fa-heart fa-lg ${Collect ? "favorite" : ""}`}
+          className={`far fa-heart fa-lg ${collect ? "color-me-orange" : ""}`}
           onClick={() => {
             if(user.isAuthenticated){
               handleClick()
@@ -52,21 +54,16 @@ const stpm = (state) => {
   };
   const dtpm = (dispatch) => {
     return {
-        findFavorite: (uId, rId) =>
-        service.findFavorite(uId, rId).then((theF) =>
-          dispatch({
-            type: "FIND_FAVORITE",
-            favorite: theF,
-          })
-        ),
-        deleteFavorite: (fId) => {
-            service.deleteFavorite(fId)
-            .then((status) =>
-                dispatch({
-                    type: 'DELETE_FAVORITE',
-                    itemToDelete: {id: fId}
-                })
-            )
+        deleteFavorite: (uId, rId) => {
+            service.deleteRecipeFavoriteForUser(uId, rId)
+            .then((res) =>{
+                if (res.id){
+                    dispatch({
+                        type: 'DELETE_FAVORITE',
+                        itemToDelete: {id: res.id}
+                    })
+                }
+            })
         },
         createFavorite: (userId, recipeId, theF) => {
             service

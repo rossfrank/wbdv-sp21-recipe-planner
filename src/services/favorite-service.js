@@ -22,11 +22,17 @@ export const deleteFavorite = (fId) =>
     method: "DELETE",
   }).then((response) => response.json())
 
+export const deleteRecipeFavoriteForUser = (uId, rId) =>
+    fetch(`${USERS_URL}/${uId}/recipe/${rId}/favorite`, {
+        method: 'DELETE'
+    }).then((response) => response.json());
+
 const api = {
   createFavorite,
   findFavoriteForUser,
   deleteFavorite,
   findFavorite,
+  deleteRecipeFavoriteForUser
 };
 
 export default api;
