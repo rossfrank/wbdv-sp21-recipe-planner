@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import './homepage.css'
 import RecipeCard from "./recipe-card";
 import recipeService from "../../services/recipe-service";
-import recipeDBService from "../../services/recipe-db-service";
 import reviewService from "../../services/review-service"
 import {connect} from "react-redux";
 
@@ -17,23 +16,10 @@ function Homepage({userCredential}) {
                 recipeService.findRecipeByIdBulk(res.results.map(r => r.id))
                     .then(x => setHomeRecipes(x))
             )
-
         reviewService.findReviewForUser(userCredential["userId"])
-            .then((res)=>{
-
-                const recipeIds = [...new Set(res.map(r=>r["recipeId"]))];
-
-                recipeIds.map(rId =>{
-                    if (rId.substring(0, 3)==="rcp"){
-                        recipeDBService.findRecipeDBById(rId)
-                            .then(res=>setUserRecipes(prev=> [...prev, res]))
-                    }else {
-                        recipeService.findRecipeById(rId)
-                            .then(res=>setUserRecipes(prev=> [...prev, res]))
-                    }
-                })
-            })
-
+            .then((res)=>
+                recipeService.findRecipeByIdBulk(res.map(r=>r["recipeId"])).then(res => setUserRecipes(res))
+            )
     },[])
 
     return(
@@ -50,13 +36,13 @@ function Homepage({userCredential}) {
 
 
                 <div className="row row-cols-1 row-cols-md-4 m-4">
-                    &nbsp;
+                    <br/>
                     {
                         (userRecipes.length === 0) &&
                         <h5 className="ml-1">You haven't left any reviews.</h5>
                     }
                     {
-                        (userRecipes.length >= 1) &&
+                        (userRecipes.length > 0) &&
                         userRecipes.map(r => <RecipeCard recipe={r} key={r.id}/>)
                     }
                 </div>

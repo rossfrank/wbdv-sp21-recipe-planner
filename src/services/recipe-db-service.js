@@ -7,11 +7,15 @@ export const findRecipeDBById = (rid)=>
                 res.json()
             )
 
-export const findRecipeDBByIdBulk = (ids)=>
-    fetch(`${RECIPES_URL}/bulk/${ids.join(",")}`)
-        .then((res)=>
+export const findRecipeDBByIdBulk = (ids)=> {
+    if(ids.length === 0){
+        return new Promise((resolve) => { resolve([]); })
+    }
+    return fetch(`${RECIPES_URL}/bulk/${ids.join(",")}`)
+        .then((res) =>
             res.json()
         )
+}
 
 
 export const createRecipeDB = (recipe) => {

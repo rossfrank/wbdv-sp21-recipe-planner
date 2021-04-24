@@ -32,9 +32,8 @@ export const findRecipeTopRating = number =>
 export const findRecipeByIdBulk = ids => {
     let db = []
     let spoon = []
-    let result = []
     ids.forEach(id => {
-        if (id.startsWith("rcp")) {
+        if ((typeof id) === "string" && (id.startsWith("rcp"))) {
             db = [...db, id]
         } else {
             spoon = [...spoon, id]
@@ -43,8 +42,6 @@ export const findRecipeByIdBulk = ids => {
     return fetch(`${RECIPE_URL}/informationBulk?ids=${spoon.join("%2C")}`, GET_HEADER)
         .then(response => recipeDbService.findRecipeDBByIdBulk(db).then(res => {
             return response.json().then(s => {
-                console.log(s)
-                console.log(res)
                 return[...s, ...res]
             })
         }))
