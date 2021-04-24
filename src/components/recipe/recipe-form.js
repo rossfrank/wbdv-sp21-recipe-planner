@@ -13,14 +13,14 @@ const RecipeForm = ({userCredential}) =>{
         directions: "",
         readyInMinutes: 0,
         userId: userCredential["userId"],
-        ingredientList: [{name:"", unit:"", amount:1}]
+        extendedIngredients: [{name:"", unit:"", amount:1}]
     })
     //const [ingredients, setIngredients] = useState([{name:"", unit:"", amount:1}])
 
     const updateIngredients = (ingred) => {
         console.log(ingred)
         setRecipe(prev => {
-            return {...prev, ingredientList: ingred}
+            return {...prev, extendedIngredients: ingred}
         })
     }
 
@@ -67,7 +67,7 @@ const RecipeForm = ({userCredential}) =>{
                                }}
                         />
                     </div>
-                    <IngredientsForm ingredients={recipe.ingredientList} setIngredients={updateIngredients} recipeId={""}/>
+                    <IngredientsForm ingredients={recipe.extendedIngredients} setIngredients={updateIngredients} recipeId={""}/>
 
                     <div className="form-group">
                         <label>Instructions</label>

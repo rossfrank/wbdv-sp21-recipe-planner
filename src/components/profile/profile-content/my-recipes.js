@@ -35,7 +35,7 @@ const MyRecipes = ({userinfo}) => {
                 recipes.map(recipe =>
                     <div key={recipe.id}>
                         {
-                            <ProfileRecipe recipe={recipe} ingredients={recipe.ingredientList} />
+                            <ProfileRecipe recipe={recipe} ingredients={recipe.extendedIngredients} />
                         }
                     </div>
                 )

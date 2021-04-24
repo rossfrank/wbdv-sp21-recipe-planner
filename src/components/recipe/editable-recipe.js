@@ -31,7 +31,7 @@ const EditableRecipe = ({userCredential}) => {
     const updateIngredients = (ingred) => {
         console.log(ingred)
         setRecipe(prev => {
-            return {...prev, ingredientList: ingred}
+            return {...prev, extendedIngredients: ingred}
         })
     }
 
@@ -70,7 +70,7 @@ const EditableRecipe = ({userCredential}) => {
                                }
                         />
                     </div>
-                    <IngredientsForm ingredients={recipe.ingredientList} setIngredients={updateIngredients} recipeId={recipeId}/>
+                    <IngredientsForm ingredients={recipe.extendedIngredients} setIngredients={updateIngredients} recipeId={recipeId}/>
 
                     <div className="form-group">
                         <label>Instructions</label>
