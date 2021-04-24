@@ -10,14 +10,8 @@ import IngredientsForm from "./ingredients-form";
 const EditableRecipe = ({userCredential}) => {
 
     const {recipeId} = useParams();
-
     const [recipe, setRecipe] = useState({});
-
-    const [ingredients, setIngredients] = useState([])
-
     const [editAllowed, setEditAllowed] = useState(false)
-
-
 
     useEffect(()=>{
         recipeService.findRecipeDBById(recipeId)
@@ -28,37 +22,21 @@ const EditableRecipe = ({userCredential}) => {
                 }
             });
 
-        ingredientService.findRecipeIngredientsForRecipe(recipeId)
-            .then((res)=>{
-                setIngredients(res);
-            })
-
     }, [recipeId])
-
 
     const updateRecipe = ()=>{
         recipeService.updateRecipeDB(recipeId, recipe).then(res => res);
-        for(let i=0; i<ingredients.length; i++){
-            if (ingredients[i]["id"] !== undefined && ingredients[i]["id"] !== ""){
-                ingredientService.updateRecipeIngredient(ingredients[i]["id"], ingredients[i]).then(res => res)
-            }else {
-                ingredientService.createRecipeIngredient(recipeId, ingredients[i])
-                    .then((res)=>res);
-            }
-        }
     }
 
+    const updateIngredients = (ingred) => {
+        setRecipe(prev => {
+            return {...prev, extendedIngredients: ingred}
+        })
+    }
 
     const deleteRecipe = ()=>{
-        ingredients.map((each)=>{
-            if(each["id"] !== undefined && each["id"] !== ""){
-                ingredientService.deleteRecipeIngredient(each["id"]).then(res => res)
-            }
-        });
         recipeService.deleteRecipeDB(recipeId).then(res => res);
     }
-
-
 
     return(
         <div className="whole-page">
@@ -91,7 +69,7 @@ const EditableRecipe = ({userCredential}) => {
                                }
                         />
                     </div>
-                    <IngredientsForm ingredients={ingredients} setIngredients={setIngredients} recipeId={recipeId}/>
+                    <IngredientsForm ingredients={recipe.extendedIngredients} setIngredients={updateIngredients} recipeId={recipeId}/>
 
                     <div className="form-group">
                         <label>Instructions</label>
@@ -103,7 +81,7 @@ const EditableRecipe = ({userCredential}) => {
                                 setRecipe(prev=>{return {...prev, directions: e.target.value}})}
                             }
                         >
-            </textarea>
+                        </textarea>
                     </div>
 
                     {
@@ -114,7 +92,7 @@ const EditableRecipe = ({userCredential}) => {
                                       updateRecipe();
                                       alert("Successfully updated the recipe");
                                   }}
-                                  to={`/profile/${userCredential["userId"]}`}>
+                                  to={`/details/${recipeId}`}>
                                 Update
                             </Link>
                             <Link type="button" className="btn btn-danger border-0 mr-2"

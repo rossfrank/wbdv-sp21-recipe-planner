@@ -1,10 +1,10 @@
-import {Link} from "react-router-dom";
-
 const IngredientsForm = ({ingredients,setIngredients, recipeId}) => {
     return(
         <div className="form-group">
+            {console.log(ingredients)}
             <label>Ingredients</label>
-            {ingredients.map((ingredient,ingredientIndex) => (
+            {ingredients &&
+            ingredients.map((ingredient,ingredientIndex) => (
                 <div className="row mb-2" key={ingredientIndex}>
                     <div className="col-6">
                         <input className="form-control" placeholder="Ingredient Name"
@@ -54,15 +54,14 @@ const IngredientsForm = ({ingredients,setIngredients, recipeId}) => {
                 </div>
             ))}
             <div className="row">
-                <Link className="col-6 pwd-info"
+                <p className="col-6 pwd-info btn btn-secondary"
                       onClick={()=>{
-                          setIngredients(prev=>{
-                              return [...prev,
+                          setIngredients([...ingredients,
                                   { name: "", amount: "1", unit: "", recipeId: recipeId}]
-                          })
+                          )
                       }}>
                     Add new ingredients
-                </Link>
+                </p>
             </div>
         </div>
     )

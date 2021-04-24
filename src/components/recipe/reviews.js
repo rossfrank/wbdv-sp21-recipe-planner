@@ -16,7 +16,7 @@ const Reviews = ({
   const { recipeId } = useParams();
   const [newReview, setNewReview] = useState("");
   useEffect(() => {
-    findReviewsForRecipe(recipeId)
+      findReviewsForRecipe(recipeId)
   }, [recipeId])
   return (
     <div>
@@ -26,10 +26,10 @@ const Reviews = ({
         </div>
       </div>
       <ul className="percentage70-item center-element">
-          {reviews &&
+          {reviews && (reviews.length >= 1) &&
           reviews.map((review) => {
               return (
-                  <div key={review.reviewId}>
+                  <div key={review.id}>
                       <div className="media">
                           <Link to={`/profile/${review.userId}`}>
                               <img
@@ -39,9 +39,9 @@ const Reviews = ({
                               />
                           </Link>
                           <div className="media-body">
-                              <a className="mt-0" href={`/profile/${review.userId}`}>
-                                  {review.email}
-                              </a>
+                              <Link className="mt-0" to={`/profile/${review.user.id}`}>
+                                  {review.user.email}
+                              </Link>
                               <p>{review.text}</p>
                           </div>
                       </div>
@@ -86,9 +86,8 @@ const dtpm = (dispatch) => {
     createReview: (user, recipe, recipeId, newReview) => {
       reviewService
         .createReview(recipeId, {
-          userId: user.userId,
           text: newReview,
-          userName: user.username,
+          user: {id: user.userId},
           recipeName: recipe,
         })
         .then((theReview) =>

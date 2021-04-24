@@ -7,15 +7,26 @@ export const findRecipeDBById = (rid)=>
                 res.json()
             )
 
+export const findRecipeDBByIdBulk = (ids)=> {
+    if(ids.length === 0){
+        return new Promise((resolve) => { resolve([]); })
+    }
+    return fetch(`${RECIPES_URL}/bulk/${ids.join(",")}`)
+        .then((res) =>
+            res.json()
+        )
+}
 
-export const createRecipeDB = (recipe) =>
-        fetch(`${RECIPES_URL}`, {
+
+export const createRecipeDB = (recipe) => {
+    return fetch(`${RECIPES_URL}`, {
             method: "POST",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(recipe)
         }).then((res)=>
             res.json()
         )
+}
 
 
 export const updateRecipeDB = (rid, recipe) =>
@@ -40,6 +51,7 @@ export const findRecipeForUser = (uId) =>
 
 const api = {
     findRecipeDBById,
+    findRecipeDBByIdBulk,
     createRecipeDB,
     updateRecipeDB,
     deleteRecipeDB,

@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import "./recipe-profile.css";
 import recipeService from "../../services/recipe-db-service";
-import ingredientService from "../../services/recipe-ingredient-service";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import IngredientsForm from "./ingredients-form";
@@ -13,25 +12,20 @@ const RecipeForm = ({userCredential}) =>{
         image: "",
         directions: "",
         readyInMinutes: 0,
-        userId: userCredential["userId"]
+        userId: userCredential["userId"],
+        extendedIngredients: [{name:"", unit:"", amount:1}]
     })
-    const [ingredients, setIngredients] = useState([{name:"", unit:"", amount:1}])
+    //const [ingredients, setIngredients] = useState([{name:"", unit:"", amount:1}])
 
+    const updateIngredients = (ingred) => {
+        setRecipe(prev => {
+            return {...prev, extendedIngredients: ingred}
+        })
+    }
 
     const createRecipe = ()=>{
         return recipeService.createRecipeDB(recipe)
-            .then((res)=>{
-                return res["id"];
-            });
-    }
-
-    const createIngredients = (recipeId)=>{
-        for(let i=0; i<ingredients.length; i++){
-            if (ingredients[i]["name"] !== "" ){
-                ingredientService.createRecipeIngredient(recipeId, ingredients[i]).then(r => r);
-            }
-        }
-
+            .then((res)=> res["id"]);
     }
 
     return(
@@ -71,7 +65,7 @@ const RecipeForm = ({userCredential}) =>{
                                }}
                         />
                     </div>
-                    <IngredientsForm ingredients={ingredients} setIngredients={setIngredients} recipeId={""}/>
+                    <IngredientsForm ingredients={recipe.extendedIngredients} setIngredients={updateIngredients} recipeId={""}/>
 
                     <div className="form-group">
                         <label>Instructions</label>
@@ -91,9 +85,6 @@ const RecipeForm = ({userCredential}) =>{
                         <Link className="btn btn-primary btn-block wbdv-login bg-theme border-0"
                            onClick={()=>{
                                createRecipe()
-                                   .then((res)=>{
-                                       createIngredients(res)
-                                   })
                            }}
                            to={`/profile/${userCredential["userId"]}`}
                         >
@@ -104,7 +95,8 @@ const RecipeForm = ({userCredential}) =>{
             </div>
         </div>
     )
-};
+}
+
 const stateToPropMapper = (state) => {
     return {
         userCredential: state.userReducer.userCredential

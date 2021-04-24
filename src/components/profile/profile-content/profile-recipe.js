@@ -23,7 +23,7 @@ function ProfileRecipe({recipe , ingredients}) {
                         <div className="col-8">
                             <h6 className="card-subtitle">Ingredients</h6>
                             <div className="card-summary">
-                                {ingredients !== undefined &&
+                                {(ingredients !== undefined && ingredients !== null && ingredients.length > 0) &&
                                 ingredients.map(i => i.name).join(', ')
                                 }
                             </div>

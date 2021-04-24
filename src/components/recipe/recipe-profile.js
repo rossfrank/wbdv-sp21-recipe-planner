@@ -87,7 +87,7 @@ const RecipeProfile = ({ recipe = [],
           )}
         </div>
         <div className="col-3">
-          <Link>{recipe.sourceName}</Link>
+          <p>{recipe.sourceName}</p>
         </div>
       </div>
         <div className="row mr-5 mb-2">
