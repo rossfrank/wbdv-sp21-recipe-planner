@@ -13,7 +13,7 @@ const UserDescription = ({userCredential}) => {
     useEffect(() => {
         userService.findUserById(user)
             .then(response => setUserInfo(response))
-    }, [user])
+    }, [user, userCredential])
 
     return(
         <div className="container">
