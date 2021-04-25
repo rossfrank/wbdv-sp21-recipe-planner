@@ -32,7 +32,7 @@ function App({userCredential,}) {
                     </Route>
                     {/*protect Search function*/}
                     <Route exact path={["/search", "/search/:keyword"]}>
-                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/login" />}
+                        <SearchResult /> 
                     </Route>
 
                     { !userCredential["isAuthenticated"] &&
