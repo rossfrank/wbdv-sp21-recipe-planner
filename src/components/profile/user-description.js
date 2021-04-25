@@ -8,11 +8,18 @@ const UserDescription = ({userCredential}) => {
 
     const {user} = useParams();
 
+    const [userInfo, setUserInfo] = useState({})
+
+    useEffect(() => {
+        userService.findUserById(user)
+            .then(response => setUserInfo(response))
+    }, [user])
+
     return(
         <div className="container">
             <img src={stick} alt="User Profile"/>
-            <h2>{userCredential.username}</h2>
-            <h2>{userCredential.email}</h2>
+            <h2>{userInfo.name}</h2>
+            <h2>{userInfo.email}</h2>
             {user ===userCredential.userId &&
             <Link to={`/profile/${user}/update`}>
                 <button className="btn btn-success">Update User Info</button>
