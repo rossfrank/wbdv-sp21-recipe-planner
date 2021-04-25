@@ -14,7 +14,7 @@ const Profile = ({userCredential}) => {
         <div className="profile-page">
             { userId !== "" &&
                 <div className="row">
-                    <div className="col-3">
+                    <div className="col-3 d-none d-md-block d-lg-block d-xl-block">
                         <UserDescription user={userId}/>
                     </div>
                     <div className="col-8">
