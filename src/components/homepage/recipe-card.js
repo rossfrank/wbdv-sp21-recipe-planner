@@ -17,7 +17,7 @@ function RecipeCard({recipe={}}) {
                     </Link>
                     <h6 className="card-subtitle">Ingredients</h6>
                     <div className="card-summary">
-                        {recipe.extendedIngredients.length > 0 &&
+                        {recipe.extendedIngredients && recipe.extendedIngredients.length > 0 &&
                         recipe.extendedIngredients.map(i => i.name).join(', ')
                         }
                     </div>
