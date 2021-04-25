@@ -12,8 +12,14 @@ function SearchResult(){
     useEffect(()=>{
         recipeService.findRecipeByKeyword(keyword)
             .then((res)=>{
-                setResultRecipes(res.results)
+                const ids = res.results.map(r=>r["id"]);
+                if (ids.length>0){
+                    return recipeService.findRecipeByIdBulk(ids)
+                } else {
+                    return []
+                }
             })
+            .then(x => setResultRecipes(x))
     },[keyword])
 
     return(
