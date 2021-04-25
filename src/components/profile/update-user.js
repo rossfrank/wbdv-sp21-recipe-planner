@@ -2,12 +2,13 @@ import React, {useState} from "react";
 import "./../sign-up/sign-up.css";
 import userService from "../../services/user-service";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {useParams} from "react-router";
 
 const UpdateUser = ({userCredential, updateUser}) => {
 
   const {user} = useParams()
+  const history = useHistory();
 
   const [username, setUsername] = useState(userCredential.username);
   const [password, setPassword] = useState("")
@@ -23,7 +24,8 @@ const UpdateUser = ({userCredential, updateUser}) => {
       password: (passwordUpdate ? password: null),
       role: role
     }
-    updateUser(user, newUser)
+    updateUser(user, newUser);
+    history.push(`/profile/${userCredential["userId"]}`)
   }
 
   return (
@@ -117,9 +119,13 @@ const dispatchToPropMapper = (dispatch)=> {
     updateUser: (user, userData) => {
       userService.updateUser(user, userData)
           .then((res) => {
+            const newCredential = {
+              username: res["name"],
+              role: res["role"],
+            };
             dispatch({
               type: "UPDATE_USER",
-              payload: res
+              payload: newCredential
             });
           })
     }
