@@ -19,7 +19,7 @@ const UserDescription = ({userCredential, user}) => {
             <h2>{userInfo.name}</h2>
             {user ===userCredential.userId &&
             <div>
-                <h2>{userInfo.email}</h2>
+                <h2 className="d-none d-lg-block">{userInfo.email}</h2>
                 <Link to={`/profile/${user}/update`}>
                     <button className="btn btn-success">Update User Info</button>
                 </Link>

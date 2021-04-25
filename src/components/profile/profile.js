@@ -13,6 +13,7 @@ const Profile = ({userCredential}) => {
     return(
         <div className="profile-page">
             { userId !== "" &&
+                <div className="container">
                 <div className="row">
                     <div className="col-3">
                         <UserDescription user={userId}/>
@@ -21,6 +22,7 @@ const Profile = ({userCredential}) => {
                         <ProfileTabs user={userId}/>
                         <ProfileCards user={userId}/>
                     </div>
+                </div>
                 </div>
             }
             { userId === "" &&
