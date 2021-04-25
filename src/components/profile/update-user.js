@@ -23,7 +23,6 @@ const UpdateUser = ({userCredential, updateUser}) => {
       password: (passwordUpdate ? password: null),
       role: role
     }
-    console.log(newUser)
     updateUser(user, newUser)
   }
 
@@ -34,14 +33,13 @@ const UpdateUser = ({userCredential, updateUser}) => {
           <h3>Update User</h3>
           <form>
             <div className="form-group">
+              <label>Email</label>
+              <input className="form-control" value={email} disabled={true}/>
+            </div>
+            <div className="form-group">
               <label>Name</label>
               <input className="form-control" value={username}
                      onChange={(e)=>setUsername(e.target.value)}/>
-            </div>
-            <div className="form-group">
-              <label>Email</label>
-              <input className="form-control"
-                     onChange={(e)=>setEmail(e.target.value)}/>
             </div>
             <div className="form-group">
               <label>Password</label>
