@@ -40,7 +40,7 @@ const Reviews = ({
                           </Link>
                           <div className="media-body">
                               <Link className="mt-0" to={`/profile/${review.user.id}`}>
-                                  {review.user.email}
+                                  {review.user.name}
                               </Link>
                               <p>{review.text}</p>
                           </div>
