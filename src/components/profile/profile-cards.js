@@ -5,7 +5,7 @@ import Cart from "./profile-content/cart";
 import Reviews from "./profile-content/reviews";
 import MyRecipes from "./profile-content/my-recipes";
 
-const ProfileCards = () => {
+const ProfileCards = ({user}) => {
 
     const {tab} = useParams();
 
@@ -17,7 +17,7 @@ const ProfileCards = () => {
         <div className="mt-4">
             <div className="container">
                 {isFavorite() &&
-                    <Favorite />
+                    <Favorite user={user}/>
                 }
                 {
                     tab === "Cart" &&

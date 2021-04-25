@@ -14,7 +14,7 @@ function SearchResult(){
             .then((res)=>{
                 const ids = res.results.map(r=>r["id"]);
                 if (ids.length>0){
-                    return recipeService.findRecipeByIdBulk(ids)
+                    return recipeService.findRecipeByIdBulk(ids, true)
                 } else {
                     return []
                 }
@@ -24,28 +24,30 @@ function SearchResult(){
 
     return(
         <div>
-            <div className="content-page">
-                <span className="search-results-header-pads" />
-                <div className="search-results-header-wrapper">
-                    <div className="search-results-header border-dark">
-                        <div className="search-results-header-group">
-                            <h4 className="mt-2 mb-0" aria-live="assertive" aria-atomic="true">
-                                Recipe Results for this {keyword}
-                            </h4>
+            {keyword !== undefined &&
+                <div className="content-page">
+                    <span className="search-results-header-pads"/>
+                    <div className="search-results-header-wrapper">
+                        <div className="search-results-header border-dark">
+                            <div className="search-results-header-group">
+                                <h4 className="mt-2 mb-0" aria-live="assertive" aria-atomic="true">
+                                    Recipe Results for this {keyword}
+                                </h4>
+                            </div>
+
                         </div>
+                    </div>
+                    <div className="container mb-4">
+                        <div className="row row-cols-1 row-cols-md-4">
+                            {
+                                resultRecipes !== undefined &&
+                                resultRecipes.map(r => <RecipeCard key={r.id} recipe={r}/>)
+                            }
 
+                        </div>
                     </div>
                 </div>
-                <div className="container mb-4">
-                    <div className="row row-cols-1 row-cols-md-4">
-                        {
-                            resultRecipes !== undefined &&
-                            resultRecipes.map(r =><RecipeCard key={r.id} recipe={r}/>)
-                        }
-
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     )
 }

@@ -30,9 +30,8 @@ function App({userCredential,}) {
                     <Route exact path="/login">
                         {userCredential["isAuthenticated"] ? <Redirect to="/homepage" /> : <LogIn />}
                     </Route>
-                    {/*protect Search function*/}
                     <Route exact path={["/search", "/search/:keyword"]}>
-                        {userCredential["isAuthenticated"] ?  <SearchResult /> : <Redirect to="/login" />}
+                        <SearchResult />
                     </Route>
 
                     { !userCredential["isAuthenticated"] &&
@@ -59,7 +58,7 @@ function App({userCredential,}) {
                         <RecipeProfile />
                     </Route>
                     <Route path="/profile/:user/update">
-                        <UpdateUser />
+                        {userCredential["isAuthenticated"] ? <UpdateUser />: <Redirect to="/homepage" />}
                     </Route>
                     <Route path={[
                         "/profile",

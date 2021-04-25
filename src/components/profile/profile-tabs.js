@@ -3,9 +3,9 @@ import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import {connect} from "react-redux";import userService from "../../services/user-service";
 
-const ProfileTabs = ({userCredential}) => {
+const ProfileTabs = ({userCredential, user}) => {
 
-    const {user, tab} = useParams();
+    const {tab} = useParams();
     const [items, setItems] = useState(["Favorites", "Reviews"])
 
     useEffect(() => {

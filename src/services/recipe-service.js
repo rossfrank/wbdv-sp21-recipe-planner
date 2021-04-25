@@ -29,7 +29,7 @@ export const findRecipeTopRating = number =>
     fetch(`${RECIPE_URL}/searchComplex?limitLicense=null&offset=0&number=${number}`, GET_HEADER)
         .then(response => response.json())
 
-export const findRecipeByIdBulk = ids => {
+export const findRecipeByIdBulk = (ids, allSpoon = false) => {
     console.log(ids)
     let db = []
     let spoon = []
@@ -40,16 +40,21 @@ export const findRecipeByIdBulk = ids => {
             spoon = [...spoon, id]
         }
     })
-    if(spoon.length > 0) {
+    if(allSpoon){
         return fetch(`${RECIPE_URL}/informationBulk?ids=${spoon.join("%2C")}`, GET_HEADER)
-            .then(response => recipeDbService.findRecipeDBByIdBulk(db).then(res => {
-                return response.json().then(s => {
-                    return [...s, ...res]
-                })
-            }))
+            .then(response => response.json()).then(res => res)
     }
-    else{
-        return recipeDbService.findRecipeDBByIdBulk(db).then(res => res)
+    else {
+        if (spoon.length > 0) {
+            return fetch(`${RECIPE_URL}/informationBulk?ids=${spoon.join("%2C")}`, GET_HEADER)
+                .then(response => recipeDbService.findRecipeDBByIdBulk(db).then(res => {
+                    return response.json().then(s => {
+                        return [...s, ...res]
+                    })
+                }))
+        } else {
+            return recipeDbService.findRecipeDBByIdBulk(db).then(res => res)
+        }
     }
 }
 

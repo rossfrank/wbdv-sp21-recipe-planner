@@ -1,15 +1,13 @@
 import React, {useEffect} from 'react'
 import ProfileRecipe from "./../profile-content/profile-recipe";
-import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import favoriteService from "../../../services/favorite-service";
 import recipeService from "../../../services/recipe-service";
 
 const Favorite = (
-    {
+    {user,
         myFavorite,
         findFavoriteForUser}) => {
-    const {user} = useParams();
 
     useEffect(()=>{
         findFavoriteForUser(user)

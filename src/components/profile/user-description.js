@@ -4,9 +4,7 @@ import {Link, useParams} from "react-router-dom";
 import userService from "../../services/user-service";
 import {connect} from "react-redux";
 
-const UserDescription = ({userCredential}) => {
-
-    const {user} = useParams();
+const UserDescription = ({userCredential, user}) => {
 
     const [userInfo, setUserInfo] = useState({})
 
@@ -19,15 +17,18 @@ const UserDescription = ({userCredential}) => {
         <div className="container">
             <img src={stick} alt="User Profile"/>
             <h2>{userInfo.name}</h2>
-            <h2>{userInfo.email}</h2>
             {user ===userCredential.userId &&
-            <Link to={`/profile/${user}/update`}>
-                <button className="btn btn-success">Update User Info</button>
-            </Link>
+            <div>
+                <h2>{userInfo.email}</h2>
+                <Link to={`/profile/${user}/update`}>
+                    <button className="btn btn-success">Update User Info</button>
+                </Link>
+            </div>
             }
         </div>
     )
 }
+
 const stpm = (state) => {
     return {
         userCredential: state.userReducer.userCredential
