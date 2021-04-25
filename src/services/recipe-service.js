@@ -30,6 +30,7 @@ export const findRecipeTopRating = number =>
         .then(response => response.json())
 
 export const findRecipeByIdBulk = ids => {
+    console.log(ids)
     let db = []
     let spoon = []
     ids.forEach(id => {
@@ -39,12 +40,17 @@ export const findRecipeByIdBulk = ids => {
             spoon = [...spoon, id]
         }
     })
-    return fetch(`${RECIPE_URL}/informationBulk?ids=${spoon.join("%2C")}`, GET_HEADER)
-        .then(response => recipeDbService.findRecipeDBByIdBulk(db).then(res => {
-            return response.json().then(s => {
-                return[...s, ...res]
-            })
-        }))
+    if(spoon.length > 0) {
+        return fetch(`${RECIPE_URL}/informationBulk?ids=${spoon.join("%2C")}`, GET_HEADER)
+            .then(response => recipeDbService.findRecipeDBByIdBulk(db).then(res => {
+                return response.json().then(s => {
+                    return [...s, ...res]
+                })
+            }))
+    }
+    else{
+        return recipeDbService.findRecipeDBByIdBulk(db).then(res => res)
+    }
 }
 
 
