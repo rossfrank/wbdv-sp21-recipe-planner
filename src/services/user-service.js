@@ -27,6 +27,7 @@ export const updateUser = (uId, user) =>
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(user)
     })
+        .then((response) => response.json())
 
 const api = {
     userLogin,
